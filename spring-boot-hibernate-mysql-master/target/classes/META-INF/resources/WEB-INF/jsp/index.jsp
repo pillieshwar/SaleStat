@@ -344,9 +344,9 @@
                       </a>
               </li>
               <li>
-                <a class="" href="chart-chartjs">
+                <a class="" href="all_doctors">
                           <i class="icon_piechart"></i>
-                          <span>Charts</span>
+                          <span>Doctors</span>
 
                       </a>
 

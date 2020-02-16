@@ -149,8 +149,16 @@ public class PersonController {
     public void doctorDataEntry(@RequestBody DoctorDetails jsonString) {
 		//Person person=personService.savedata(jsonString);
 		doctorDataEntryDao.insertDoctorDetails(jsonString);
-		System.out.println("succrss");
+		System.out.println("success");
     }
+	
+	@RequestMapping("/all_doctors")
+    public ModelAndView allDoctors(Model model){
+		List<LocationDto> location = locationDao.getAllLocations();
+		model.addAttribute("location",location);
+		return new ModelAndView("all_doctors");
+		
+	}
 	
 	 @RequestMapping(value = { "/ajax", "/ajax/" }, method = RequestMethod.GET)
 	    @ResponseBody

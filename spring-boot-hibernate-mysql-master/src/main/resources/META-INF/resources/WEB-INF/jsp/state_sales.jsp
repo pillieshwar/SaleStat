@@ -585,7 +585,7 @@
     	    var month = document.getElementById('monthpick').value;
     	    var url= "http://localhost:8090/state_sales/"+month;
        	 	window.location.href=url;
-    	} 
+    	}
 
      </script>
 </body>
