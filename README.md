@@ -10,8 +10,8 @@ a)SIDEBAR :
 	1. States tab should populate all the states that he operates in, according to the person who logs in.
 
 b)CARDS : 
-	1. Sponsored Doctors ( Populate the total no of doctors who are sponsored and who belong to the state that the person is logged in.)
 
+	1. Sponsored Doctors ( Populate the total no of doctors who are sponsored and who belong to the state that the person is logged in.)
 	2. Expected businedd by those doctors ( Total business expectation by the doctors in that state)
 	
 	3. Business by those doctors ( Total business given by the doctors in that state)
