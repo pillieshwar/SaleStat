@@ -42,6 +42,10 @@ public class PersonController {
         model.put("message", "HowToDoInJava Reader !!");
         return "index";
     }
+	@RequestMapping("/profile")
+    public String profile() {
+        return "profile";
+    }
 	
 	@PostMapping("/savePerson")
 	public String save(@RequestBody Person person) {
