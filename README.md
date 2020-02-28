@@ -27,3 +27,13 @@ e)DOCTOR'S VISIT : (Future Scope)
 f)SIDE CARDS : (functionality yet to be confirmed)
 
 g) SIDE GRAPHS : (yet to be confirmed)
+
+
+
+
+
+
+User Role Hierarchy:
+
+
+ 
