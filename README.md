@@ -33,7 +33,25 @@ f)SIDE CARDS : (functionality yet to be confirmed)
 g) SIDE GRAPHS : (yet to be confirmed)
 
 
+TECHNOLOGY STACK :
 
+Presentation Tier( Front-End):
+- HTML
+- CSS
+- Bootstrap
+- Javascript
+- Jquery
+- Ajax
+
+Middle Tier:
+- Spring Boot (Framework)
+- JWT (security)
+- Hibernate
+
+Data Tier:
+- MySQL
+
+![](images/technology_stack.jpg)
 
 
 
