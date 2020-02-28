@@ -2,6 +2,10 @@
 
 SaleStat is a software product which helps the medical company to analyse their sales, in a graphical view and get a clear picture of their monthly and yearly sales status of every particular product in detail.
 
+Product website design:
+
+![](images/website_design.jpg)
+
 Page-wise functionality : 
 1)DASHBOARD :
 
