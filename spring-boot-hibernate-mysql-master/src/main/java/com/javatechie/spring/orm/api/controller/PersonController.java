@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,10 +20,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.javatechie.spring.orm.api.dao.DoctorDataEntryDao;
 import com.javatechie.spring.orm.api.dao.LocationDao;
+import com.javatechie.spring.orm.api.dao.LoginDao;
 import com.javatechie.spring.orm.api.dao.PersonDao;
 import com.javatechie.spring.orm.api.dto.LocationDto;
 import com.javatechie.spring.orm.api.model.DoctorDetails;
 import com.javatechie.spring.orm.api.model.Location;
+import com.javatechie.spring.orm.api.model.Login;
 import com.javatechie.spring.orm.api.model.Person;
 
 @Controller
@@ -35,6 +39,9 @@ public class PersonController {
 	private LocationDao locationDao;
 	
 	@Autowired
+	private LoginDao loginDao;
+	
+	@Autowired
 	private DoctorDataEntryDao doctorDataEntryDao ;
 
 	@RequestMapping("/")
@@ -42,9 +49,18 @@ public class PersonController {
         model.put("message", "HowToDoInJava Reader !!");
         return "index";
     }
+	
 	@RequestMapping("/profile")
     public String profile() {
         return "profile";
+    }
+	@RequestMapping("/login")
+    public String login() {
+        return "login";
+    }
+	@RequestMapping("/dashboard")
+    public String dashboard() {
+        return "dashboard";
     }
 	
 	@PostMapping("/savePerson")
@@ -133,11 +149,11 @@ public class PersonController {
 		System.out.println(model.toString());
         return new ModelAndView("chart-chartjs");
     }
-	@RequestMapping("/login")
-    public ModelAndView login(Model model){
-
-        return new ModelAndView("login");
-    }
+//	@RequestMapping("/login")
+//    public ModelAndView login(Model model){
+//
+//        return new ModelAndView("login");
+//    }
 	
 	
 	@RequestMapping(value = "/edited_data", method = RequestMethod.POST)
@@ -146,6 +162,14 @@ public class PersonController {
 		//Person person=personService.savedata(jsonString);
 		locationDao.saveLocation(jsonString);
 		System.out.println("succrss");
+    }
+	
+	@RequestMapping(value = "/login_data", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public String LoginData(@RequestBody Login jsonString) {	
+		String result = loginDao.checkLogin(jsonString);
+		System.out.println("result = "+result);
+		return result;
     }
 	
 	@RequestMapping(value = "/doctor_data_entry", method = RequestMethod.POST)
