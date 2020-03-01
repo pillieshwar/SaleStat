@@ -636,7 +636,8 @@ th:first-child, td:first-child {
 		            dataType: 'json',
 		            contentType: 'application/json',
 		            success: function (data) {
-		                $('#target').html(data.msg);
+		            	
+		            	
 		            },
 		            data: JSON.stringify(person)
 		        }); 

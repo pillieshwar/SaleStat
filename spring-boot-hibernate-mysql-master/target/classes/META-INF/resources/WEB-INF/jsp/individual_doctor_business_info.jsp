@@ -135,7 +135,7 @@
         <!-- sidebar menu start-->
         <ul class="sidebar-menu">
           <li class="">
-            <a class="" href="index.html">
+            <a class="" href="dashboard">
                           <i class="icon_house_alt"></i>
                           <span>Dashboard</span>
                       </a>
@@ -278,9 +278,35 @@
           <!--Table head-->
           <thead>
             <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th> </th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <thead>
+            <tr>
               <th> Doctor </th>
               <th> ASM Visits</th>
               <th> RM Visits</th>
+              <th> YEAR </th>
+              <th> JAN </th>
+              <th> FEB </th>
+              <th> MAR </th>
+              <th> APR </th>
+              <th> MAY </th>
+              <th> JUN </th>
+              <th> JUL </th>
+              <th> AUG </th>
+              <th> SEP </th>
+              <th> OCT </th>
+              <th> NOV </th>
+              <th> DEC </th>
               <th> RX FOR TARGETED BRAND UNITS </th>
               <th> TOTAL VALUE SALE FOR THE MONTH </th>
               <th> HQ. PRIM SALES VAL (LACS) </th>
@@ -288,69 +314,82 @@
               <th> Region </th>
             </tr>
           </thead>
+          
           <!--Table head-->
 
           <!--Table body-->
           <tbody>
             <tr>
               <td><a class="" href="individual_doctor_business_info.jsp">Kate</td>
-              <td>Moss</td>
-              <td>USA / The United Kingdom / China / Russia </td>
-              <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
-              <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+              <td>7, 13, 19</td>
+              <td>10, 12</td>
+              <td>1.1</td>
+              <!-- <table>
+              	<tr>
+              		<td>1.1</td>
+              	</tr>
+              	<tr>
+              		<td>1.1</td>
+              	</tr>
+              	<tr>
+              		<td>1.1</td>
+              	</tr>
+              </table> -->
+              
+              <td>2.4</td>
               <td>23</td>
               <td>23</td>
             </tr>
             <tr>
               <td><a class="" href="individual_doctor_business_info.jsp">Kate</td>
-              <td>Moss</td>
-              <td>USA / The United Kingdom / China / Russia </td>
-              <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
-              <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+              <td>7, 13, 19</td>
+              <td>10, 12</td>
+              <td>1.1</td>
+              <td>2.4</td>
               <td>23</td>
               <td>23</td>
             </tr><tr>
               <td><a class="" href="individual_doctor_business_info.jsp">Kate</td>
-              <td>Moss</td>
-              <td>USA / The United Kingdom / China / Russia </td>
-              <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
-              <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+              <td>7, 13, 19</td>
+              <td>10, 12</td>
+              <td>1.1</td>
+              <td>2.4</td>
               <td>23</td>
               <td>23</td>
             </tr>
             <tr>
               <td><a class="" href="individual_doctor_business_info.jsp">Kate</td>
-              <td>Moss</td>
-              <td>USA / The United Kingdom / China / Russia </td>
-              <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
-              <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+              <td>7, 13, 19</td>
+              <td>10, 12</td>
+              <td>1.1</td>
+              <td>2.4</td>
               <td>23</td>
               <td>23</td>
             </tr>
             <tr>
               <td><a class="" href="individual_doctor_business_info.jsp">Kate</td>
-              <td>Moss</td>
-              <td>USA / The United Kingdom / China / Russia </td>
-              <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
-              <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+              <td>7, 13, 19</td>
+              <td>10, 12</td>
+              <td>1.1</td>
+              <td>2.4</td>
               <td>23</td>
               <td>23</td>
             </tr>
             <tr>
               <td><a class="" href="individual_doctor_business_info.jsp">Kate</td>
-              <td>Moss</td>
-              <td>USA / The United Kingdom / China / Russia </td>
-              <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
-              <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+              <td>7, 13, 19</td>
+              <td>10, 12</td>
+              <td>1.1</td>
+              <td>2.4</td>
               <td>23</td>
               <td>23</td>
             </tr>
             <tr>
               <td><a class="" href="individual_doctor_business_info.jsp">Kate</td>
-              <td>Moss</td>
-              <td>USA / The United Kingdom / China / Russia </td>
-              <td>New York City / Warsaw / Lodz / Amsterdam / London / Chicago</td>
-              <td>Web Designer /UX designer / Ul designer / JavaScript Developer</td>
+              <td>7, 13, 19</td>
+              <td>10, 12</td>
+              <td>1.1</td>
+              <td>2.4</td>
               <td>23</td>
               <td>23</td>
             </tr>
