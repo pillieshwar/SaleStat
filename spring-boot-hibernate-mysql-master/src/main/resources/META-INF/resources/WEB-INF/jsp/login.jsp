@@ -1,129 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<title>Login V5</title>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google-signin-scope" content="profile email">
-    <meta name="google-signin-client_id" content="179550612993-v74ibfb67m6f198g6qc67jngj2j8out2.apps.googleusercontent.com">
-    <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Creative - Bootstrap 3 Responsive Admin Template">
+  <meta name="author" content="GeeksLabs">
+  <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+  <link rel="shortcut icon" href="img/favicon.png">
 
+  <title>SaleStat - Login</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <!-- bootstrap theme -->
+  <link href="css/bootstrap-theme.css" rel="stylesheet">
+  <!--external css-->
+  <!-- font icon -->
+  <link href="css/elegant-icons-style.css" rel="stylesheet" />
+  <link href="css/font-awesome.css" rel="stylesheet" />
+  <!-- Custom styles -->
+  <link href="css/style.css" rel="stylesheet">
+  <link href="css/style-responsive.css" rel="stylesheet" />
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+  <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- =======================================================
+      Theme Name: NiceAdmin
+      Theme URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
+      Author: BootstrapMade
+      Author URL: https://bootstrapmade.com
+    ======================================================= -->
 </head>
-<body>
-	
-	<div class="limiter">
-		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
-			<div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
-				<form class="login100-form validate-form flex-sb flex-w">
-					<span class="login100-form-title p-b-53">
-						Sign In With
-					</span>
+
+<body class="login-img3-body">
+
+  <div class="container">
+
+    <form class="login-form" onsubmit='return false' action="/Car/Edit/17" id="myForm" method="post" name="myForm">
+      <div class="login-wrap">
+        <p class="login-img"><i class="icon_lock_alt"></i></p>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="icon_profile"></i></span>
+          <input type="text" id="username" class="form-control" placeholder="Username" autofocus>
+        </div>
+        <div class="input-group">
+          <span class="input-group-addon"><i class="icon_key_alt"></i></span>
+          <input type="password" id="password" class="form-control" placeholder="Password">
+        </div>
+        <label class="checkbox">
+                <input type="checkbox" value="remember-me"> Remember me
+                <span class="pull-right"> <a href="#"> Forgot Password?</a></span>
+            </label>
+        <button class="btn btn-primary btn-lg btn-block" onclick="loginFunction()" type="submit">Login</button>
+        <button class="btn btn-info btn-lg btn-block" type="submit">Signup</button>
+      </div>
+    </form>
+    <div class="text-right">
+      <div class="credits">
+          <!--
+            All the links in the footer should remain intact.
+            You can delete the links only if you purchased the pro version.
+            Licensing information: https://bootstrapmade.com/license/
+            Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
+          -->
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+    </div>
+  </div>
+
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.scrollTo.min.js"></script>
+	<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="js/scripts.js"></script>
+
+<script>
+
+function loginFunction(){
+	var username = document.getElementById("username").value;
+	var password = document.getElementById("password").value;
+
+	 var login = {
+			 username: username,
+	            password: password
+	        }
+	 console.log(login);
 
 
-          
-           <div class="g-signin2" data-width="455" data-height="50" data-longtitle="true" data-onsuccess="onSignIn" data-theme="dark"></div>
-					
-					<div class="p-t-31 p-b-9">
-						<span class="txt1">
-							Username
-						</span>
-					</div>
-					<div class="wrap-input100 validate-input" data-validate = "Username is required">
-						<input class="input100" type="text" name="username" >
-						<span class="focus-input100"></span>
-					</div>
-					
-					<div class="p-t-13 p-b-9">
-						<span class="txt1">
-							Password
-						</span>
+	 $.ajax({
+         url: '/login_data',
+         type: 'post',
+         dataType: 'text',
+         contentType: 'application/json',
+         success: function (data) {
+        	 if(data=="success"){
+        		 window.location.href = "dashboard";
+        		 //location.window.href = "http://your_domain_name/thank-you";
+        	 }
+        	 console.log("SUCCESS : ", data);
+         },
+         data: JSON.stringify(login)
+     }); 
 
-						<a href="#" class="txt2 bo1 m-l-5">
-							Forgot?
-						</a>
-					</div>
-					<div class="wrap-input100 validate-input" data-validate = "Password is required">
-						<input class="input100" type="password" name="pass" >
-						<span class="focus-input100"></span>
-					</div>
-
-					<div class="container-login100-form-btn m-t-17">
-						<button class="login100-form-btn">
-							Sign In
-						</button>
-					</div>
-
-<!-- 					<div class="w-full text-center p-t-55">
-						<span class="txt2">
-							Not a member?
-						</span> -->
-
-<!-- 						<a href="#" class="txt2 bo1">
-							Sign up now
-						</a> -->
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	
-
-	<div id="dropDownSelect1"></div>
-  
-   <script>
-      function onSignIn(googleUser) {
-        // Useful data for your client-side scripts:
-        var profile = googleUser.getBasicProfile();
-        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
-        console.log('Full Name: ' + profile.getName());
-        console.log('Given Name: ' + profile.getGivenName());
-        console.log('Family Name: ' + profile.getFamilyName());
-        console.log("Image URL: " + profile.getImageUrl());
-        console.log("Email: " + profile.getEmail());
-        
-        localStorage.setItem("id", profile.getId());
-        localStorage.setItem("fullName", profile.getName());
-        localStorage.setItem("familyName", profile.getFamilyName());
-        localStorage.setItem("givenName", profile.getGivenName());
-        localStorage.setItem("image", profile.getImageUrl());
-        localStorage.setItem("email", profile.getEmail());
-        localStorage.setItem("names", "xyz");
-        
-        
-                //         <--------------------------COOKIES---------------------------------->
-                //         function createCookie(key,value)
-                //         {
-                //           let cookie = escape(key) + "=" + escape(value) + ";";
-                //           document.cookie = cookie;
-                //           console.log(cookie);
-                //           console.log("creating cookie with key : "+ key + "value : " +value);
-                //         }
-
-                //         createCookie("givenName" , profile.getGivenName());
-                //         createCookie("imageUrl" , profile.getImageUrl());
-                //         createCookie("email" , profile.getEmail());
-                //           <--------------------------COOKIES---------------------------------->
-
-        // The ID token you need to pass to your backend:
-        var id_token = googleUser.getAuthResponse().id_token;
-        console.log("ID Token: " + id_token);
-        
-        if (profile.getName() !=null) {
-          if(profile.getName()=="Eshwar Pilli")
-            {
-              window.location.replace("http://pillieshwar.me/NiceAdmin/index.jsp");
-            }
-          else
-           {
-              window.location.replace("http://pillieshwar.me/dataCollection/index.html");
-           }
-        
-} 
-//         var x = profile.getImageUrl();
-//         document.getElementById("demo").src = x;
-        
-      }
-    </script>
+}
+</script>
 
 </body>
+
 </html>
