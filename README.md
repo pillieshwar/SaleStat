@@ -60,4 +60,17 @@ User Role Hierarchy:
  
 
 ![](images/user%20role%20hierarchy.png)
+
+
+
+Steps to run the project : 
+1) install git
+2) open a folder and right click to open git bash
+3) clone the master repository ( git clone https://github.com/pillieshwar/SaleStat.git)
+4) install eclipse 
+5) after opening eclipse right click on the project explorer and select import existing maven project.
+6) then a dialog box will open, select the cloned project( it will automatically open in eclipse)
+7) after importing (press ctrl+shift+r) and enter 	SpringBootHibernateApplication.java and open that file.
+8) right click on it and run as java application.
+9) after the application is started goto browser and enter the url: http://localhost:8090 (a login page will appear)
  
