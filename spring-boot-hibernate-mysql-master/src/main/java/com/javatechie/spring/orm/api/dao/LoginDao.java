@@ -16,28 +16,28 @@ public class LoginDao {
 
 	@Autowired
 	private SessionFactory factory;
-	
+
 	public void saveLocation(Login login) {
 		getSession().save(login);
 	}
-	
-	public String checkLogin(Login login) {
-		String qry = "select * from login where username='"+login.getUsername()+"' and password='"+login.getPassword()+"'";
-		String ret;
-		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
 
+	public String checkLogin(Login login) {
+		String ret;
+		String qry = "select * from login where username='" + login.getUsername() + "' and password='"
+				+ login.getPassword() + "'";
+		
+		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
 		sqlQuery.addEntity(Login.class);
-		if(sqlQuery.list().size()!=0)
-		{
-			ret="success";
-		}
-		else {
-			System.out.println(sqlQuery.getFetchSize());
-			ret="fail";
+		
+		if (sqlQuery.list().size() != 0) {
+			ret = "success";
+		} else {
+			// System.out.println(sqlQuery.getFetchSize());
+			ret = "fail";
 		}
 		return ret;
-		
 	}
+
 	private Session getSession() {
 		Session session = factory.getCurrentSession();
 		if (session == null) {
