@@ -74,3 +74,4 @@ Steps to run the project :
 8) right click on it and run as java application.
 9) after the application is started goto browser and enter the url: http://localhost:8090 (a login page will appear)
  
+#RUN UPDATED_SCHEMA.SQL IN MYSQL ( This will create entire schema and the database will be ready for use. )
