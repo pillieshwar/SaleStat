@@ -58,7 +58,7 @@ color: #F00
 				</label> -->
 				<button class="btn btn-primary btn-lg btn-block"
 					onclick="loginFunction()" type="submit">Login</button>
-				<button class="btn btn-info btn-lg btn-block" type="submit">Signup</button>
+				<button onclick="signup()" class="btn btn-info btn-lg btn-block" type="submit">Signup</button>
 			</div>
 		</form>
 		<div class="text-right">
@@ -75,6 +75,12 @@ color: #F00
 	<script src="js/scripts.js"></script>
 
 	<script>
+	
+	function signup(){
+		window.location.href = "signup";
+	}
+	
+	
 		function loginFunction() {
 			var username = document.getElementById("username").value;
 			var password = document.getElementById("password").value;
