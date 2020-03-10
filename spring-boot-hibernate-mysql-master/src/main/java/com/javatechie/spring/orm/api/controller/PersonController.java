@@ -29,7 +29,6 @@ import com.javatechie.spring.orm.api.model.Login;
 import com.javatechie.spring.orm.api.model.Person;
 
 @Controller
-//@RequestMapping("/spring-boot-orm")
 public class PersonController {
 
 	@Autowired
@@ -39,28 +38,11 @@ public class PersonController {
 	private LocationDao locationDao;
 	
 	@Autowired
-	private LoginDao loginDao;
-	
-	@Autowired
 	private DoctorDataEntryDao doctorDataEntryDao ;
 
-	@RequestMapping("/")
-    public String home(Map<String, Object> model) {
-        model.put("message", "HowToDoInJava Reader !!");
-        return "index";
-    }
-	
 	@RequestMapping("/profile")
     public String profile() {
         return "profile";
-    }
-	@RequestMapping("/login")
-    public String login() {
-        return "login";
-    }
-	@RequestMapping("/dashboard")
-    public String dashboard() {
-        return "dashboard";
     }
 	
 	@PostMapping("/savePerson")
@@ -79,25 +61,13 @@ public class PersonController {
 		return dao.getFewPersons();
 	}
 	
-	@RequestMapping("/index")
-    public ModelAndView myindex(Model model){
-		
-		List<Person> p = dao.getPersons();
-		List<LocationDto> location = locationDao.getAllLocations();
-//		System.out.println(""+location.get(0).getId());
-		model.addAttribute("message",p);
-		model.addAttribute("location",location);
-//		System.out.println(model.toString());
-        return new ModelAndView("index");
-    }
-	
-/*	@RequestMapping("/state_sales")
+	@RequestMapping("/state_sales")
     public ModelAndView stateSales(Model model){
 		List<LocationDto> location = locationDao.getAllLocations();
 		model.addAttribute("location",location);
 		return new ModelAndView("state_sales");
 		
-	}*/
+	}
 	
 	@RequestMapping("/state_doctor_business")
     public ModelAndView stateDoctorBusiness(Model model){
@@ -122,23 +92,15 @@ public class PersonController {
 		return new ModelAndView("individual_doctor_business_info");
 		
 	}
-	
-	/*@RequestMapping(path="/state_sales/{month}")
-	public String getMessage(@PathVariable("month") String month) {
-				return month;
-		
-	}*/
-	
-	//@RequestMapping(value = "/state_sales/{month}", method = RequestMethod.GET)
+
 	@RequestMapping(path="/state_sales/{month}")
-    public ModelAndView stateSalesMonth(@PathVariable("month") String month, Model model) {
+    public String stateSalesMonth(@PathVariable("month") String month, Model model) {
 		System.out.println("inside");
 		System.out.println(month);
-		//List<LocationDto> location = locationDao.getStateSalesMonth();
-		//System.out.println(location.get(0).getState());
 		List<LocationDto> location = locationDao.getStateSalesMonth(month);
+		System.out.println(location.size());
 		model.addAttribute("location",location);
-		return new ModelAndView("state_sales");
+		return ("state_sales");
 	}
 	 
 	@RequestMapping("/chart-chartjs")
@@ -149,12 +111,6 @@ public class PersonController {
 		System.out.println(model.toString());
         return new ModelAndView("chart-chartjs");
     }
-//	@RequestMapping("/login")
-//    public ModelAndView login(Model model){
-//
-//        return new ModelAndView("login");
-//    }
-	
 	
 	@RequestMapping(value = "/edited_data", method = RequestMethod.POST)
     @ResponseBody
@@ -164,13 +120,7 @@ public class PersonController {
 		System.out.println("succrss");
     }
 	
-	@RequestMapping(value = "/login_data", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
-    @ResponseBody
-    public String LoginData(@RequestBody Login jsonString) {	
-		String result = loginDao.checkLogin(jsonString);
-		System.out.println("result = "+result);
-		return result;
-    }
+	
 	
 	@RequestMapping(value = "/doctor_data_entry", method = RequestMethod.POST)
     @ResponseBody
@@ -188,9 +138,4 @@ public class PersonController {
 		
 	}
 	
-	 @RequestMapping(value = { "/ajax", "/ajax/" }, method = RequestMethod.GET)
-	    @ResponseBody
-	    public String ajax() {
-	        return "{\"url\":\"New Song URL\"}";
-	    }
 }

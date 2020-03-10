@@ -13,57 +13,11 @@
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
 	rel="stylesheet" />
-<title>All Doctors</title>
+<title>Medicines</title>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@include file="header.jsp"%>
-
+<%@include file="header.jsp" %>
 <style>
-.noteven {
-	background-color: #FD8385;
-}
-
-.even {
-	background-color: #7BFD94;
-}
-
-/* Style the tab */
-.tab {
-	overflow: hidden;
-	border: 1px solid #ccc;
-	background-color: #5A888E;;
-}
-
-/* Style the buttons inside the tab */
-.tab button {
-	background-color: inherit;
-	float: left;
-	border: none;
-	outline: none;
-	cursor: pointer;
-	padding: 14px 16px;
-	transition: 0.3s;
-	font-size: 17px;
-}
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-	background-color: #ddd;
-}
-
-/* Create an active/current tablink class */
-.tab button.active {
-	background-color: #ccc;
-}
-
-/* Style the tab content */
-.tabcontent {
-	display: none;
-	padding: 6px 12px;
-	border: 1px solid #ccc;
-	border-top: none;
-}
-
 #myInput {
 	background-image: url('/img/search-icon.jpg');
 	background-position: 10px 16px;
@@ -74,174 +28,101 @@
 	border: 1px solid #ddd;
 	margin-bottom: 12px;
 }
-
-th:first-child, td:first-child {
-	position: sticky;
-	left: 0px;
-	background-color: white;
-}
 </style>
 </head>
+<body>
 
-<!-- container section start -->
-<body onload="openCity(event, 'tab-description')">
-	<!--main content start-->
-	<section id="main-content">
-		<section class="wrapper">
-			<div class="row">
-				<div class="col-lg-12">
-					<h3 class="page-header">
-						<i class="fa fa-table"></i> Table
-					</h3>
-					<ol class="breadcrumb">
-						<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-						<li><i class="fa fa-table"></i>Table</li>
-						<li><i class="fa fa-th-list"></i>Basic Table</li>
-					</ol>
+		<!--main content start-->
+		<section id="main-content">
+			<section class="wrapper">
+				<div class="row">
+					<div class="col-lg-12">
+						<h3 class="page-header">
+							<i class="fa fa-table"></i> Table
+						</h3>
+						<ol class="breadcrumb">
+							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
+							<li><i class="fa fa-table"></i>Table</li>
+							<li><i class="fa fa-th-list"></i>Basic Table</li>
+						</ol>
+					</div>
 				</div>
-			</div>
-			<!-- page start-->
-			<div class="tab">
-				<button class="tablinks"
-					onclick="openCity(event, 'tab-description')">ALL DOCTORS</button>
-				<select name="monthpick" id="monthpick"
-					style="height: 52px; float: right">
-					<option value="ASSAM">ASSAM</option>
-					<option value="BIHAR">BIHAR</option>
-					<option value="JHARKHAND">JHARKHAND</option>
-					<option value="ORISSA">ORISSA</option>
-					<option value="UP">UP</option>
-					<option value="WESTBENGAL">WEST-BENGAL</option>
+				<!-- page start-->
+				
 
-				</select>
-				<button style="color: white; float: right" id="touch"
-					onclick="stateSort();">Select State</button>
-			</div>
+				<input type="text" id="myInput" onkeyup="myFunction()"
+					placeholder="Search for names.." title="Type in a name">
 
-			<input type="text" id="myInput" onkeyup="myFunction()"
-				placeholder="Search for names.." title="Type in a name">
+				<div id="tab-description" class="row tabcontent">
+					<div class="col-lg-12">
+						<section class="panel">
+							<header style="background-color: #7BFD94;" class="panel-heading">
+								SALES EXPECTATION REACHED </header>
 
-			<div id="tab-description" class="row tabcontent">
-				<div class="col-lg-12">
-					<section class="panel">
-						<header style="background-color: #7BFD94;" class="panel-heading">
-							SALES EXPECTATION REACHED </header>
-
-						<div class="table-responsive text-nowrap">
-							<table id="myTable" class="table table-striped">
-								<thead>
-									<tr>
-										<th>Doctor</th>
-										<th>Region</th>
-										<th>Brand Targeted</th>
-										<th>Amount</th>
-										<th>Value business at time of Disbursement</th>
-										<th>Date of Activity Done</th>
-										<th>Type of Sponsorship</th>
-										<th>ASM Name</th>
-										<th>MR Name</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td><a class="" href="individual_doctor_business_info">Kate</td>
-										<td>Moss</td>
-										<td>USA</td>
-										<td>New York City / Warsaw / Lodz / Amsterdam / London /
-											Chicago</td>
-										<td>Web Designer /UX designer / Ul designer / JavaScript
-											Developer</td>
-										<td>23</td>
-										<td>23</td>
-										<td>Rahul</td>
-										<td>Salim</td>
-									</tr>
-									<tr>
-										<td><a class=""
-											href="individual_doctor_business_info.jsp">Kate</td>
-										<td contenteditable='true'>Moss</td>
-										<td>Russia</td>
-										<td>New York City / Warsaw / Lodz / Amsterdam / London /
-											Chicago</td>
-										<td>Web Designer /UX designer / Ul designer / JavaScript
-											Developer</td>
-										<td>23</td>
-										<td>23</td>
-									</tr>
-									<tr>
-										<td><a class=""
-											href="individual_doctor_business_info.jsp">Kate</td>
-										<td>Eshwar</td>
-										<td>India</td>
-										<td>New York City / Warsaw / Lodz / Amsterdam / London /
-											Chicago</td>
-										<td>Web Designer /UX designer / Ul designer / JavaScript
-											Developer</td>
-										<td>23</td>
-										<td>23</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</section>
-				</div>
-			</div>
-
-			<div id="tab-shipping" class="row tabcontent">
-				<div class="col-lg-12">
-					<section class="panel">
-						<header style="background-color: #FD8385;" class="panel-heading">
-							SALES EXPECTATION NOT REACHED </header>
-
-						<div class="table-responsive text-nowrap">
-							<!--Table-->
-							<table id="thetable" class="table table-striped">
-
-								<!--Table head-->
-								<thead>
-									<tr>
-										<th>Doctor</th>
-										<th>Brand Targetted</th>
-										<th>Amount</th>
-										<th>Value business at time of Disbursement</th>
-										<th>Date of Activity Done</th>
-										<th>Type of Sponsors</th>
-										<th>MR Name</th>
-										<th>Region</th>
-									</tr>
-								</thead>
-								<!--Table head-->
-
-								<!--Table body-->
-								<tbody>
-									<c:forEach items="${location}" var="loc" varStatus="loop">
+							<div class="table-responsive text-nowrap">
+								<table id="myTable" class="table table-striped">
+									<thead>
+										<tr>
+											<th>Doctor</th>
+											<th>Region</th>
+											<th>Brand Targeted</th>
+											<th>Amount</th>
+											<th>Value business at time of Disbursement</th>
+											<th>Date of Activity Done</th>
+											<th>Type of Sponsorship</th>
+											<th>ASM Name</th>
+											<th>MR Name</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><a class="" href="individual_doctor_business_info">Kate</td>
+											<td>Moss</td>
+											<td>USA</td>
+											<td>New York City / Warsaw / Lodz / Amsterdam / London /
+												Chicago</td>
+											<td>Web Designer /UX designer / Ul designer / JavaScript
+												Developer</td>
+											<td>23</td>
+											<td>23</td>
+											<td>Rahul</td>
+											<td>Salim</td>
+										</tr>
 										<tr>
 											<td><a class=""
 												href="individual_doctor_business_info.jsp">Kate</td>
-											<c:set var="index" value="${loop.index}" />
-											<c:set var="index" value="${index + 1}" />
-
-											<td id="did${index}">${loc.id}</td>
-											<td id="state${index}">${loc.state}</td>
-											<td id="region${index}">${loc.region}</td>
-											<td><c:out value="${index}" /></td>
-											<td><input type="button" id="edit_button${index}"
-												value="Edit" class="edit" onclick="edit_row('${index}')"></td>
-											<td><input type="button" id="save_button${index}"
-												value="Save" class="save" onclick="save_row('${index}')"></td>
+											<td contenteditable='true'>Moss</td>
+											<td>Russia</td>
+											<td>New York City / Warsaw / Lodz / Amsterdam / London /
+												Chicago</td>
+											<td>Web Designer /UX designer / Ul designer / JavaScript
+												Developer</td>
+											<td>23</td>
+											<td>23</td>
 										</tr>
-									</c:forEach>
-								</tbody>
-								<!--Table body-->
-
-
-							</table>
-							<!--Table-->
-						</div>
+										<tr>
+											<td><a class=""
+												href="individual_doctor_business_info.jsp">Kate</td>
+											<td>Eshwar</td>
+											<td>India</td>
+											<td>New York City / Warsaw / Lodz / Amsterdam / London /
+												Chicago</td>
+											<td>Web Designer /UX designer / Ul designer / JavaScript
+												Developer</td>
+											<td>23</td>
+											<td>23</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</section>
+					</div>
 				</div>
-			</div>
+
+				
+
+			</section>
 		</section>
-	</section>
 	</section>
 
 	<!--main content end-->
