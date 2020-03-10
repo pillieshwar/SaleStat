@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.javatechie.spring.orm.api.dto.LoginDto;
 import com.javatechie.spring.orm.api.model.Location;
 import com.javatechie.spring.orm.api.model.Login;
 
@@ -21,13 +22,13 @@ public class LoginDao {
 		getSession().save(login);
 	}
 
-	public String checkLogin(Login login) {
+	public String checkLogin(LoginDto jsonLoginString) {
 		String ret;
-		String qry = "select * from login where username='" + login.getUsername() + "' and password='"
-				+ login.getPassword() + "'";
+		String qry = "select * from user where username='" + jsonLoginString.getUsername() + "' and password='"
+				+ jsonLoginString.getPassword() + "'";
 		
 		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
-		sqlQuery.addEntity(Login.class);
+		//sqlQuery.addEntity(LoginDto.class);
 		
 		if (sqlQuery.list().size() != 0) {
 			ret = "success";
