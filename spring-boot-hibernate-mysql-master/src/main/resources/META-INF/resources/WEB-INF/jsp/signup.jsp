@@ -149,14 +149,16 @@
 			var password = document.getElementById("password").value;
 
 			var signup = {
-				role : role,
-				division : division,
-				state : state,
-				headquarter : headquarter,
-				doctor : doctor,
-				reportingto : reportingto,
+
+				role_id : role,
 				username : username,
-				password : password
+				password : password,
+				division_id : division,
+				state_id : state,
+				headquarter_id : headquarter,
+				doctor_id : doctor,
+				reporting_to : reportingto
+
 			}
 			console.log(signup); //remove all console.log once the whole module is deployed and ready for UAT.
 
