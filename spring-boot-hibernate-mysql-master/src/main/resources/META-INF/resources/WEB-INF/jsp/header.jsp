@@ -328,10 +328,10 @@
 				<!-- sidebar menu start-->
 				<ul class="sidebar-menu">
 					<li class="active"><a class="" href="dashboard"> <i
-							class="icon_house_alt"></i> <span>Dashboard</span>
+							class="icon_house_alt"></i> <span>DASHBOARD</span>
 					</a></li>
 					<li class="sub-menu"><a href="javascript:;" class=""> <i
-							class="icon_document_alt"></i> <span>States</span> <span
+							class="icon_document_alt"></i> <span>STATES</span> <span
 							class="menu-arrow arrow_carrot-right"></span>
 					</a>
 						<ul class="sub">
@@ -339,12 +339,12 @@
 							<li><a class="" href="form_validation.html">Orissa</a></li>
 						</ul></li>
 					<li><a class="" href="all_doctors"> <i
-							class="icon_piechart"></i> <span>Doctors</span>
+							class="icon_piechart"></i> <span>DOCTORS</span>
 					</a></li>
 					<li><a class="" href="medicine"> <i class="icon_genius"></i>
-							<span>Medicine</span>
+							<span>MEDICINES</span>
 					</a></li>
-					<li class="sub-menu"><a href="javascript:;" class=""> <i
+					<!-- <li class="sub-menu"><a href="javascript:;" class=""> <i
 							class="icon_desktop"></i> <span>UI Features</span> <span
 							class="menu-arrow arrow_carrot-right"></span>
 					</a>
@@ -352,17 +352,17 @@
 							<li><a class="" href="general.html">Elements</a></li>
 							<li><a class="" href="buttons.html">Buttons</a></li>
 							<li><a class="" href="grids.html">Grids</a></li>
-						</ul></li>
+						</ul></li> -->
 
 					<li class="sub-menu"><a href="javascript:;" class=""> <i
-							class="icon_table"></i> <span>Data Entry</span> <span
+							class="icon_table"></i> <span>DATA ENTRY</span> <span
 							class="menu-arrow arrow_carrot-right"></span>
 					</a>
 						<ul class="sub">
-							<li><a class="" href="data_entry">Data Entry</a></li>
+							<li><a class="" href="data_entry">DATA ENTRY</a></li>
 						</ul></li>
 
-					<li class="sub-menu"><a href="javascript:;" class=""> <i
+					<!-- <li class="sub-menu"><a href="javascript:;" class=""> <i
 							class="icon_documents_alt"></i> <span>Pages</span> <span
 							class="menu-arrow arrow_carrot-right"></span>
 					</a>
@@ -374,6 +374,15 @@
 										Page</span></a></li>
 							<li><a class="" href="blank.html">Blank Page</a></li>
 							<li><a class="" href="404.html">404 Error</a></li>
+						</ul></li> -->
+
+					<li class="sub-menu"><a href="javascript:;" class=""> <i
+							class="icon_documents_alt"></i> <span>ADMIN</span> <span
+							class="menu-arrow arrow_carrot-right"></span>
+					</a>
+						<ul class="sub">
+							<li><a class="" href="add_doctor">Add Doctor</a></li>
+							<li><a class="" href="add_medicine"><span>Add Medicine</span></a></li>
 						</ul></li>
 
 				</ul>
