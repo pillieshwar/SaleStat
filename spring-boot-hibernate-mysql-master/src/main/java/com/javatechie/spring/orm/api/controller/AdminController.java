@@ -16,4 +16,17 @@ public class AdminController {
         return ("add_doctor");
     }
 	
+	@RequestMapping("/add_sponsorship") //redirects to add new sponsorship page
+    public String addSponsorship(){
+        return ("add_sponsorship");
+    }
+	
+	@RequestMapping("/add_state") //redirects to add new state page
+    public String addState(){
+        return ("add_state");
+    }
+	@RequestMapping("/add_headquarter") //redirects to add new headquarter page
+    public String addHeadquarter(){
+        return ("add_headquarter");
+    }
 }

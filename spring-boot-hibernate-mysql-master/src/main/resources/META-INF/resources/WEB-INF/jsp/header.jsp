@@ -383,6 +383,9 @@
 						<ul class="sub">
 							<li><a class="" href="add_doctor">Add Doctor</a></li>
 							<li><a class="" href="add_medicine"><span>Add Medicine</span></a></li>
+							<li><a class="" href="add_sponsorship"><span>Add Sponsorship</span></a></li>
+							<li><a class="" href="add_state"><span>Add State</span></a></li>
+							<li><a class="" href="add_headquarter"><span>Add Headquarter</span></a></li>
 						</ul></li>
 
 				</ul>

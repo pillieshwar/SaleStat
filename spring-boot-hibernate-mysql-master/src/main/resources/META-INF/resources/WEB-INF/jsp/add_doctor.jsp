@@ -82,12 +82,12 @@
                               <input type="text" class="form-control" id="speciality" placeholder=" ">
                             </div>
                           </div>
-                          <div class="form-group">
+                          <!-- <div class="form-group">
                             <label class="col-lg-2 control-label">Division Name</label>
                             <div class="col-lg-10">
                               <textarea name="" id="division_name" class="form-control" cols="30" rows="5"></textarea>
                             </div>
-                          </div>
+                          </div> -->
                           <div class="form-group">
                             <label class="col-lg-2 control-label">State</label>
                             <div class="col-lg-6">
@@ -101,12 +101,12 @@
                             </div>
                           </div>
                           <div class="form-group">
-                            <label class="col-lg-2 control-label">Occupation</label>
+                            <label class="col-lg-2 control-label">Division Name</label>
                             <div class="col-lg-6">
-                              <input type="text" class="form-control" id="occupation" placeholder=" ">
+                              <input type="text" class="form-control" id="division_name" placeholder=" ">
                             </div>
                           </div>
-                          <div class="form-group">
+                          <!-- <div class="form-group">
                             <label class="col-lg-2 control-label">Email</label>
                             <div class="col-lg-6">
                               <input type="text" class="form-control" id="email" placeholder=" ">
@@ -123,7 +123,7 @@
                             <div class="col-lg-6">
                               <input type="text" class="form-control" id="url" placeholder="http://www.demowebsite.com ">
                             </div>
-                          </div>
+                          </div> -->
 
                           <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">

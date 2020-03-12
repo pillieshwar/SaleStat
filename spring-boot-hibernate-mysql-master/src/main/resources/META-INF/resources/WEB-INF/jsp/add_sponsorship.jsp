@@ -12,7 +12,7 @@
   <meta name="keyword" content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
   <link rel="shortcut icon" href="img/favicon.png">
 
-  <title>SaleStat - Add Medicine</title>
+  <title>SaleStat - Add Doctor</title>
 
   <!-- Bootstrap CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -54,7 +54,7 @@
             <ol class="breadcrumb">
               <li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
               <li><i class="icon_documents_alt"></i>Admin</li>
-              <li><i class="fa fa-user-md"></i>Add Medicine</li>
+              <li><i class="fa fa-user-md"></i>Add Sponsorship</li>
             </ol>
           </div>
         </div>
@@ -68,66 +68,45 @@
                   <div id="edit-profile" class="tab-pane">
                     <section class="panel">
                       <div class="panel-body bio-graph-info">
-                        <h1> New Medicine Info</h1>
+                        <h1> Add New Sponsorship</h1>
                         <form class="form-horizontal" role="form">
                           <div class="form-group">
-                            <label class="col-lg-2 control-label">Medicine Name</label>
+                            <label class="col-lg-2 control-label">Sponsorship Name</label>
                             <div class="col-lg-6">
-                              <input type="text" class="form-control" id="medicine_name" placeholder=" ">
+                              <input type="text" class="form-control" id="sponsorship_name" placeholder=" ">
                             </div>
                           </div>
-                          <div class="form-group">
-                            <label class="col-lg-2 control-label">Medicine Price</label>
-                            <div class="col-lg-6">
-                              <input type="text" class="form-control" id="medicine_price" placeholder=" ">
-                            </div>
+                          
+                          <div class="row">
+                          <div class="bio-row">
+                            <p><span>First Name </span>: Jenifer </p>
                           </div>
-                          <!-- <div class="form-group">
-                            <label class="col-lg-2 control-label">About Me</label>
-                            <div class="col-lg-10">
-                              <textarea name="" id="" class="form-control" cols="30" rows="5"></textarea>
-                            </div>
+                          <div class="bio-row">
+                            <p><span>Last Name </span>: Smith</p>
                           </div>
-                          <div class="form-group">
-                            <label class="col-lg-2 control-label">Country</label>
-                            <div class="col-lg-6">
-                              <input type="text" class="form-control" id="c-name" placeholder=" ">
-                            </div>
+                          <div class="bio-row">
+                            <p><span>Birthday</span>: 27 August 1987</p>
                           </div>
-                          <div class="form-group">
-                            <label class="col-lg-2 control-label">Birthday</label>
-                            <div class="col-lg-6">
-                              <input type="text" class="form-control" id="b-day" placeholder=" ">
-                            </div>
+                          <div class="bio-row">
+                            <p><span>Country </span>: United</p>
                           </div>
-                          <div class="form-group">
-                            <label class="col-lg-2 control-label">Occupation</label>
-                            <div class="col-lg-6">
-                              <input type="text" class="form-control" id="occupation" placeholder=" ">
-                            </div>
+                          <div class="bio-row">
+                            <p><span>Occupation </span>: UI Designer</p>
                           </div>
-                          <div class="form-group">
-                            <label class="col-lg-2 control-label">Email</label>
-                            <div class="col-lg-6">
-                              <input type="text" class="form-control" id="email" placeholder=" ">
-                            </div>
+                          <div class="bio-row">
+                            <p><span>Email </span>:jenifer@mailname.com</p>
                           </div>
-                          <div class="form-group">
-                            <label class="col-lg-2 control-label">Mobile</label>
-                            <div class="col-lg-6">
-                              <input type="text" class="form-control" id="mobile" placeholder=" ">
-                            </div>
+                          <div class="bio-row">
+                            <p><span>Mobile </span>: (+6283) 456 789</p>
                           </div>
-                          <div class="form-group">
-                            <label class="col-lg-2 control-label">Website URL</label>
-                            <div class="col-lg-6">
-                              <input type="text" class="form-control" id="url" placeholder="http://www.demowebsite.com ">
-                            </div>
-                          </div> -->
+                          <div class="bio-row">
+                            <p><span>Phone </span>: (+021) 956 789123</p>
+                          </div>
+                        </div>
 
                           <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                              <button type="submit" class="btn btn-primary">Save</button>
+                              <button type="submit" class="btn btn-primary">Add</button>
                               <button type="button" class="btn btn-danger">Cancel</button>
                             </div>
                           </div>
