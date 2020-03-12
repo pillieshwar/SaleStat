@@ -25,8 +25,14 @@ public class AdminController {
     public String addState(){
         return ("add_state");
     }
+	
 	@RequestMapping("/add_headquarter") //redirects to add new headquarter page
     public String addHeadquarter(){
         return ("add_headquarter");
+    }
+	
+	@RequestMapping("/add_role") //redirects to add new role page
+    public String addRole(){
+        return ("add_role");
     }
 }
