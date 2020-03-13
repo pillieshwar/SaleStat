@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <head>
 <meta charset="utf-8">
@@ -70,12 +72,16 @@
 					<div class="col-md-6 input-group">
 						<span class="input-group-addon"><i class="icon_profile"></i></span>
 						<select id="state" name="state" class="form-control" autofocus>
-							<option value="volvo">State</option>
+							<c:forEach items="${stateList}" var="state">
+								<option value="volvo"><c:out value="${state.state_name}" /></option>
+							</c:forEach>
 							<option value="1">ASSAM</option>
 							<option value="2">AP</option>
 							<option value="3">MAHARASHTRA</option>
 						</select>
 					</div>
+
+					
 					<div class=" col-md-6 input-group">
 						<span class="input-group-addon"><i class="icon_profile"></i></span>
 						<select id="headquarter" name="headquarter" class="form-control"

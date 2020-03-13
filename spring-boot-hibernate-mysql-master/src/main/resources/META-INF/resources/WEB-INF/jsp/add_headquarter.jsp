@@ -74,15 +74,16 @@
 									<div class="panel-body bio-graph-info">
 										<h1>Add Headquarter</h1>
 										<form class="form-horizontal" role="form">
-										<div class="form-group">
+											<div class="form-group">
 												<label class="col-lg-2 control-label">State Name</label>
-												<div class="col-lg-6"><!-- pass the state id from backend call -->
+												<div class="col-lg-6">
+													<!-- pass the state id from backend call -->
 													<select id="state_name" name="reportingto"
 														class="form-control" autofocus>
-														<option value=""> </option>
-														<option value="1">ASSAM</option>
-														<option value="2">AP</option>
-														<option value="3">MAHARASHTRA</option>
+														<c:forEach items="${stateList}" var="state">
+															<option value="${state.state_id}"><c:out
+																	value="${state.state_name}" /></option>
+														</c:forEach>
 													</select>
 												</div>
 											</div>
@@ -140,7 +141,7 @@
 
 											<div class="form-group">
 												<div class="col-lg-offset-2 col-lg-10">
-													<button type="submit" class="btn btn-primary">Add</button>
+													<button onclick="addHeadquarter()" type="submit" class="btn btn-primary">Add</button>
 													<button type="button" class="btn btn-danger">Cancel</button>
 												</div>
 											</div>
@@ -186,6 +187,35 @@
 		$(".knob").knob();
 	</script>
 
+<script>
+function addHeadquarter(){
+	var state_id = document.getElementById("state_name").value;
+	var headquarter_name = document.getElementById("headquarter_name").value;
+	
+	var headquarterjson = {
+			state_id : state_id,
+			headquarter_name : headquarter_name
+		}
+console.log(headquarterjson);
+	alert(headquarterjson);
+		$.ajax({
+			url : '/add_headquarter_data',
+			type : 'post',
+			dataType : 'text',
+			contentType : 'application/json',
+			success : function(data) {
+				if (data == "success") {
+				}
+
+				console.log("state_data : ", data);
+
+			},
+			data : JSON.stringify(headquarterjson)
+
+		});
+	}
+
+</script>
 
 </body>
 
