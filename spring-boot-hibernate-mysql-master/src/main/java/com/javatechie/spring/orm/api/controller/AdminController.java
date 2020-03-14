@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javatechie.spring.orm.api.dao.HeadquarterDao;
 import com.javatechie.spring.orm.api.dao.StateDao;
+import com.javatechie.spring.orm.api.dto.DynamicHeadquarterDropdownDto;
+import com.javatechie.spring.orm.api.dto.HeadquarterListDto;
 import com.javatechie.spring.orm.api.model.Headquarter;
 import com.javatechie.spring.orm.api.model.State;
 
@@ -34,7 +36,9 @@ public class AdminController {
     }
 	
 	@RequestMapping("/add_doctor") //redirects to add new doctor page
-    public String addDoctor(){
+    public String addDoctor(Model model){
+		List<State> stateList = stateDao.getStateList();
+		model.addAttribute("stateList",stateList);
         return ("add_doctor");
     }
 	
@@ -80,4 +84,24 @@ public class AdminController {
 		headquarterDao.saveHeadquarter(headquarterjson);
     }
 	
+    @RequestMapping(value = "/dynamic_headquarter_dropdown", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<Headquarter> dynamiceHeadquarterDropdown(@RequestBody Headquarter headquarterdropdownjson){
+    	List<Headquarter> dynamicHeadquarterDropdown = headquarterDao.dynamicHeadquarterDropdown(headquarterdropdownjson);
+		return dynamicHeadquarterDropdown;
+    }
+    
+ /*public String[] dynamiceHeadquarterDropdown(@RequestBody Headquarter headquarterdropdownjson, Model model){
+    	
+		System.out.println("inside dynamicHeadquarterDropdownDto"+headquarterdropdownjson.getState_id());
+		List<String> dynamicHeadquarterDropdown = headquarterDao.dynamicHeadquarterDropdown(headquarterdropdownjson);
+		
+        String[] arr = new String[dynamicHeadquarterDropdown.size()]; 
+
+		for (int i =0; i < dynamicHeadquarterDropdown.size(); i++) 
+            arr[i] = dynamicHeadquarterDropdown.get(i); 
+		
+		model.addAttribute("headquarterList",dynamicHeadquarterDropdown);
+		return arr;
+    }*/
 }

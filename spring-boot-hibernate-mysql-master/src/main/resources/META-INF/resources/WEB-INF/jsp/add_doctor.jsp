@@ -107,12 +107,12 @@
 												<div class="form-group col-md-6">
 													<label class="col-lg-3 control-label">State</label>
 													<div class="col-lg-9">
-														<select id="state_name" name="reportingto"
-															class="form-control" autofocus>
-															<option value="volvo">Reporting To</option>
-															<option value="1">PAATNAIK</option>
-															<option value="2">DURGESHWAR</option>
-															<option value="3">MANDODARAI</option>
+														<select onChange="stateChanged()" id="state_name"
+															name="reportingto" class="form-control" autofocus>
+															<c:forEach items="${stateList}" var="state">
+																<option value="${state.state_id}"><c:out
+																		value="${state.state_name}" /></option>
+															</c:forEach>
 														</select>
 													</div>
 												</div>
@@ -131,10 +131,7 @@
 													<div class="col-lg-9">
 														<select id="headquarter_name" name="reportingto"
 															class="form-control" autofocus>
-															<option value="volvo">Reporting To</option>
-															<option value="1">PAATNAIK</option>
-															<option value="2">DURGESHWAR</option>
-															<option value="3">MANDODARAI</option>
+															<option>Choose a number</option>
 														</select>
 													</div>
 												</div>
@@ -211,6 +208,46 @@
 		$(".knob").knob();
 	</script>
 
+	<script>
+		function stateChanged() {
+			var state_id = document.getElementById("state_name").value;
+			var select = document.getElementById("headquarter_name");
+
+			var headquarterdropdownjson = {
+				state_id : state_id
+			}
+			console.log(headquarterdropdownjson);
+			$.ajax({
+				url : '/dynamic_headquarter_dropdown',
+				type : 'post',
+				dataType : 'text',
+				contentType : 'application/json',
+				success : function(data) {
+					if (data == "success") {
+					}
+					
+					while (select.hasChildNodes()) {
+						select.removeChild(select.firstChild);
+					}
+					var options = JSON.parse(data);
+					for (var i = 0; i < options.length; i++) {
+
+						var opt = options[i];
+						var el = document.createElement("option");
+						el.textContent = opt;
+						el.value = opt;
+						select.appendChild(el);
+					}
+
+					console.log("dynamic_headquarter_dropdown : ", JSON
+							.parse(data));
+
+				},
+				data : JSON.stringify(headquarterdropdownjson)
+
+			});
+		}
+	</script>
 
 </body>
 
