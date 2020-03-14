@@ -73,7 +73,10 @@
 						<span class="input-group-addon"><i class="icon_profile"></i></span>
 						<select id="state" name="state" class="form-control" autofocus>
 							<c:forEach items="${stateList}" var="state">
-								<option value="volvo"><c:out value="${state.state_name}" /></option>
+								<c:forEach items="${stateList}" var="state">
+									<option value="${state.state_id}"><c:out
+											value="${state.state_name}" /></option>
+								</c:forEach>
 							</c:forEach>
 							<option value="1">ASSAM</option>
 							<option value="2">AP</option>
@@ -81,7 +84,7 @@
 						</select>
 					</div>
 
-					
+
 					<div class=" col-md-6 input-group">
 						<span class="input-group-addon"><i class="icon_profile"></i></span>
 						<select id="headquarter" name="headquarter" class="form-control"
