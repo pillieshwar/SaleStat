@@ -190,15 +190,15 @@
 <script>
 function addHeadquarter(){
 	var state_id = document.getElementById("state_name").value;
-	var headquarter_name = document.getElementById("headquarter_name").value;
+	var headquarter_name = document.getElementById("headquarter_name").value.toUpperCase();
 	
 	var headquarterjson = {
 			state_id : state_id,
 			headquarter_name : headquarter_name
 		}
 console.log(headquarterjson);
-	alert(headquarterjson);
-		$.ajax({
+
+	$.ajax({
 			url : '/add_headquarter_data',
 			type : 'post',
 			dataType : 'text',

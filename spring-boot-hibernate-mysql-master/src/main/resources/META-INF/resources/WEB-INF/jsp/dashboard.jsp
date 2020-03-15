@@ -147,11 +147,11 @@
 								</thead>
 								<tbody>
 
-									<c:forEach items="${location}" var="loc">
+									<c:forEach items="${stateList}" var="loc">
 										<tr>
 											<td><img src="img/India.png"
 												style="height: 18px; margin-top: -2px;"></td>
-											<td><c:out value="${loc.state}" /></td>
+											<td><c:out value="${loc.state_name}" /></td>
 											<td>2563</td>
 											<td>1025</td>
 											<td>

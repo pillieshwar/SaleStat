@@ -19,11 +19,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.javatechie.spring.orm.api.dao.DoctorDataEntryDao;
+import com.javatechie.spring.orm.api.dao.HeadquarterDao;
 import com.javatechie.spring.orm.api.dao.LocationDao;
 import com.javatechie.spring.orm.api.dao.LoginDao;
 import com.javatechie.spring.orm.api.dao.PersonDao;
+import com.javatechie.spring.orm.api.dto.HeadquarterListDto;
 import com.javatechie.spring.orm.api.dto.LocationDto;
 import com.javatechie.spring.orm.api.model.DoctorDetails;
+import com.javatechie.spring.orm.api.model.Headquarter;
 import com.javatechie.spring.orm.api.model.Location;
 import com.javatechie.spring.orm.api.model.Login;
 import com.javatechie.spring.orm.api.model.Person;
@@ -39,6 +42,9 @@ public class PersonController {
 	
 	@Autowired
 	private DoctorDataEntryDao doctorDataEntryDao ;
+	
+	@Autowired
+	private HeadquarterDao headquarterDao;
 
 	@RequestMapping("/profile")
     public String profile() {
@@ -59,14 +65,6 @@ public class PersonController {
 	@GetMapping("/getData")
 	public List<Person> getFewPersons() {
 		return dao.getFewPersons();
-	}
-	
-	@RequestMapping("/state_sales")
-    public ModelAndView stateSales(Model model){
-		List<LocationDto> location = locationDao.getAllLocations();
-		model.addAttribute("location",location);
-		return new ModelAndView("state_sales");
-		
 	}
 	
 	@RequestMapping("/state_doctor_business")
@@ -93,15 +91,19 @@ public class PersonController {
 		
 	}
 
-	@RequestMapping(path="/state_sales/{month}")
+	/*@RequestMapping(path="/state_sales/{month}")
     public String stateSalesMonth(@PathVariable("month") String month, Model model) {
 		System.out.println("inside");
 		System.out.println(month);
-		List<LocationDto> location = locationDao.getStateSalesMonth(month);
-		System.out.println(location.size());
+		List<HeadquarterListDto> location = locationDao.getStateSalesMonth(month);
+		
+    	List<HeadquarterListDto> headquarterList = headquarterDao.headquarterList(month); 
+
+		System.out.println("headquarterList"+headquarterList.size());
 		model.addAttribute("location",location);
+		model.addAttribute("headquarterList",headquarterList);
 		return ("state_sales");
-	}
+	}*/
 	 
 	@RequestMapping("/chart-chartjs")
     public ModelAndView myindexx(Model model){

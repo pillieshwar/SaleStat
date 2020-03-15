@@ -11,7 +11,7 @@
 <meta name="author" content="GeeksLabs">
 <meta name="keyword"
 	content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
-<link rel="shortcut icon" href="img/favicon.png">
+<link rel="shortcut icon" href="../img/favicon.png">
 
 <title>SaleStat</title>
 
@@ -287,7 +287,7 @@
 
 					<li class="dropdown"><a data-toggle="dropdown"
 						class="dropdown-toggle" href="#"> <span class="profile-ava">
-								<img alt="" src="img/avatar1_small.jpg">
+								<img alt="" src="../img/avatar1_small.jpg">
 						</span> <span class="username" id="username">Jenifer Smith</span> <b
 							class="caret"></b>
 					</a>
@@ -335,8 +335,10 @@
 							class="menu-arrow arrow_carrot-right"></span>
 					</a>
 						<ul class="sub">
-							<li><a class="" href="sa,">Assam</a></li>
-							<li><a class="" href="form_validation.html">Orissa</a></li>
+							<c:forEach items="${stateList}" var="state">
+								<li><a class="" href="state_sales?state=${state.state_id}"><c:out
+											value="${state.state_name}" /></a></li>
+							</c:forEach>
 						</ul></li>
 					<li><a class="" href="all_doctors"> <i
 							class="icon_piechart"></i> <span>DOCTORS</span>
@@ -383,12 +385,15 @@
 						<ul class="sub">
 							<li><a class="" href="add_role"><span>Add Role</span></a></li>
 							<li><a class="" href="add_state"><span>Add State</span></a></li>
-							<li><a class="" href="add_headquarter"><span>Add Headquarter</span></a></li>
+							<li><a class="" href="add_headquarter"><span>Add
+										Headquarter</span></a></li>
 							<li><a class="" href="add_doctor">Add Doctor</a></li>
-							<li><a class="" href="add_medicine"><span>Add Medicine</span></a></li>
-							<li><a class="" href="add_sponsorship"><span>Add Sponsorship</span></a></li>
-							
-							
+							<li><a class="" href="add_medicine"><span>Add
+										Medicine</span></a></li>
+							<li><a class="" href="add_sponsorship"><span>Add
+										Sponsorship</span></a></li>
+
+
 						</ul></li>
 
 				</ul>
