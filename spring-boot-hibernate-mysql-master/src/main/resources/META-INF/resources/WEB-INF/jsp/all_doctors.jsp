@@ -106,13 +106,10 @@ th:first-child, td:first-child {
 					onclick="openCity(event, 'tab-description')">ALL DOCTORS</button>
 				<select name="monthpick" id="monthpick"
 					style="height: 52px; float: right">
-					<option value="ASSAM">ASSAM</option>
-					<option value="BIHAR">BIHAR</option>
-					<option value="JHARKHAND">JHARKHAND</option>
-					<option value="ORISSA">ORISSA</option>
-					<option value="UP">UP</option>
-					<option value="WESTBENGAL">WEST-BENGAL</option>
-
+					<c:forEach items="${stateList}" var="state">
+						<option value="${state.state_name}"><c:out
+								value="${state.state_name}" /></option>
+					</c:forEach>
 				</select>
 				<button style="color: white; float: right" id="touch"
 					onclick="stateSort();">Select State</button>
@@ -145,7 +142,7 @@ th:first-child, td:first-child {
 								<tbody>
 									<tr>
 										<td><a class="" href="individual_doctor_business_info">Kate</td>
-										<td>Moss</td>
+										<td>ASSAM</td>
 										<td>USA</td>
 										<td>New York City / Warsaw / Lodz / Amsterdam / London /
 											Chicago</td>

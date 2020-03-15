@@ -132,12 +132,6 @@ public class PersonController {
 		System.out.println("success");
     }
 	
-	@RequestMapping("/all_doctors")
-    public ModelAndView allDoctors(Model model){
-		List<LocationDto> location = locationDao.getAllLocations();
-		model.addAttribute("location",location);
-		return new ModelAndView("all_doctors");
-		
-	}
+	
 	
 }

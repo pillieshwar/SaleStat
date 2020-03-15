@@ -12,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javatechie.spring.orm.api.dao.HeadquarterDao;
+import com.javatechie.spring.orm.api.dao.MedicineDao;
 import com.javatechie.spring.orm.api.dao.StateDao;
 import com.javatechie.spring.orm.api.dto.DynamicHeadquarterDropdownDto;
 import com.javatechie.spring.orm.api.dto.HeadquarterListDto;
 import com.javatechie.spring.orm.api.model.Headquarter;
+import com.javatechie.spring.orm.api.model.Medicine;
 import com.javatechie.spring.orm.api.model.State;
 
 @Controller
@@ -29,6 +31,9 @@ public class AdminController {
 	
 	@Autowired
 	private HeadquarterDao headquarterDao;
+	
+	@Autowired
+	private MedicineDao medicineDao;
 
 	@RequestMapping("/add_medicine") //redirects to add new medicine page
     public String addMedicine(){
@@ -104,4 +109,11 @@ public class AdminController {
 		model.addAttribute("headquarterList",dynamicHeadquarterDropdown);
 		return arr;
     }*/
+    
+    @RequestMapping(value = "/add_medicine_data", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public void addMedicineData(@RequestBody Medicine medicinejson){
+		System.out.println("inside add medicine data");
+		medicineDao.saveMedicine(medicinejson);
+    }
 }

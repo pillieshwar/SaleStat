@@ -127,7 +127,7 @@
 
                           <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                              <button type="submit" class="btn btn-primary">Save</button>
+                              <button onclick="addMedicine()" type="submit" class="btn btn-primary">Add</button>
                               <button type="button" class="btn btn-danger">Cancel</button>
                             </div>
                           </div>
@@ -173,6 +173,35 @@
     $(".knob").knob();
   </script>
 
+<script>
+function addMedicine(){
+	var medicine_name = document.getElementById("medicine_name").value.toUpperCase();
+	var medicine_price = document.getElementById("medicine_price").value;
+	
+	var medicinejson = {
+			medicine_name : medicine_name,
+			medicine_price : medicine_price
+		}
+console.log(medicinejson);
+
+	$.ajax({
+			url : '/add_medicine_data',
+			type : 'post',
+			dataType : 'text',
+			contentType : 'application/json',
+			success : function(data) {
+				if (data == "success") {
+				}
+
+				console.log("medicine_data : ", data);
+
+			},
+			data : JSON.stringify(medicinejson)
+
+		});
+	}
+
+</script>
 
 </body>
 
