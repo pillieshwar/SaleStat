@@ -1,0 +1,2 @@
+1) Create a database with name as 'TEST' is caps.
+2) In application properties change the jdbc username and password accordingly.
