@@ -9,12 +9,11 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 public class SpringBootHibernateApplication {
 
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-	      return application.sources(SpringBootHibernateApplication.class);
-	   }
-	
+		return application.sources(SpringBootHibernateApplication.class);
+	}
+
 	public static void main(String[] args) {
 		SpringApplication.run(SpringBootHibernateApplication.class, args);
 	}
-	
+
 }
- 
