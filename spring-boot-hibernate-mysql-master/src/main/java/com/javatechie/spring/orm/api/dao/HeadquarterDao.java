@@ -50,7 +50,7 @@ public class HeadquarterDao {
 	@SuppressWarnings("unchecked")
 	public List<Headquarter> dynamicHeadquarterDropdown(Headquarter headquarterdropdownjson) {
 		List<Headquarter> x = getSession().createSQLQuery(
-				"select headquarter_name from headquarter where state_id=" + headquarterdropdownjson.getState_id())
+				"select headquarter_id,headquarter_name from headquarter where state_id=" + headquarterdropdownjson.getState_id())
 				.list();
 		return x;
 	}

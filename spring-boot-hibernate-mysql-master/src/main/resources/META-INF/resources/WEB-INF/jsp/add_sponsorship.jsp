@@ -106,7 +106,7 @@
 
                           <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                              <button type="submit" class="btn btn-primary">Add</button>
+                              <button onclick="addSponsorship()" type="submit" class="btn btn-primary">Add</button>
                               <button type="button" class="btn btn-danger">Cancel</button>
                             </div>
                           </div>
@@ -152,6 +152,33 @@
     $(".knob").knob();
   </script>
 
+<script>
+function addSponsorship(){
+	var sponsorship_nature = document.getElementById("sponsorship_name").value.toUpperCase();
+	
+	var sponsorshipjson = {
+			sponsorship_nature : sponsorship_nature
+		}
+console.log(sponsorshipjson);
+
+	$.ajax({
+			url : '/add_sponsorship_data',
+			type : 'post',
+			dataType : 'text',
+			contentType : 'application/json',
+			success : function(data) {
+				if (data == "success") {
+				}
+
+				console.log("sponsorship_data : ", data);
+
+			},
+			data : JSON.stringify(sponsorshipjson)
+
+		});
+	}
+
+</script>
 
 </body>
 

@@ -79,7 +79,7 @@
                           <div class="form-group">
                             <label class="col-lg-2 control-label">Role Abbrevation</label>
                             <div class="col-lg-6">
-                              <input type="text" class="form-control" id="role_abbrevation" placeholder="MR">
+                              <input type="text" class="form-control" id="role_abbr" placeholder="MR">
                             </div>
                           </div>
                           
@@ -112,7 +112,7 @@
 
                           <div class="form-group">
                             <div class="col-lg-offset-2 col-lg-10">
-                              <button type="submit" class="btn btn-primary">Add</button>
+                              <button onclick="addRole()" type="submit" class="btn btn-primary">Add</button>
                               <button type="button" class="btn btn-danger">Cancel</button>
                             </div>
                           </div>
@@ -158,6 +158,36 @@
     $(".knob").knob();
   </script>
 
+<script>
+function addRole(){
+	var role_name = document.getElementById("role_name").value.toUpperCase();
+	var role_abbr = document.getElementById("role_abbr").value.toUpperCase();
+	
+	var rolejson = {
+			role_name : role_name,
+			role_abbr : role_abbr
+			
+		}
+alert(rolejson);
+
+	$.ajax({
+			url : '/add_role_data',
+			type : 'post',
+			dataType : 'text',
+			contentType : 'application/json',
+			success : function(data) {
+				if (data == "success") {
+				}
+
+				console.log("rolejson : ", data);
+
+			},
+			data : JSON.stringify(rolejson)
+
+		});
+	}
+
+</script>
 
 </body>
 

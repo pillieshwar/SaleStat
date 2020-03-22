@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.javatechie.spring.orm.api.dao.RoleDao;
 import com.javatechie.spring.orm.api.dao.SignupDao;
 import com.javatechie.spring.orm.api.dao.StateDao;
 import com.javatechie.spring.orm.api.dto.LocationDto;
@@ -25,10 +27,17 @@ public class SignupController {
 	@Autowired
 	private StateDao stateDao;
 	
+	@Autowired
+	private RoleDao roleDao;
+	
 	@RequestMapping("/signup")
 	public String signup(Model model) {
 		List<State> stateList = stateDao.getStateList();
+		List<State> roleList = roleDao.getRoleList();
 		model.addAttribute("stateList",stateList);
+		model.addAttribute("roleList",roleList);
+		
+		
 		return "signup";
 	}
 

@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.javatechie.spring.orm.api.dto.HeadquarterListDto;
 import com.javatechie.spring.orm.api.model.Headquarter;
 import com.javatechie.spring.orm.api.model.Medicine;
+import com.javatechie.spring.orm.api.model.Role;
+import com.javatechie.spring.orm.api.model.Sponsorship;
 
 @Repository
 @Transactional
@@ -35,6 +37,24 @@ public class MedicineDao {
 			session = factory.openSession();
 		}
 		return session;
+	}
+
+	public void saveSponsorship(Sponsorship sponsorshipjson) {
+		String qry = "insert into sponsorship values(null,'" + sponsorshipjson.getSponsorship_nature() + "'"+")";
+		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
+		int s = sqlQuery.executeUpdate();
+		System.out.println("executed query");
+		System.out.println(s);		
+	}
+
+	public void saveRole(Role rolejson) {
+
+		String qry = "insert into role values(null,'" + rolejson.getRole_name() + "','"
+				+ rolejson.getRole_abbr() + "')";
+		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
+		int s = sqlQuery.executeUpdate();
+		System.out.println("executed query");
+		System.out.println(s);	
 	}
 
 	/*@SuppressWarnings("unchecked")

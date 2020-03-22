@@ -18,6 +18,8 @@ import com.javatechie.spring.orm.api.dto.DynamicHeadquarterDropdownDto;
 import com.javatechie.spring.orm.api.dto.HeadquarterListDto;
 import com.javatechie.spring.orm.api.model.Headquarter;
 import com.javatechie.spring.orm.api.model.Medicine;
+import com.javatechie.spring.orm.api.model.Role;
+import com.javatechie.spring.orm.api.model.Sponsorship;
 import com.javatechie.spring.orm.api.model.State;
 
 @Controller
@@ -115,5 +117,19 @@ public class AdminController {
     public void addMedicineData(@RequestBody Medicine medicinejson){
 		System.out.println("inside add medicine data");
 		medicineDao.saveMedicine(medicinejson);
+    }
+    
+    @RequestMapping(value = "/add_sponsorship_data", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public void addSponsorshipData(@RequestBody Sponsorship sponsorshipjson){
+		System.out.println("inside add sponsorship data");
+		medicineDao.saveSponsorship(sponsorshipjson);
+    }
+
+    @RequestMapping(value = "/add_role_data", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public void addRoleData(@RequestBody Role rolejson){
+		System.out.println("inside add sponsorship data");
+		medicineDao.saveRole(rolejson);
     }
 }

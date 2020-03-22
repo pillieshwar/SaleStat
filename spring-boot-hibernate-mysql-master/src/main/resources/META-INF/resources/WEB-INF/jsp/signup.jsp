@@ -51,10 +51,10 @@
 				<div class="input-group">
 					<span class="input-group-addon"><i class="icon_profile"></i></span>
 					<select id="role" name="role" class="form-control" autofocus>
-						<option value="volvo">ROLE</option>
-						<option value="1">MR</option>
-						<option value="2">TMR</option>
-						<option value="3">CEO</option>
+						<c:forEach items="${roleList}" var="role">
+							<option value="${role.role_id}"><c:out
+									value="${role.role_abbr}" /></option>
+						</c:forEach>
 					</select>
 				</div>
 				<div class="input-group">
@@ -71,28 +71,21 @@
 				<div class="row">
 					<div class="col-md-6 input-group">
 						<span class="input-group-addon"><i class="icon_profile"></i></span>
-						<select id="state" name="state" class="form-control" autofocus>
+						<select onChange="stateChanged()" id="state" name="state"
+							class="form-control" autofocus>
 							<c:forEach items="${stateList}" var="state">
-								<c:forEach items="${stateList}" var="state">
-									<option value="${state.state_id}"><c:out
-											value="${state.state_name}" /></option>
-								</c:forEach>
+								<option value="${state.state_id}"><c:out
+										value="${state.state_name}" /></option>
 							</c:forEach>
-							<option value="1">ASSAM</option>
-							<option value="2">AP</option>
-							<option value="3">MAHARASHTRA</option>
 						</select>
 					</div>
 
 
 					<div class=" col-md-6 input-group">
 						<span class="input-group-addon"><i class="icon_profile"></i></span>
-						<select id="headquarter" name="headquarter" class="form-control"
-							autofocus>
-							<option value="volvo">Headquarter</option>
-							<option value="1">MUMBAI</option>
-							<option value="2">HYDERABAD</option>
-							<option value="3">PUNE</option>
+						<select id="headquarter" name="reportingto"
+							class="form-control" autofocus>
+							<option value="${state.state_id}">Choose a number</option>
 						</select>
 					</div>
 				</div>
@@ -190,5 +183,50 @@
 		}
 	</script>
 
+
+	<script>
+		function stateChanged() {
+			var state_id = document.getElementById("state").value;
+			var select = document.getElementById("headquarter");
+
+			var headquarterdropdownjson = {
+				state_id : state_id
+			}
+			console.log(headquarterdropdownjson);
+			$.ajax({
+				url : '/dynamic_headquarter_dropdown',
+				type : 'post',
+				dataType : 'text',
+				contentType : 'application/json',
+				success : function(data) {
+					if (data == "success") {
+					}
+
+					while (select.hasChildNodes()) {
+						select.removeChild(select.firstChild);
+					}
+					var options = JSON.parse(data);
+					
+					for (var i = 0; i < options.length; i++) {
+
+						var opt = options[i];
+						var el = document.createElement("option");
+						var str = opt.toString();
+						var val = str.split(",");
+						el.textContent = val[1];
+						el.value = val[0];
+						console.log("options : "+val[0]+" - " +el.value);
+						select.appendChild(el);
+					}
+
+					console.log("dynamic_headquarter_dropdown : ", JSON
+							.parse(data));
+
+				},
+				data : JSON.stringify(headquarterdropdownjson)
+
+			});
+		}
+	</script>
 </body>
 </html>
