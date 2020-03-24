@@ -103,7 +103,11 @@ color: #F00
 				dataType : 'text',
 				contentType : 'application/json',
 				success : function(data) {
-					if (data) {
+					console.log("LOGIN : ", data);
+
+					var nullcheck = JSON.parse(data);
+					
+					if (nullcheck!='') {
 						
 						var options = JSON.parse(data);
 						
@@ -128,7 +132,7 @@ color: #F00
 					else{
 						document.getElementById("credentials").innerHTML = "<span style='color: red;'> Username / password incorrect </span>";
 					}
-					console.log("LOGIN : ", data.substring(1,2));
+					console.log("LOGIN : ", data);
 					
 				},
 				data : JSON.stringify(login)

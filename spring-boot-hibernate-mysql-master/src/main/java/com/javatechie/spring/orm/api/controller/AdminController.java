@@ -11,10 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.javatechie.spring.orm.api.dao.DoctorDao;
 import com.javatechie.spring.orm.api.dao.HeadquarterDao;
 import com.javatechie.spring.orm.api.dao.MedicineDao;
 import com.javatechie.spring.orm.api.dao.RoleDao;
 import com.javatechie.spring.orm.api.dao.StateDao;
+import com.javatechie.spring.orm.api.dto.AddDoctorDto;
+import com.javatechie.spring.orm.api.dto.DivisionStateDto;
 import com.javatechie.spring.orm.api.dto.DynamicHeadquarterDropdownDto;
 import com.javatechie.spring.orm.api.dto.HeadquarterListDto;
 import com.javatechie.spring.orm.api.model.Division;
@@ -41,6 +44,9 @@ public class AdminController {
 	
 	@Autowired
 	private RoleDao roleDao;
+	
+	@Autowired
+	private DoctorDao doctorDao;
 
 
 	@RequestMapping("/add_medicine") //redirects to add new medicine page
@@ -71,6 +77,8 @@ public class AdminController {
     public String addHeadquarter(Model model){
 		List<State> stateList = stateDao.getStateList();
 		model.addAttribute("stateList",stateList);
+		List<Division> divisionList = roleDao.getDivisionList();
+		model.addAttribute("divisionList",divisionList);
         return ("add_headquarter");
     }
 	
@@ -92,9 +100,18 @@ public class AdminController {
         return (ret);
     }
 	
-	@RequestMapping(value = "/add_headquarter_data", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	/*@RequestMapping(value = "/add_headquarter_data", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public void addHeadquarterData(@RequestBody Headquarter headquarterjson){
+		System.out.println("inside add headquarter data");
+		headquarterDao.saveHeadquarter(headquarterjson);
+		//headquarterDao.saveDivisionState(headquarterjson);
+		
+    }*/
+	
+	@RequestMapping(value = "/add_headquarter_data", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public void addHeadquarterData(@RequestBody DivisionStateDto headquarterjson){
 		System.out.println("inside add headquarter data");
 		headquarterDao.saveHeadquarter(headquarterjson);
 		//headquarterDao.saveDivisionState(headquarterjson);
@@ -141,5 +158,12 @@ public class AdminController {
     public void addRoleData(@RequestBody Role rolejson){
 		System.out.println("inside add sponsorship data");
 		medicineDao.saveRole(rolejson);
+    }
+    
+    @RequestMapping(value = "/add_doctor_data", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public void addDoctorData(@RequestBody AddDoctorDto adddoctorjson){
+		System.out.println("inside add headquarter data");
+		doctorDao.saveDoctor(adddoctorjson);		
     }
 }

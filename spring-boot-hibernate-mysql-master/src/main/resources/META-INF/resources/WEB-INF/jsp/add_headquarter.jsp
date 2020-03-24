@@ -53,7 +53,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h3 class="page-header">
-							<i class="fa fa-user-md"></i> Profile
+							<i class="fa fa-user-md"></i> HEADQUARTER
 						</h3>
 						<ol class="breadcrumb">
 							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
@@ -75,10 +75,22 @@
 										<h1>Add Headquarter</h1>
 										<form class="form-horizontal" role="form">
 											<div class="form-group">
+												<label class="col-lg-2 control-label">Division Name</label>
+												<div class="col-lg-6">
+													<select id="division_id" name="division"
+														class="form-control" autofocus>
+														<c:forEach items="${divisionList}" var="division">
+															<option value="${division.division_id}"><c:out
+																	value="${division.division_name}" /></option>
+														</c:forEach>
+													</select>
+												</div>
+											</div>
+											<div class="form-group">
 												<label class="col-lg-2 control-label">State Name</label>
 												<div class="col-lg-6">
 													<!-- pass the state id from backend call -->
-													<select id="state_name" name="reportingto"
+													<select id="state_name" name="state_name"
 														class="form-control" autofocus>
 														<c:forEach items="${stateList}" var="state">
 															<option value="${state.state_id}"><c:out
@@ -141,7 +153,8 @@
 
 											<div class="form-group">
 												<div class="col-lg-offset-2 col-lg-10">
-													<button onclick="addHeadquarter()" type="submit" class="btn btn-primary">Add</button>
+													<button onclick="addHeadquarter()" type="submit"
+														class="btn btn-primary">Add</button>
 													<button type="button" class="btn btn-danger">Cancel</button>
 												</div>
 											</div>
@@ -187,35 +200,37 @@
 		$(".knob").knob();
 	</script>
 
-<script>
-function addHeadquarter(){
-	var state_id = document.getElementById("state_name").value;
-	var headquarter_name = document.getElementById("headquarter_name").value.toUpperCase();
-	
-	var headquarterjson = {
-			state_id : state_id,
-			headquarter_name : headquarter_name
+	<script>
+		function addHeadquarter() {
+			var state_id = document.getElementById("state_name").value;
+			var headquarter_name = document.getElementById("headquarter_name").value
+					.toUpperCase();
+			var division_id = document.getElementById("division_id").value;
+
+			var headquarterjson = {
+				state_id : state_id,
+				headquarter_name : headquarter_name,
+				division_id : division_id
+			}
+			console.log(headquarterjson);
+
+			$.ajax({
+				url : '/add_headquarter_data',
+				type : 'post',
+				dataType : 'text',
+				contentType : 'application/json',
+				success : function(data) {
+					if (data == "success") {
+					}
+
+					console.log("state_data : ", data);
+
+				},
+				data : JSON.stringify(headquarterjson)
+
+			});
 		}
-console.log(headquarterjson);
-
-	$.ajax({
-			url : '/add_headquarter_data',
-			type : 'post',
-			dataType : 'text',
-			contentType : 'application/json',
-			success : function(data) {
-				if (data == "success") {
-				}
-
-				console.log("state_data : ", data);
-
-			},
-			data : JSON.stringify(headquarterjson)
-
-		});
-	}
-
-</script>
+	</script>
 
 </body>
 

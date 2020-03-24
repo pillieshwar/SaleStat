@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.javatechie.spring.orm.api.dto.DivisionStateDto;
 import com.javatechie.spring.orm.api.dto.DynamicHeadquarterDropdownDto;
 import com.javatechie.spring.orm.api.dto.HeadquarterListDto;
 import com.javatechie.spring.orm.api.model.Headquarter;
@@ -22,13 +23,29 @@ public class HeadquarterDao {
 	@Autowired
 	private SessionFactory factory;
 
-	public void saveHeadquarter(Headquarter headquarter) {
+	/*public void saveHeadquarter(Headquarter headquarter) {
 		String qry = "insert into headquarter values(null,'" + headquarter.getHeadquarter_name() + "',"
 				+ headquarter.getState_id() + ")";
 		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
 		int s = sqlQuery.executeUpdate();
 		System.out.println("executed query");
 		System.out.println(s);
+	}*/
+
+	public void saveHeadquarter(DivisionStateDto headquarterjson) {
+		String qry = "insert into headquarter values(null,'" + headquarterjson.getHeadquarter_name() + "',"
+				+ headquarterjson.getState_id() + ")";
+		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
+		int s = sqlQuery.executeUpdate();
+		
+		String qry_division_state = "insert into division_state values(null," + headquarterjson.getDivision_id() + ","
+				+ headquarterjson.getState_id() + ",(select headquarter_id from headquarter where headquarter_name='" + headquarterjson.getHeadquarter_name() + "'))";
+		SQLQuery sqlQuery_division_state = getSession().createSQLQuery(qry_division_state);
+		int s1 = sqlQuery_division_state.executeUpdate();
+	}
+	
+	private void saveDivisionState(Headquarter headquarter) {
+		
 	}
 
 	private Session getSession() {

@@ -27,6 +27,7 @@
 <!-- Custom styles -->
 <link href="css/style.css" rel="stylesheet">
 <link href="css/style-responsive.css" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/css/material-bootstrap.css">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
 <!--[if lt IE 9]>
@@ -53,7 +54,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h3 class="page-header">
-							<i class="fa fa-user-md"></i> Profile
+							<i class="fa fa-user-md"></i> NEW DOCTOR
 						</h3>
 						<ol class="breadcrumb">
 							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
@@ -67,7 +68,10 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<section class="panel">
-
+							<div class="chip">
+  Tag
+  <i class="close material-icons">close</i>
+</div>
 							<!-- add-new-medicine -->
 							<div id="edit-profile" class="tab-pane">
 								<section class="panel">
@@ -87,10 +91,10 @@
 													<div class="col-lg-9">
 														<select id="division_name" name="reportingto"
 															class="form-control" autofocus>
-															<option value="volvo">Reporting To</option>
-															<option value="1">PAATNAIK</option>
-															<option value="2">DURGESHWAR</option>
-															<option value="3">MANDODARAI</option>
+															<c:forEach items="${divisionList}" var="division">
+																<option value="${division.division_id}"><c:out
+																		value="${division.division_name}" /></option>
+															</c:forEach>
 														</select>
 													</div>
 												</div>
@@ -100,15 +104,15 @@
 													<label class="col-lg-4 control-label">Doctor
 														Speciality</label>
 													<div class="col-lg-8">
-														<input type="text" class="form-control" id="speciality"
-															placeholder=" ">
+														<input type="text" class="form-control"
+															id="doctor_speciality" placeholder=" ">
 													</div>
 												</div>
 												<div class="form-group col-md-6">
 													<label class="col-lg-3 control-label">State</label>
 													<div class="col-lg-9">
 														<select onChange="stateChanged()" id="state_name"
-															name="reportingto" class="form-control" autofocus>
+															name="state_name" class="form-control" autofocus>
 															<c:forEach items="${stateList}" var="state">
 																<option value="${state.state_id}"><c:out
 																		value="${state.state_name}" /></option>
@@ -131,7 +135,7 @@
 													<div class="col-lg-9">
 														<select id="headquarter_name" name="reportingto"
 															class="form-control" autofocus>
-															<option>Choose a number</option>
+															<option>Choose Headquarter</option>
 														</select>
 													</div>
 												</div>
@@ -140,14 +144,14 @@
 												<div class="form-group col-md-6">
 													<label class="col-lg-4 control-label">Phone Number</label>
 													<div class="col-lg-8">
-														<input type="text" class="form-control" id="phone_number"
-															placeholder=" ">
+														<input type="number" class="form-control"
+															id="phone_number" placeholder=" " max="9999999999">
 													</div>
 												</div>
 												<div class="form-group col-md-6">
 													<label class="col-lg-3 control-label">Address</label>
 													<div class="col-lg-9">
-														<textarea name="" id="address" class="form-control"
+														<textarea name="address" id="address" class="form-control"
 															cols="20" rows="3"></textarea>
 													</div>
 												</div>
@@ -162,7 +166,8 @@
 
 											<div class="form-group">
 												<div class="col-lg-offset-2 col-lg-10">
-													<button type="submit" class="btn btn-primary">Save</button>
+													<button onclick="addDoctor()" type="submit"
+														class="btn btn-primary">Save</button>
 													<button type="button" class="btn btn-danger">Cancel</button>
 												</div>
 											</div>
@@ -202,7 +207,8 @@
 	<script src="assets/jquery-knob/js/jquery.knob.js"></script>
 	<!--custome script for all page-->
 	<script src="js/scripts.js"></script>
-
+	<script src="/assets/vendors/jquery/jquery.min.js"></script>
+	<script src="/assets/js/material-bootstrap.js"></script>
 	<script>
 		//knob
 		$(".knob").knob();
@@ -225,7 +231,7 @@
 				success : function(data) {
 					if (data == "success") {
 					}
-					
+
 					while (select.hasChildNodes()) {
 						select.removeChild(select.firstChild);
 					}
@@ -234,8 +240,11 @@
 
 						var opt = options[i];
 						var el = document.createElement("option");
-						el.textContent = opt;
-						el.value = opt;
+						var str = opt.toString();
+						var val = str.split(",");
+						el.textContent = val[1];
+						el.value = val[0];
+						console.log("options : " + val[0] + " - " + el.value);
 						select.appendChild(el);
 					}
 
@@ -249,6 +258,58 @@
 		}
 	</script>
 
+
+	<script>
+		function addDoctor() {
+
+			var doctor_name = document.getElementById("doctor_name").value
+					.toUpperCase();
+			var division_name = document.getElementById("division_name").value
+					.toUpperCase();
+			var state_name = document.getElementById("state_name").value
+					.toUpperCase();
+			var headquarter_name = document.getElementById("headquarter_name").value
+					.toUpperCase();
+			var doctor_qualification = document
+					.getElementById("doctor_qualification").value.toUpperCase();
+			var doctor_speciality = document
+					.getElementById("doctor_speciality").value.toUpperCase();
+			var phone_number = document.getElementById("phone_number").value;
+			var address = document.getElementById("address").value
+					.toUpperCase();
+
+			var addDoctor = {
+
+				doctor_name : doctor_name,
+				doctor_speciality : doctor_speciality,
+				division_id : division_name,
+				state_id : state_name,
+				headquarter_id : headquarter_name,
+				doctor_qualification : doctor_qualification,
+				phone_number : phone_number,
+				address : address
+
+			}
+			console.log(addDoctor); //remove all console.log once the whole module is deployed and ready for UAT.
+
+			$
+					.ajax({
+						url : '/add_doctor_data',
+						type : 'post',
+						dataType : 'text',
+						contentType : 'application/json',
+						success : function(data) {
+							if (data == "success") {
+								window.location.href = "login";
+							} else {
+								document.getElementById("credentials").innerHTML = "<span style='color: red;'> Username / password incorrect </span>";
+							}
+							console.log("ADD_DOCTOR : ", data);
+						},
+						data : JSON.stringify(addDoctor)
+					});
+		}
+	</script>
 </body>
 
 </html>
