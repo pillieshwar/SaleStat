@@ -61,10 +61,10 @@
 					<span class="input-group-addon"><i class="icon_profile"></i></span>
 					<select id="division" name="division" class="form-control"
 						autofocus>
-						<option value="volvo">Division Name</option>
-						<option value="1">CARDIAC</option>
-						<option value="2">GYNEC</option>
-						<option value="3">PEDIATRIC</option>
+						<c:forEach items="${divisionList}" var="division">
+								<option value="${division.division_id}"><c:out
+										value="${division.division_name}" /></option>
+							</c:forEach>
 					</select>
 				</div>
 

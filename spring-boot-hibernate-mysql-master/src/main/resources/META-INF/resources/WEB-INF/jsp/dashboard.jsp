@@ -446,7 +446,13 @@
 		});
 
 		function username() {
-			document.getElementById("username").innerHTML = "Eshwar Pilli";
+			this.getData =function(){ 
+				 return JSON.parse(localStorage.getItem('saleStatData'));
+
+				}
+			document.getElementById("username").innerHTML = this.getData().username.toUpperCase();
+			  console.log(this.getData().username);
+			/* document.getElementById("username").innerHTML = "Eshwar Pilli"; */
 		}
 	</script>
 

@@ -89,6 +89,12 @@ color: #F00
 				username : username,
 				password : password
 			}
+			
+			/* localStorage.setItem('saleStatData', JSON.stringify({
+				username: document.getElementById('username').value,
+				password: document.getElementById('password').value 
+		  })); */
+			
 			console.log(login); //remove all console.log once the whole module is deployed and ready for UAT.
 
 			$.ajax({
@@ -97,13 +103,33 @@ color: #F00
 				dataType : 'text',
 				contentType : 'application/json',
 				success : function(data) {
-					if (data == "success") {
+					if (data) {
+						
+						var options = JSON.parse(data);
+						
+						for (var i = 0; i < options.length; i++) {
+
+							var opt = options[i];
+							var str = opt.toString();
+							var val = str.split(",");
+						}
+						console.log(val);
+
+						localStorage.setItem('saleStatData', JSON.stringify({
+							username: val[0],
+							division_id: val[1],
+							state_id: val[2],
+							headquarter_id: val[3],
+							role_id: val[4],
+							role_abbr: val[5] 
+					  }));
 						window.location.href = "dashboard";
 					}
 					else{
 						document.getElementById("credentials").innerHTML = "<span style='color: red;'> Username / password incorrect </span>";
 					}
-					console.log("LOGIN : ", data);
+					console.log("LOGIN : ", data.substring(1,2));
+					
 				},
 				data : JSON.stringify(login)
 			});

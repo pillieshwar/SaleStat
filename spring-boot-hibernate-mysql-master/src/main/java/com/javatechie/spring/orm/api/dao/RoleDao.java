@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.javatechie.spring.orm.api.model.Division;
 import com.javatechie.spring.orm.api.model.Role;
 import com.javatechie.spring.orm.api.model.State;
 
@@ -23,9 +24,13 @@ public class RoleDao {
 //		Serializable ret = getSession().save(state);
 //		return ret;
 //	}
+	@SuppressWarnings("unchecked")
+	public List<Division> getDivisionList() {
+		return getSession().createCriteria(Division.class).list();
+	}
 	
 	@SuppressWarnings("unchecked")
-	public List<State> getRoleList() {
+	public List<Role> getRoleList() {
 		return getSession().createCriteria(Role.class).list();
 	}
 	

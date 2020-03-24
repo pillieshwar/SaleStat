@@ -15,6 +15,8 @@ import com.javatechie.spring.orm.api.dao.RoleDao;
 import com.javatechie.spring.orm.api.dao.SignupDao;
 import com.javatechie.spring.orm.api.dao.StateDao;
 import com.javatechie.spring.orm.api.dto.LocationDto;
+import com.javatechie.spring.orm.api.model.Division;
+import com.javatechie.spring.orm.api.model.Role;
 import com.javatechie.spring.orm.api.model.Signup;
 import com.javatechie.spring.orm.api.model.State;
 
@@ -33,9 +35,11 @@ public class SignupController {
 	@RequestMapping("/signup")
 	public String signup(Model model) {
 		List<State> stateList = stateDao.getStateList();
-		List<State> roleList = roleDao.getRoleList();
+		List<Role> roleList = roleDao.getRoleList();
+		List<Division> divisionList = roleDao.getDivisionList();
 		model.addAttribute("stateList",stateList);
 		model.addAttribute("roleList",roleList);
+		model.addAttribute("divisionList",divisionList);
 		
 		
 		return "signup";

@@ -1,5 +1,7 @@
 package com.javatechie.spring.orm.api.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javatechie.spring.orm.api.dao.LoginDao;
 import com.javatechie.spring.orm.api.dto.LoginDto;
+import com.javatechie.spring.orm.api.dto.LoginLocalStorageDto;
 import com.javatechie.spring.orm.api.model.Login;
 
 @Controller
@@ -33,10 +36,17 @@ public class LoginController {
         return "login";
     }
 	
-	@RequestMapping(value = "/login_data", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
+	/*@RequestMapping(value = "/login_data", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public String LoginData(@RequestBody LoginDto jsonLoginString) {	
 		String result = loginDao.checkLogin(jsonLoginString);
+		return result;
+    }*/
+	
+	@RequestMapping(value = "/login_data", method = RequestMethod.POST, produces= MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public List<LoginLocalStorageDto> LoginData(@RequestBody LoginDto jsonLoginString) {	
+		List<LoginLocalStorageDto> result = loginDao.checkLogin(jsonLoginString);
 		return result;
     }
 }

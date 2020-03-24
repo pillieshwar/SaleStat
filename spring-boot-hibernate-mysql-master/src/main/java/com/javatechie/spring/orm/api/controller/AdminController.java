@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javatechie.spring.orm.api.dao.HeadquarterDao;
 import com.javatechie.spring.orm.api.dao.MedicineDao;
+import com.javatechie.spring.orm.api.dao.RoleDao;
 import com.javatechie.spring.orm.api.dao.StateDao;
 import com.javatechie.spring.orm.api.dto.DynamicHeadquarterDropdownDto;
 import com.javatechie.spring.orm.api.dto.HeadquarterListDto;
+import com.javatechie.spring.orm.api.model.Division;
 import com.javatechie.spring.orm.api.model.Headquarter;
 import com.javatechie.spring.orm.api.model.Medicine;
 import com.javatechie.spring.orm.api.model.Role;
@@ -36,6 +38,10 @@ public class AdminController {
 	
 	@Autowired
 	private MedicineDao medicineDao;
+	
+	@Autowired
+	private RoleDao roleDao;
+
 
 	@RequestMapping("/add_medicine") //redirects to add new medicine page
     public String addMedicine(){
@@ -45,6 +51,8 @@ public class AdminController {
 	@RequestMapping("/add_doctor") //redirects to add new doctor page
     public String addDoctor(Model model){
 		List<State> stateList = stateDao.getStateList();
+		List<Division> divisionList = roleDao.getDivisionList();
+		model.addAttribute("divisionList",divisionList);
 		model.addAttribute("stateList",stateList);
         return ("add_doctor");
     }
@@ -89,6 +97,8 @@ public class AdminController {
     public void addHeadquarterData(@RequestBody Headquarter headquarterjson){
 		System.out.println("inside add headquarter data");
 		headquarterDao.saveHeadquarter(headquarterjson);
+		//headquarterDao.saveDivisionState(headquarterjson);
+		
     }
 	
     @RequestMapping(value = "/dynamic_headquarter_dropdown", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
