@@ -2,6 +2,8 @@ package com.javatechie.spring.orm.api.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.javatechie.spring.orm.api.dao.DashboardDao;
 import com.javatechie.spring.orm.api.dao.HeadquarterDao;
 import com.javatechie.spring.orm.api.dao.LocationDao;
 import com.javatechie.spring.orm.api.dao.StateDao;
@@ -31,8 +34,14 @@ public class StateController {
 	@Autowired
 	private StateDao stateDao;
 	
+	@Autowired
+	private DashboardDao dashboardDao;
+	
 	@RequestMapping("/state_sales")
-    public ModelAndView stateSales(Model model){		
+    public ModelAndView stateSales(Model model, HttpSession session) {
+		int state_id_session = Integer.parseInt((String) session.getAttribute("state_id_session"));
+		List<State> stateDropdownList = dashboardDao.stateDropdown1(state_id_session);
+		model.addAttribute("stateDropdownList", stateDropdownList);
 		return new ModelAndView("state_sales");
 	}
 	
@@ -48,10 +57,14 @@ public class StateController {
 	}*/
 	
 	@GetMapping("/state_sales")
-    public String stateSalesMonth(@RequestParam("state") String state, Model model) {
+    public String stateSalesMonth(@RequestParam("state") String state, Model model, HttpSession session) {
 		System.out.println("state---->"+state);
 		List<State> stateList = stateDao.getStateList();
 		model.addAttribute("stateList",stateList);
+		
+		int state_id_session = Integer.parseInt((String) session.getAttribute("state_id_session"));
+		List<State> stateDropdownList = dashboardDao.stateDropdown1(state_id_session);
+		model.addAttribute("stateDropdownList", stateDropdownList);
 		
     	List<HeadquarterListDto> headquarterList = headquarterDao.headquarterList(state);
 		model.addAttribute("headquarterList",headquarterList);

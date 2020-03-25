@@ -60,6 +60,12 @@
     Author: BootstrapMade
     Author URL: https://bootstrapmade.com
   ======================================================= -->
+<style>
+/* .disabled {
+	pointer-events: none;
+	cursor: default;
+} */
+</style>
 </head>
 
 <body onload="username();">
@@ -330,12 +336,12 @@
 					<li class="active"><a class="" href="dashboard"> <i
 							class="icon_house_alt"></i> <span>DASHBOARD</span>
 					</a></li>
-					<li class="sub-menu"><a href="javascript:;" class=""> <i
-							class="icon_document_alt"></i> <span>STATES</span> <span
-							class="menu-arrow arrow_carrot-right"></span>
+					<li class="sub-menu"><a onClick="stateDropdown()"
+						href="javascript:;" class=""> <i class="icon_document_alt"></i>
+							<span>STATES</span> <span class="menu-arrow arrow_carrot-right"></span>
 					</a>
 						<ul class="sub">
-							<c:forEach items="${stateList}" var="state">
+							<c:forEach items="${stateDropdownList}" var="state">
 								<li><a class="" href="state_sales?state=${state.state_id}"><c:out
 											value="${state.state_name}" /></a></li>
 							</c:forEach>
@@ -378,8 +384,8 @@
 							<li><a class="" href="404.html">404 Error</a></li>
 						</ul></li> -->
 
-					<li class="sub-menu"><a href="javascript:;" class=""> <i
-							class="icon_documents_alt"></i> <span>ADMIN</span> <span
+					<li class="sub-menu"><a href="javascript:;" id="admin_enable" class="disabled">
+							<i class="icon_documents_alt"></i> <span>ADMIN</span> <span
 							class="menu-arrow arrow_carrot-right"></span>
 					</a>
 						<ul class="sub">
@@ -404,7 +410,45 @@
 
 		<script>
 			function username() {
-				document.getElementById("username").innerHTML = "Eshwar Pilli";
+				this.getData = function() {
+					return JSON.parse(localStorage.getItem('saleStatData'));
+
+				}
+				document.getElementById("username").innerHTML = this.getData().username
+						.toUpperCase();
+				if (this.getData().role_abbr.toUpperCase() !== 'ADMIN') {
+					document.getElementById('admin_enable').style.pointerEvents="none";
+					document.getElementById('admin_enable').style.cursor="default";
+				}
+				
+			}
+
+			function stateDropdown() {
+				this.getData = function() {
+					return JSON.parse(localStorage.getItem('saleStatData'));
+				}
+
+				var stateId = this.getData().state_id;
+				var statedropdownjson = {
+					state_id : stateId
+				}
+				console.log(statedropdownjson);
+				$.ajax({
+					url : '/state_dropdown_data',
+					type : 'post',
+					dataType : 'text',
+					contentType : 'application/json',
+					success : function(data) {
+						if (data == "success") {
+						}
+
+						console.log("---> ", data);
+
+					},
+					data : JSON.stringify(statedropdownjson)
+
+				});
+
 			}
 		</script>
 </body>

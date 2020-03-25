@@ -77,6 +77,8 @@
 								<option value="${state.state_id}"><c:out
 										value="${state.state_name}" /></option>
 							</c:forEach>
+							<option value="9999"><c:out
+										value="ALL INDIA" /></option>
 						</select>
 					</div>
 

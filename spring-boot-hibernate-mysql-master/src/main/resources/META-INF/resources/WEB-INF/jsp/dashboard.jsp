@@ -446,13 +446,18 @@
 		});
 
 		function username() {
-			this.getData =function(){ 
-				 return JSON.parse(localStorage.getItem('saleStatData'));
+			this.getData = function() {
+				return JSON.parse(localStorage.getItem('saleStatData'));
 
-				}
-			document.getElementById("username").innerHTML = this.getData().username.toUpperCase();
-			  console.log(this.getData().username);
-			/* document.getElementById("username").innerHTML = "Eshwar Pilli"; */
+			}
+			document.getElementById("username").innerHTML = this.getData().username
+					.toUpperCase();
+			console.log(this.getData().role_abbr);
+
+			if (this.getData().role_abbr.toUpperCase() !== 'ADMIN') {
+				document.getElementById('admin_enable').style.pointerEvents = "none";
+				document.getElementById('admin_enable').style.cursor = "default";
+			}
 		}
 	</script>
 

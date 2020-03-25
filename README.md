@@ -75,3 +75,9 @@ Steps to run the project :
 9) after the application is started goto browser and enter the url: http://localhost:8090 (a login page will appear)
  
 #RUN UPDATED_SCHEMA.SQL IN MYSQL ( This will create entire schema and the database will be ready for use. )
+
+
+LOGIN FUNCTIONALITY :
+login.jsp -> loginController(/login_data) -> loginDao(checkLogin) -> login.jsp(redirect to dashboard.jsp) -> DashboardController(/dashboard) -> DashboardDao(stateDropdown1) -> dashboard.jsp
+
+- For higher officials all india data should be shown so i have set all india ID to 9999;

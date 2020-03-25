@@ -42,20 +42,12 @@ public class LoginDao {
 		return ret;
 	}*/
 	
-	public List<LoginLocalStorageDto> checkLogin(LoginDto jsonLoginString) {
+	public List<Object> checkLogin(LoginDto jsonLoginString) {
 		String ret;
 		String qry = "select u.username, u.division_id, u.state_id, u.headquarter_id, r.role_id, r.role_abbr from user as u inner join role as r on u.role_id=r.role_id where username='" + jsonLoginString.getUsername() + "' and password='"
 				+ jsonLoginString.getPassword() + "'";
 		
 		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
-		//sqlQuery.addEntity(LoginLocalStorageDto.class);
-		
-//		if (sqlQuery.list().size() != 0) {
-//			ret = "success";
-//		} else {
-//			// System.out.println(sqlQuery.getFetchSize());
-//			ret = "fail";
-//		}
 		return sqlQuery.list();
 	}
 
