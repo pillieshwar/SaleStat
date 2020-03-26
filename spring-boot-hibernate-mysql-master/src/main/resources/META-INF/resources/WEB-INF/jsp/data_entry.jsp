@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@include file="header.jsp"%>
 
 <head>
 <meta charset="utf-8">
@@ -10,12 +13,9 @@
 <meta name="keyword"
 	content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
 <link rel="shortcut icon" href="img/favicon.png">
-<link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
-	rel="stylesheet" />
-<title>Doctor's Business</title>
- <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c"%>
+
+<title>SaleStat - Data Entry</title>
+
 <!-- Bootstrap CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- bootstrap theme -->
@@ -27,6 +27,7 @@
 <!-- Custom styles -->
 <link href="css/style.css" rel="stylesheet">
 <link href="css/style-responsive.css" rel="stylesheet" />
+<link rel="stylesheet" href="/assets/css/material-bootstrap.css">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
 <!--[if lt IE 9]>
@@ -41,178 +42,11 @@
       Author: BootstrapMade
       Author URL: https://bootstrapmade.com
     ======================================================= -->
-<style>
-.noteven {
-	background-color: #FD8385;
-}
-
-.even {
-	background-color: #7BFD94;
-}
-
-/* Style the tab */
-.tab {
-  overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #5A888E;;
-}
-
-/* Style the buttons inside the tab */
-.tab button {
-  background-color: inherit;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
-  font-size: 17px;
-}
-
-/* Change background color of buttons on hover */
-.tab button:hover {
-  background-color: #ddd;
-}
-
-/* Create an active/current tablink class */
-.tab button.active {
-  background-color: #ccc;
-}
-
-/* Style the tab content */
-.tabcontent {
-  display: none;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-top: none;
-}
-
-#myInput {
-	background-image: url('/img/search-icon.jpg');
-	background-position: 10px 16px;
-	background-repeat: no-repeat;
-	width: 100%;
-	font-size: 16px;
-	padding: 12px 20px 12px 40px;
-	border: 1px solid #ddd;
-	margin-bottom: 12px;
-}
-
-th:first-child, td:first-child {
-	position: sticky;
-	left: 0px;
-	background-color: white;
-}
-</style>
 </head>
 
-<!-- <body onload="alternate('thetable')"> -->
-<!-- container section start -->
 <body>
+	<!-- container section start -->
 	<section id="container" class="">
-		<!--header start-->
-		<header class="header dark-bg">
-			<div class="toggle-nav">
-				<div class="icon-reorder tooltips"
-					data-original-title="Toggle Navigation" data-placement="bottom">
-					<i class="icon_menu"></i>
-				</div>
-			</div>
-
-			<!--logo start-->
-			<a href="index.html" class="logo">Nice <span class="lite">Admin</span></a>
-			<!--logo end-->
-
-			<div class="top-nav notification-row">
-
-				<!-- user login dropdown start-->
-				<li class="dropdown"><a data-toggle="dropdown"
-					class="dropdown-toggle" href="#"> <span class="profile-ava">
-							<img alt="" src="img/avatar1_small.jpg">
-					</span> <span class="username">Jenifer Smith</span> <b class="caret"></b>
-				</a>
-					<ul class="dropdown-menu extended logout">
-						<div class="log-arrow-up"></div>
-						<li class="eborder-top"><a href="#"><i
-								class="icon_profile"></i> My Profile</a></li>
-						<li><a href="#"><i class="icon_mail_alt"></i> My Inbox</a></li>
-						<li><a href="#"><i class="icon_clock_alt"></i> Timeline</a></li>
-						<li><a href="#"><i class="icon_chat_alt"></i> Chats</a></li>
-						<li><a href="login.html"><i class="icon_key_alt"></i> Log
-								Out</a></li>
-						<li><a href="documentation.html"><i class="icon_key_alt"></i>
-								Documentation</a></li>
-						<li><a href="documentation.html"><i class="icon_key_alt"></i>
-								Documentation</a></li>
-					</ul></li>
-				<!-- user login dropdown end -->
-				</ul>
-				<!-- notificatoin dropdown end-->
-			</div>
-		</header>
-		<!--header end-->
-
-		<!--sidebar start-->
-		<aside>
-			<div id="sidebar" class="nav-collapse ">
-				<!-- sidebar menu start-->
-				<ul class="sidebar-menu">
-					<li class=""><a class="" href="index.html"> <i
-							class="icon_house_alt"></i> <span>Dashboard</span>
-					</a></li>
-					<li class="sub-menu"><a href="javascript:;" class=""> <i
-							class="icon_document_alt"></i> <span>Forms</span> <span
-							class="menu-arrow arrow_carrot-right"></span>
-					</a>
-						<ul class="sub">
-							<li><a class="" href="form_component.html">Form Elements</a></li>
-							<li><a class="" href="form_validation.html">Form
-									Validation</a></li>
-						</ul></li>
-					<li class="sub-menu"><a href="javascript:;" class=""> <i
-							class="icon_desktop"></i> <span>UI Fitures</span> <span
-							class="menu-arrow arrow_carrot-right"></span>
-					</a>
-						<ul class="sub">
-							<li><a class="" href="general.html">Components</a></li>
-							<li><a class="" href="buttons.html">Buttons</a></li>
-							<li><a class="" href="grids.html">Grids</a></li>
-						</ul></li>
-					<li><a class="" href="widgets.html"> <i
-							class="icon_genius"></i> <span>Widgets</span>
-					</a></li>
-					<li><a class="" href="chart-chartjs.html"> <i
-							class="icon_piechart"></i> <span>Charts</span>
-
-					</a></li>
-
-					<li class="sub-menu"><a href="javascript:;" class=""> <i
-							class="icon_table"></i> <span>Tables</span> <span
-							class="menu-arrow arrow_carrot-right"></span>
-					</a>
-						<ul class="sub">
-							<li><a class="active" href="basic_table.html">Basic
-									Table</a></li>
-						</ul></li>
-
-					<li class="sub-menu"><a href="javascript:;" class=""> <i
-							class="icon_documents_alt"></i> <span>Pages</span> <span
-							class="menu-arrow arrow_carrot-right"></span>
-					</a>
-						<ul class="sub">
-							<li><a class="" href="profile.html">Profile</a></li>
-							<li><a class="" href="login.html"><span>Login
-										Page</span></a></li>
-							<li><a class="" href="contact.html"><span>Contact
-										Page</span></a></li>
-							<li><a class="" href="blank.html">Blank Page</a></li>
-							<li><a class="" href="404.html">404 Error</a></li>
-						</ul></li>
-
-				</ul>
-				<!-- sidebar menu end-->
-			</div>
-		</aside>
 
 		<!--main content start-->
 		<section id="main-content">
@@ -220,364 +54,257 @@ th:first-child, td:first-child {
 				<div class="row">
 					<div class="col-lg-12">
 						<h3 class="page-header">
-							<i class="fa fa-table"></i> Table
+							<i class="fa fa-user-md"></i> ENTER DATA
 						</h3>
 						<ol class="breadcrumb">
 							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-							<li><i class="fa fa-table"></i>Table</li>
-							<li><i class="fa fa-th-list"></i>Basic Table</li>
+							<li><i class="icon_documents_alt"></i>Admin</li>
+							<li><i class="fa fa-user-md"></i>Data Entry</li>
 						</ol>
 					</div>
 				</div>
+
 				<!-- page start-->
-				<div class="tab">
-					<button class="tablinks"
-						onclick="openCity(event, 'tab-description')">SALES EXPECTATION REACHED</button>
-					<button class="tablinks" onclick="openCity(event, 'tab-shipping')">Enter Data</button>
-				</div>
-
-				<input type="text" id="myInput" onkeyup="myFunction()"
-					placeholder="Search for names.." title="Type in a name">
-
-				<div id="tab-description" class="row tabcontent">
+				<div class="row">
 					<div class="col-lg-12">
 						<section class="panel">
-							<header style="background-color: #7BFD94;" class="panel-heading">
-								SALES EXPECTATION REACHED </header>
+							
+							<!-- add-new-medicine -->
+							<div id="edit-profile" class="tab-pane">
+								<section class="panel">
+									<div class="panel-body bio-graph-info">
+										<h1>Enter Data</h1>
+										<form class="form-horizontal" role="form">
+											<div class="row">
+												<div class="form-group col-md-6">
+													<label class="col-lg-4 control-label">Doctor Name</label>
+													<div class="col-lg-8">
+														<input type="text" class="form-control" id="doctor_name"
+															placeholder=" ">
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-lg-3 control-label">Division Name</label>
+													<div class="col-lg-9">
+														<select id="division_name" name="reportingto"
+															class="form-control" autofocus>
+															<c:forEach items="${divisionList}" var="division">
+																<option value="${division.division_id}"><c:out
+																		value="${division.division_name}" /></option>
+															</c:forEach>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group col-md-6">
+													<label class="col-lg-4 control-label">Doctor
+														Speciality</label>
+													<div class="col-lg-8">
+														<input type="text" class="form-control"
+															id="doctor_speciality" placeholder=" ">
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-lg-3 control-label">State</label>
+													<div class="col-lg-9">
+														<select onChange="stateChanged()" id="state_name"
+															name="state_name" class="form-control" autofocus>
+															<c:forEach items="${stateList}" var="state">
+																<option value="${state.state_id}"><c:out
+																		value="${state.state_name}" /></option>
+															</c:forEach>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group col-md-6">
+													<label class="col-lg-4 control-label">Doctor
+														Qualification</label>
+													<div class="col-lg-8">
+														<input type="text" class="form-control"
+															id="doctor_qualification" placeholder=" ">
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-lg-3 control-label">Headquarter</label>
+													<div class="col-lg-9">
+														<select id="headquarter_name" name="reportingto"
+															class="form-control" autofocus>
+															<option>Choose Headquarter</option>
+														</select>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="form-group col-md-6">
+													<label class="col-lg-4 control-label">Phone Number</label>
+													<div class="col-lg-8">
+														<input type="number" class="form-control"
+															id="phone_number" placeholder=" " max="9999999999">
+													</div>
+												</div>
+												<div class="form-group col-md-6">
+													<label class="col-lg-3 control-label">Address</label>
+													<div class="col-lg-9">
+														<textarea name="address" id="address" class="form-control"
+															cols="20" rows="3"></textarea>
+													</div>
+												</div>
+												<!-- <div class="form-group  col-md-6">
+													<label class="col-lg-4 control-label">Address</label>
+													<div class="col-lg-8">
+														<input type="text" class="form-control" id="address"
+															placeholder="http://www.demowebsite.com ">
+													</div>
+												</div> -->
+											</div>
 
-							<div class="table-responsive text-nowrap">
-								<table id="myTable1" class="table table-striped">
-									<thead>
-										<tr>
-											<th>Doctor</th>
-											<th>Brand Targetted</th>
-											<th>Amount</th>
-											<th>Value business at time of Disbursement</th>
-											<th>Date of Activity Done</th>
-											<th>Type of Sponsors</th>
-											<th>MR Name</th>
-											<th>Region</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><a class="" href="individual_doctor_business_info">Kate</td>
-											<td>Moss</td>
-											<td>USA</td>
-											<td>New York City / Warsaw / Lodz / Amsterdam / London /
-												Chicago</td>
-											<td>Web Designer /UX designer / Ul designer / JavaScript
-												Developer</td>
-											<td>23</td>
-											<td>23</td>
-										</tr>
-										<tr>
-											<td><a class=""
-												href="individual_doctor_business_info.jsp">Kate</td>
-											<td contenteditable='true'>Moss</td>
-											<td>Russia</td>
-											<td>New York City / Warsaw / Lodz / Amsterdam / London /
-												Chicago</td>
-											<td>Web Designer /UX designer / Ul designer / JavaScript
-												Developer</td>
-											<td>23</td>
-											<td>23</td>
-										</tr>
-										<tr>
-											<td><a class=""
-												href="individual_doctor_business_info.jsp">Kate</td>
-											<td>Eshwar</td>
-											<td>India</td>
-											<td>New York City / Warsaw / Lodz / Amsterdam / London /
-												Chicago</td>
-											<td>Web Designer /UX designer / Ul designer / JavaScript
-												Developer</td>
-											<td>23</td>
-											<td>23</td>
-										</tr>
-									</tbody>
-								</table>
+											<div class="form-group">
+												<div class="col-lg-offset-2 col-lg-10">
+													<button onclick="addDoctor()" type="submit"
+														class="btn btn-primary">Save</button>
+													<button type="button" class="btn btn-danger">Cancel</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</section>
 							</div>
+
 						</section>
 					</div>
 				</div>
 
-				<div id="tab-shipping" class="row tabcontent">
-					<div class="col-lg-12">
-						<section class="panel">
-							<header style="background-color: #FD8385;" class="panel-heading">
-								Enter data </header>
-
-							<div class="table-responsive text-nowrap">
-								<!--Table-->
-								<table id="mytable" class="table table-striped">
-
-									<!--Table head-->
-									<thead>
-										<tr>
-											<th>Doctor Name</th>
-											<th>MR Name</th>
-											<th>HQ of MR</th>
-											<th>ASM Name</th>
-											<th>Region</th>
-											<th>Division</th>
-											<th>Mode of Disbursement</th>
-											<th>Amount</th>
-											<th>Nature of Sponsorship</th>
-											<th>Average  per month business generated from Doctor </th>
-											<th>Particular</th>
-											<th>Apr</th>
-											<th>May</th>
-											<th>June</th>
-											<th>July</th>
-											<th>Aug</th>
-											<th>Sept</th>
-											<th>Oct</th>
-											<th>Nov</th>
-											<th>Dec</th>
-											<th>Jan</th>
-											<th>Feb</th>
-											<th>March</th>
-											
-											
-											
-											
-										</tr>
-									</thead>
-									<!--Table head-->
-
-									<!--Table body-->
-									<tbody>
-									<c:forEach items="${location}" var="loc" varStatus="loop">   	
-										<tr >
-											<td style="padding-top:4%" rowspan="6"><a class=""
-												href="individual_doctor_business_info.jsp">Kate</td>
-												<c:set var="index" value="${loop.index}" />
-												<c:set var="index" value="${index + 1}" />
-												
-											<td style="padding-top:4%" rowspan="6" id="did${index}"></td>
-											<td style="padding-top:4%" rowspan="6" id="did${index}">${loc.doctor_name}</td>
-											<td style="padding-top:4%" rowspan="6" id="did${index}">${loc.mr_name}</td>
-											<td style="padding-top:4%" rowspan="6" id="did${index}">${loc.mr_hq}</td>
-											<td style="padding-top:4%" rowspan="6" id="state${index}">${loc.asm_name}</td>
-											<td style="padding-top:4%" rowspan="6" id="region${index}">${loc.region}</td>
-											<td style="padding-top:4%" rowspan="6" id="region${index}">${loc.division}</td>
-											<td style="padding-top:4%" rowspan="6" id="region${index}">${loc.mode_of_disbursement}</td>
-											<td style="padding-top:4%" rowspan="6"><c:out value="${index}"/></td>
-											<td style="padding-top:4%" rowspan="6"><input type="button" id="edit_button${index}" value="Edit" class="edit" onclick="edit_row('${index}')"></td>
-											<td style="padding-top:4%" rowspan="6"><input type="button" id="save_button${index}" value="Save" class="save" onclick="save_row('${index}')"></td>
-											
-										</tr>
-										
-										<tr>
-											<th scope="row">Visits Dates By ASM</th>
-											<td>Apr</td>
-											<td>May</td>
-											<td>June</td>
-											<td>July</td>
-											<td>Aug</td>
-											<td>Sept</dd>
-											<td>Oct</td>
-											<td>Nov</td>
-											<td>Dec</td>
-											<td>Jan</td>
-											<td>Feb</td>
-											<td>March</td>
-										<tr>
-											<th scope="row">Visits Dates By RM</th>
-											<td>Apr</td>
-											<td>May</td>
-											<td>June</td>
-											<td>July</td>
-											<td>Aug</td>
-											<td>Sept</dd>
-											<td>Oct</td>
-											<td>Nov</td>
-											<td>Dec</td>
-											<td>Jan</td>
-											<td>Feb</td>
-											<td>March</td>
-										</tr>
-										<tr>
-											<th scope="row">BUSINESS / MTH AFTER SPONSORSHIP</th>
-											<td>Apr</td>
-											<td>May</td>
-											<td>June</td>
-											<td>July</td>
-											<td>Aug</td>
-											<td>Sept</dd>
-											<td>Oct</td>
-											<td>Nov</td>
-											<td>Dec</td>
-											<td>Jan</td>
-											<td>Feb</td>
-											<td>March</td>
-										</tr>
-										<tr>
-											<th scope="row">PRI.SLS  in Rs. Lac</th>
-											<td>Apr</td>
-											<td>May</td>
-											<td>June</td>
-											<td>July</td>
-											<td>Aug</td>
-											<td>Sept</dd>
-											<td>Oct</td>
-											<td>Nov</td>
-											<td>Dec</td>
-											<td>Jan</td>
-											<td>Feb</td>
-											<td>March</td>
-										</tr>
-										<tr>
-											<th scope="row">SEC.SLS in Rs. Lac</th>
-											<td>Apr</td>
-											<td>May</td>
-											<td>June</td>
-											<td>July</td>
-											<td>Aug</td>
-											<td>Sept</dd>
-											<td>Oct</td>
-											<td>Nov</td>
-											<td>Dec</td>
-											<td>Jan</td>
-											<td>Feb</td>
-											<td>March</td>
-										</tr>
-										</c:forEach>
-									</tbody>
-									<!--Table body-->
-
-
-								</table>
-								<!--Table-->
-							</div>
-					</div>
-				</div>
+				<!-- page end-->
 			</section>
-			
 		</section>
-	</section>
-
-	<!--main content end-->
-	<div class="text-right">
-		<div class="credits">
-			<!--
+		<!--main content end-->
+		<div class="text-right">
+			<div class="credits">
+				<!--
             All the links in the footer should remain intact.
             You can delete the links only if you purchased the pro version.
             Licensing information: https://bootstrapmade.com/license/
             Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
           -->
-			Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+				Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+			</div>
 		</div>
-	</div>
 	</section>
 	<!-- container section end -->
 	<!-- javascripts -->
 	<script src="js/jquery.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<!-- nicescroll -->
+	<!-- nice scroll -->
 	<script src="js/jquery.scrollTo.min.js"></script>
 	<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+	<!-- jquery knob -->
+	<script src="assets/jquery-knob/js/jquery.knob.js"></script>
 	<!--custome script for all page-->
 	<script src="js/scripts.js"></script>
-	
+	<script src="/assets/vendors/jquery/jquery.min.js"></script>
+	<script src="/assets/js/material-bootstrap.js"></script>
 	<script>
-		function myFunction() {
-			var input, filter, table, tr, td, i, txtValue, txtValue2;
-			input = document.getElementById("myInput");
-			filter = input.value.toUpperCase();
-			table = document.getElementById("myTable");
-			tr = table.getElementsByTagName("tr");
-			for (i = 0; i < tr.length; i++) {
-				td = tr[i].getElementsByTagName("td")[1];
-				td2 = tr[i].getElementsByTagName("td")[2];
-				if (td || td2) {
-					txtValue = td.textContent || td.innerText;
-					txtValue2 = td2.textContent || td2.innerText;
-					if (txtValue.toUpperCase().indexOf(filter) > -1
-							|| txtValue2.toUpperCase().indexOf(filter) > -1) {
-						tr[i].style.display = "";
-					} else {
-						tr[i].style.display = "none";
+		//knob
+		$(".knob").knob();
+	</script>
+
+	<script>
+		function stateChanged() {
+			var state_id = document.getElementById("state_name").value;
+			var select = document.getElementById("headquarter_name");
+
+			var headquarterdropdownjson = {
+				state_id : state_id
+			}
+			console.log(headquarterdropdownjson);
+			$.ajax({
+				url : '/dynamic_headquarter_dropdown',
+				type : 'post',
+				dataType : 'text',
+				contentType : 'application/json',
+				success : function(data) {
+					if (data == "success") {
 					}
-				}
+
+					while (select.hasChildNodes()) {
+						select.removeChild(select.firstChild);
+					}
+					var options = JSON.parse(data);
+					for (var i = 0; i < options.length; i++) {
+
+						var opt = options[i];
+						var el = document.createElement("option");
+						var str = opt.toString();
+						var val = str.split(",");
+						el.textContent = val[1];
+						el.value = val[0];
+						console.log("options : " + val[0] + " - " + el.value);
+						select.appendChild(el);
+					}
+
+					console.log("dynamic_headquarter_dropdown : ", JSON
+							.parse(data));
+
+				},
+				data : JSON.stringify(headquarterdropdownjson)
+
+			});
+		}
+	</script>
+
+
+	<script>
+		function addDoctor() {
+
+			var doctor_name = document.getElementById("doctor_name").value
+					.toUpperCase();
+			var division_name = document.getElementById("division_name").value
+					.toUpperCase();
+			var state_name = document.getElementById("state_name").value
+					.toUpperCase();
+			var headquarter_name = document.getElementById("headquarter_name").value
+					.toUpperCase();
+			var doctor_qualification = document
+					.getElementById("doctor_qualification").value.toUpperCase();
+			var doctor_speciality = document
+					.getElementById("doctor_speciality").value.toUpperCase();
+			var phone_number = document.getElementById("phone_number").value;
+			var address = document.getElementById("address").value
+					.toUpperCase();
+
+			var addDoctor = {
+
+				doctor_name : doctor_name,
+				doctor_speciality : doctor_speciality,
+				division_id : division_name,
+				state_id : state_name,
+				headquarter_id : headquarter_name,
+				doctor_qualification : doctor_qualification,
+				phone_number : phone_number,
+				address : address
+
 			}
-		}
+			console.log(addDoctor); //remove all console.log once the whole module is deployed and ready for UAT.
 
-		function openCity(evt, cityName) {
-			var i, tabcontent, tablinks;
-			tabcontent = document.getElementsByClassName("tabcontent");
-			for (i = 0; i < tabcontent.length; i++) {
-				tabcontent[i].style.display = "none";
-			}
-			tablinks = document.getElementsByClassName("tablinks");
-			for (i = 0; i < tablinks.length; i++) {
-				tablinks[i].className = tablinks[i].className.replace(
-						" active", "");
-			}
-			document.getElementById(cityName).style.display = "block";
-			evt.currentTarget.className += " active";
-		}
-		
-		
-		
-		
-		function edit_row(no)
-		{
-			
-		 document.getElementById("edit_button"+no).style.display="none";
-		 document.getElementById("save_button"+no).style.display="block";
-			
-		 var name=document.getElementById("did"+no);
-		 var country=document.getElementById("state"+no);
-		 var age=document.getElementById("region"+no);
-			
-		 var name_data=name.innerHTML;
-		 var country_data=country.innerHTML;
-		 var age_data=age.innerHTML;
-			
-		 name.innerHTML="<input type='text' id='edited_did"+no+"' value='"+name_data+"'>";
-		 country.innerHTML="<input type='text' id='edited_state"+no+"' value='"+country_data+"'>";
-		 age.innerHTML="<input type='text' id='edited_region"+no+"' value='"+age_data+"'>";
-		}
-		
-		function save_row(no)
-		{
-		 var name_val=document.getElementById("edited_did"+no).value;
-		 var country_val=document.getElementById("edited_state"+no).value;
-		 var age_val=document.getElementById("edited_region"+no).value;
-
-		 document.getElementById("did"+no).innerHTML=name_val;
-		 document.getElementById("state"+no).innerHTML=country_val;
-		 document.getElementById("region"+no).innerHTML=age_val;
-
-		 document.getElementById("edit_button"+no).style.display="block";
-		 document.getElementById("save_button"+no).style.display="none";
-		 
-		  var person = {
-				  did: name_val,
-		            state: country_val,
-		            region: age_val
-		        }
-
-		        $('#target').html('sending..');
-
-		        $.ajax({
-		            url: '/doctor_data_entry',
-		            type: 'post',
-		            dataType: 'json',
-		            contentType: 'application/json',
-		            success: function (data) {
-		                $('#target').html(data.msg);
-		            },
-		            data: JSON.stringify(person)
-		        }); 
-		        
-		}
-
-		function delete_row(no)
-		{
-		 document.getElementById("row"+no+"").outerHTML="";
+			$
+					.ajax({
+						url : '/add_doctor_data',
+						type : 'post',
+						dataType : 'text',
+						contentType : 'application/json',
+						success : function(data) {
+							if (data == "success") {
+								window.location.href = "login";
+							} else {
+								document.getElementById("credentials").innerHTML = "<span style='color: red;'> Username / password incorrect </span>";
+							}
+							console.log("ADD_DOCTOR : ", data);
+						},
+						data : JSON.stringify(addDoctor)
+					});
 		}
 	</script>
 </body>

@@ -68,10 +68,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<section class="panel">
-							<div class="chip">
-  Tag
-  <i class="close material-icons">close</i>
-</div>
+							
 							<!-- add-new-medicine -->
 							<div id="edit-profile" class="tab-pane">
 								<section class="panel">

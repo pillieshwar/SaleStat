@@ -21,6 +21,7 @@ import com.javatechie.spring.orm.api.dto.AddDoctorDto;
 import com.javatechie.spring.orm.api.dto.AddStateDataDto;
 import com.javatechie.spring.orm.api.dto.HeadquarterListDto;
 import com.javatechie.spring.orm.api.dto.LocationDto;
+import com.javatechie.spring.orm.api.model.Division;
 import com.javatechie.spring.orm.api.model.State;
 
 @Controller
@@ -39,10 +40,8 @@ public class DashboardController {
 	public ModelAndView dashboard(Model model, HttpSession session) {
 		List<LocationDto> location = locationDao.getAllLocations();
 		model.addAttribute("location", location);
-
-		int state_id_session = Integer.parseInt((String) session.getAttribute("state_id_session"));
-		List<State> stateDropdownList = dashboardDao.stateDropdown1(state_id_session);
-		model.addAttribute("stateDropdownList", stateDropdownList);
+		List<State> stateList = stateDao.getStateList();
+		model.addAttribute("stateList", stateList);
 		return new ModelAndView("dashboard");
 	}
 

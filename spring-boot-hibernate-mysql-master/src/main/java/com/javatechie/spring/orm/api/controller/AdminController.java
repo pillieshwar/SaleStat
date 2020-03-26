@@ -56,9 +56,6 @@ public class AdminController {
 
 	@RequestMapping("/add_medicine") // redirects to add new medicine page
 	public String addMedicine(Model model, HttpSession session) {
-		int state_id_session = Integer.parseInt((String) session.getAttribute("state_id_session"));
-		List<State> stateDropdownList = dashboardDao.stateDropdown1(state_id_session);
-		model.addAttribute("stateDropdownList", stateDropdownList);
 		return ("add_medicine");
 	}
 
@@ -68,27 +65,16 @@ public class AdminController {
 		List<Division> divisionList = roleDao.getDivisionList();
 		model.addAttribute("divisionList", divisionList);
 		model.addAttribute("stateList", stateList);
-
-		int state_id_session = Integer.parseInt((String) session.getAttribute("state_id_session"));
-		List<State> stateDropdownList = dashboardDao.stateDropdown1(state_id_session);
-		model.addAttribute("stateDropdownList", stateDropdownList);
-
 		return ("add_doctor");
 	}
 
 	@RequestMapping("/add_sponsorship") // redirects to add new sponsorship page
 	public String addSponsorship(Model model, HttpSession session) {
-		int state_id_session = Integer.parseInt((String) session.getAttribute("state_id_session"));
-		List<State> stateDropdownList = dashboardDao.stateDropdown1(state_id_session);
-		model.addAttribute("stateDropdownList", stateDropdownList);
 		return ("add_sponsorship");
 	}
 
 	@RequestMapping("/add_state") // redirects to add new state page
 	public String addState(Model model, HttpSession session) {
-		int state_id_session = Integer.parseInt((String) session.getAttribute("state_id_session"));
-		List<State> stateDropdownList = dashboardDao.stateDropdown1(state_id_session);
-		model.addAttribute("stateDropdownList", stateDropdownList);
 		return ("add_state");
 	}
 
@@ -97,10 +83,6 @@ public class AdminController {
 		List<State> stateList = stateDao.getStateList();
 		model.addAttribute("stateList", stateList);
 
-		int state_id_session = Integer.parseInt((String) session.getAttribute("state_id_session"));
-		List<State> stateDropdownList = dashboardDao.stateDropdown1(state_id_session);
-		model.addAttribute("stateDropdownList", stateDropdownList);
-
 		List<Division> divisionList = roleDao.getDivisionList();
 		model.addAttribute("divisionList", divisionList);
 		return ("add_headquarter");
@@ -108,9 +90,6 @@ public class AdminController {
 
 	@RequestMapping("/add_role") // redirects to add new role page
 	public String addRole(Model model, HttpSession session) {
-		int state_id_session = Integer.parseInt((String) session.getAttribute("state_id_session"));
-		List<State> stateDropdownList = dashboardDao.stateDropdown1(state_id_session);
-		model.addAttribute("stateDropdownList", stateDropdownList);
 		return ("add_role");
 	}
 
