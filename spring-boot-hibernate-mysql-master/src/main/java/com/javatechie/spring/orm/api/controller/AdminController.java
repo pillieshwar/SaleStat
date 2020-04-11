@@ -20,15 +20,16 @@ import com.javatechie.spring.orm.api.dao.MedicineDao;
 import com.javatechie.spring.orm.api.dao.RoleDao;
 import com.javatechie.spring.orm.api.dao.StateDao;
 import com.javatechie.spring.orm.api.dto.AddDoctorDto;
+import com.javatechie.spring.orm.api.dto.AddUserDoctorDto;
 import com.javatechie.spring.orm.api.dto.DivisionStateDto;
-import com.javatechie.spring.orm.api.dto.DynamicHeadquarterDropdownDto;
-import com.javatechie.spring.orm.api.dto.HeadquarterListDto;
 import com.javatechie.spring.orm.api.model.Division;
+import com.javatechie.spring.orm.api.model.Doctor;
 import com.javatechie.spring.orm.api.model.Headquarter;
 import com.javatechie.spring.orm.api.model.Medicine;
 import com.javatechie.spring.orm.api.model.Role;
 import com.javatechie.spring.orm.api.model.Sponsorship;
 import com.javatechie.spring.orm.api.model.State;
+import com.javatechie.spring.orm.api.model.User;
 
 @Controller
 public class AdminController {
@@ -180,4 +181,33 @@ public class AdminController {
 		doctorDao.saveDoctor(adddoctorjson);
 	}
 
+	@RequestMapping("/user_doctor") // redirects to user_doctor page
+	public String userDoctor(Model model) {
+		
+		List<User> tempUserList = roleDao.getUserList();
+		String arr[][]=new String[tempUserList.size()][2];
+		int n=0;
+		for(User userArr : tempUserList)
+		{
+			arr[n][0] = String.valueOf(userArr.getUser_id());
+			arr[n][1] = userArr.getUsername();
+			n++;
+		}
+		
+		List<Doctor> doctorList = roleDao.getDoctorList();
+		System.out.println("doctorList" + doctorList.size());
+		model.addAttribute("userList", arr);
+		model.addAttribute("doctorList", doctorList);
+		
+		return ("user_doctor");
+	}
+	
+	
+	@RequestMapping(value = "/add_userDoctor_data", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public void addUserDoctorData(@RequestBody AddUserDoctorDto userdoctorjson) {
+		System.out.println("inside userdoctorjson data");
+		doctorDao.userDoctorData(userdoctorjson);
+	}
+	
 }

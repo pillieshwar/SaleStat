@@ -384,11 +384,13 @@
 							<li><a class="" href="404.html">404 Error</a></li>
 						</ul></li> -->
 
-					<li class="sub-menu"><a href="javascript:;" id="admin_enable" class="disabled">
-							<i class="icon_documents_alt"></i> <span>ADMIN</span> <span
-							class="menu-arrow arrow_carrot-right"></span>
+					<li class="sub-menu"><a href="javascript:;" id="admin_enable"
+						class="disabled"> <i class="icon_documents_alt"></i> <span>ADMIN</span>
+							<span class="menu-arrow arrow_carrot-right"></span>
 					</a>
 						<ul class="sub">
+							<li><a class="" href="user_doctor"><span>User -
+										Doctor </span></a></li>
 							<li><a class="" href="add_role"><span>Add Role</span></a></li>
 							<li><a class="" href="add_state"><span>Add State</span></a></li>
 							<li><a class="" href="add_headquarter"><span>Add
@@ -417,10 +419,10 @@
 				document.getElementById("username").innerHTML = this.getData().username
 						.toUpperCase();
 				if (this.getData().role_abbr.toUpperCase() !== 'ADMIN') {
-					document.getElementById('admin_enable').style.pointerEvents="none";
-					document.getElementById('admin_enable').style.cursor="default";
+					document.getElementById('admin_enable').style.pointerEvents = "none";
+					document.getElementById('admin_enable').style.cursor = "default";
 				}
-				
+
 			}
 
 			function stateDropdown() {

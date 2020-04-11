@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import com.javatechie.spring.orm.api.model.Login;
-import com.javatechie.spring.orm.api.model.Signup;
+import com.javatechie.spring.orm.api.model.User;
 
 @Repository
 @Transactional
@@ -20,7 +20,7 @@ public class SignupDao {
 		getSession().save(login);
 	}
 
-	public String signupUser(Signup signup) {
+	public String signupUser(User signup) {
 		String qry = "insert into user values(null,"+signup.getRole_id()+",'"+signup.getUsername()+"','"+signup.getPassword()+"',"+signup.getDivision_id()+","+signup.getState_id()+","+signup.getHeadquarter_id()+","+signup.getDoctor_id()+","+signup.getReporting_to()+")";
 		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
 		int s = sqlQuery.executeUpdate();

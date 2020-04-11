@@ -1,5 +1,7 @@
 package com.javatechie.spring.orm.api.dao;
 
+import java.util.List;
+
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.javatechie.spring.orm.api.dto.AddDoctorDto;
+import com.javatechie.spring.orm.api.dto.AddUserDoctorDto;
 
 @Repository
 @Transactional
@@ -26,6 +29,26 @@ public class DoctorDao {
 				+ adddoctorjson.getPhone_number() + "','" + adddoctorjson.getAddress() + "')";
 		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
 		int s1 = sqlQuery.executeUpdate();
+	}
+	
+	public void userDoctorData(AddUserDoctorDto userdoctorjson) {
+		
+		System.out.println("userdoctorjson : " + userdoctorjson.getSelected());
+		
+		List c = userdoctorjson.getSelected();
+		String arr[] = new String[userdoctorjson.getSelected().size()];
+
+		for(int i=0;i<c.size();i++)
+		{
+			arr[i] = (String) c.get(i);
+		}
+		
+		for(int j=0;j<arr.length;j++)
+		{
+		String qry = "insert into user_doctor values(null," + userdoctorjson.getUser_id() + ","+ Integer.parseInt(arr[j]) + ")";
+		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
+		sqlQuery.executeUpdate();
+		}	
 	}
 
 	private Session getSession() {
