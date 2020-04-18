@@ -2,6 +2,7 @@ package com.javatechie.spring.orm.api.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -37,13 +39,17 @@ public class DashboardController {
 	private DashboardDao dashboardDao;
 
 	@RequestMapping("/dashboard")
-	public ModelAndView dashboard(Model model, HttpSession session) {
+	public ModelAndView dashboard(Model model, HttpServletRequest request) {
 		List<LocationDto> location = locationDao.getAllLocations();
 		model.addAttribute("location", location);
-		List<State> stateList = stateDao.getStateList();
-		model.addAttribute("stateList", stateList);
+        String state_sessionid =  (String) request.getSession().getAttribute("state_sessionid");
+        int state = Integer.parseInt(state_sessionid);
+        System.out.println("state_id :-------> " + state);
+		List<State> stateDropdownList = dashboardDao.stateDropdown1(state);
+		model.addAttribute("stateDropdownList", stateDropdownList);
 		return new ModelAndView("dashboard");
 	}
+
 
 	@RequestMapping(value = "/state_dropdown_data", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody

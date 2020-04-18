@@ -2,6 +2,7 @@ package com.javatechie.spring.orm.api.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +40,9 @@ public class StateController {
 	
 	@RequestMapping("/state_sales")
     public ModelAndView stateSales(Model model, HttpSession session) {
-		int state_id_session = Integer.parseInt((String) session.getAttribute("state_id_session"));
-		List<State> stateDropdownList = dashboardDao.stateDropdown1(state_id_session);
-		model.addAttribute("stateDropdownList", stateDropdownList);
+//		int state_id_session = Integer.parseInt((String) session.getAttribute("state_id_session"));
+//		List<State> stateDropdownList = dashboardDao.stateDropdown1(state_id_session);
+//		model.addAttribute("stateDropdownList", stateDropdownList);
 		return new ModelAndView("state_sales");
 	}
 	
@@ -57,16 +58,19 @@ public class StateController {
 	}*/
 	
 	@GetMapping("/state_sales")
-    public String stateSalesMonth(@RequestParam("state") String state, Model model, HttpSession session) {
+    public String stateSalesMonth(@RequestParam("state") String state, Model model, HttpSession session, HttpServletRequest request) {
 		System.out.println("state---->"+state);
 		List<State> stateList = stateDao.getStateList();
 		model.addAttribute("stateList",stateList);
 		
-		int state_id_session = Integer.parseInt((String) session.getAttribute("state_id_session"));
-		List<State> stateDropdownList = dashboardDao.stateDropdown1(state_id_session);
-		model.addAttribute("stateDropdownList", stateDropdownList);
+//		int state_id_session = Integer.parseInt((String) session.getAttribute("state_id_session"));
+//		List<State> stateDropdownList = dashboardDao.stateDropdown1(state_id_session);
+//		model.addAttribute("stateDropdownList", stateDropdownList);
 		
-    	List<HeadquarterListDto> headquarterList = headquarterDao.headquarterList(state);
+        String headquarter_sessionid =  (String) request.getSession().getAttribute("headquarter_sessionid");
+        System.out.println("headquarter_sessionid : " + headquarter_sessionid);
+        int headquarterId = Integer.parseInt(headquarter_sessionid);
+    	List<HeadquarterListDto> headquarterList = headquarterDao.headquarterList(state,headquarterId);
 		model.addAttribute("headquarterList",headquarterList);
 		return ("state_sales");
 	}

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.javatechie.spring.orm.api.dto.AddDoctorDto;
 import com.javatechie.spring.orm.api.dto.AddUserDoctorDto;
+import com.javatechie.spring.orm.api.dto.StateDoctorBusinessDto;
 
 @Repository
 @Transactional
@@ -51,6 +52,13 @@ public class DoctorDao {
 		}	
 	}
 
+	public List<Object> getStateDoctorBusiness(String hq_id) {
+		int headquarter_id = Integer.parseInt(hq_id);
+		String qry = "select doctor_id,doctor_name,doctor_speciality,doctor_qualification from doctor join (select division_state_id from division_state where headquarter_id="+ headquarter_id +") as ref_id on doctor.division_state_id=ref_id.division_state_id;";
+		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
+		return sqlQuery.list();
+	}
+	
 	private Session getSession() {
 		Session session = factory.getCurrentSession();
 		if (session == null) {
@@ -58,4 +66,6 @@ public class DoctorDao {
 		}
 		return session;
 	}
+
+	
 }

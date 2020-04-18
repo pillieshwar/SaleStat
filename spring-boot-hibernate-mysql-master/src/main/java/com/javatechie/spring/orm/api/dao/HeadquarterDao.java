@@ -57,8 +57,16 @@ public class HeadquarterDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<HeadquarterListDto> headquarterList(String state_id) {
-		String qry = "select * from headquarter where state_id=" + state_id;
+	public List<HeadquarterListDto> headquarterList(String state_id, int headquarter_id) {
+		String qry = "";
+		if(headquarter_id==0)
+		{
+			qry = "select * from headquarter where state_id=" + state_id;
+		}
+		else
+		{
+			qry = "select * from headquarter where state_id=" + state_id + " and headquarter_id=" + headquarter_id;
+		}
 		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
 		sqlQuery.addEntity(Headquarter.class);
 		return sqlQuery.list();

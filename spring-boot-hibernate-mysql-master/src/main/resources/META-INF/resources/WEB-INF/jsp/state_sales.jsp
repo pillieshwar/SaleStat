@@ -164,7 +164,7 @@
         	
         	{y: 10,
         	 name: '${hqList.headquarter_name}',
-        	 key: 'state_doctor_business'
+        	 key: 'state_doctor_business?hq_id=${hqList.headquarter_id}'
         	},
         	
         	</c:forEach>

@@ -3,6 +3,7 @@ package com.javatechie.spring.orm.api.controller;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,17 +44,20 @@ public class LoginController {
 
 	@RequestMapping(value = "/login_data", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<Object> LoginData(@RequestBody LoginDto jsonLoginString, HttpSession session) {
+	public List<Object> LoginData(@RequestBody LoginDto jsonLoginString, HttpSession session, HttpServletRequest request) {
 		List<Object> list = loginDao.checkLogin(jsonLoginString);
 		String state_id_session = "";
+		String headquarter_sessionid = "";
 		for (int i = 0; i < list.size(); i++) {
 			Object[] row = (Object[]) list.get(i);
 			String str = Arrays.toString(row);
 			String strArray[] = str.split(",");
 			state_id_session = strArray[2].trim();
+			headquarter_sessionid = strArray[3].trim();
 			System.out.println("Element " + strArray[2]);
 		}
-
+		request.getSession().setAttribute("headquarter_sessionid", headquarter_sessionid);
+		request.getSession().setAttribute("state_sessionid", state_id_session);
 		session.setAttribute("state_id_session", state_id_session);
 		return list;
 	}

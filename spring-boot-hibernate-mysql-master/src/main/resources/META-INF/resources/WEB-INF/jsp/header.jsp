@@ -341,8 +341,8 @@
 							<span>STATES</span> <span class="menu-arrow arrow_carrot-right"></span>
 					</a>
 						<ul class="sub">
-							<c:forEach items="${stateList}" var="state">
-								<li><a class="" href="state_sales?state=${state.state_id}"><c:out
+							<c:forEach items="${stateDropdownList}" var="state">
+								<li><a class="" href="state_sales?state=${state.state_id}" id=""><c:out
 											value="${state.state_name}" /></a></li>
 							</c:forEach>
 						</ul></li>

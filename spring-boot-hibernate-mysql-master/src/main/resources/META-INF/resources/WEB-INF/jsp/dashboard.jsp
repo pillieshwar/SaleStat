@@ -458,6 +458,33 @@
 				document.getElementById('admin_enable').style.pointerEvents = "none";
 				document.getElementById('admin_enable').style.cursor = "default";
 			}
+			
+			//statedropdown
+			this.getData = function() {
+				return JSON.parse(localStorage.getItem('saleStatData'));
+			}
+
+			var stateId = this.getData().state_id;
+			var statedropdownjson = {
+				state_id : stateId
+			}
+			console.log(statedropdownjson);
+			$.ajax({
+				url : '/state_dropdown_data',
+				type : 'post',
+				dataType : 'text',
+				contentType : 'application/json',
+				success : function(data) {
+					if (data == "success") {
+					}
+
+					console.log("---> ", data);
+
+				},
+				data : JSON.stringify(statedropdownjson)
+
+			});
+
 		}
 	</script>
 
