@@ -3,6 +3,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="header.jsp"%>
+<%@page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page isELIgnored="false" %>
 
 <head>
 <meta charset="utf-8">
@@ -17,8 +19,8 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
 	rel="stylesheet" />
 <title>Doctor's Business</title>
- <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix = "c"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!-- Bootstrap CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <!-- bootstrap theme -->
@@ -55,39 +57,39 @@
 
 /* Style the tab */
 .tab {
-  overflow: hidden;
-  border: 1px solid #ccc;
-  background-color: #5A888E;;
+	overflow: hidden;
+	border: 1px solid #ccc;
+	background-color: #5A888E;;
 }
 
 /* Style the buttons inside the tab */
 .tab button {
-  background-color: inherit;
-  float: left;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  padding: 14px 16px;
-  transition: 0.3s;
-  font-size: 17px;
+	background-color: inherit;
+	float: left;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 14px 16px;
+	transition: 0.3s;
+	font-size: 17px;
 }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-  background-color: #ddd;
+	background-color: #ddd;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-  background-color: #ccc;
+	background-color: #ccc;
 }
 
 /* Style the tab content */
 .tabcontent {
-  display: none;
-  padding: 6px 12px;
-  border: 1px solid #ccc;
-  border-top: none;
+	display: none;
+	padding: 6px 12px;
+	border: 1px solid #ccc;
+	border-top: none;
 }
 
 #myInput {
@@ -131,8 +133,10 @@ th:first-child, td:first-child {
 				<!-- page start-->
 				<div class="tab">
 					<button class="tablinks"
-						onclick="openCity(event, 'tab-description')">SALES EXPECTATION REACHED</button>
-					<button class="tablinks" onclick="openCity(event, 'tab-shipping')">SALES EXPECTATION NOT REACHED</button>
+						onclick="openCity(event, 'tab-description')">SALES
+						EXPECTATION REACHED</button>
+					<button class="tablinks" onclick="openCity(event, 'tab-shipping')">SALES
+						EXPECTATION NOT REACHED</button>
 				</div>
 
 				<input type="text" id="myInput" onkeyup="myFunction()"
@@ -149,27 +153,33 @@ th:first-child, td:first-child {
 									<thead>
 										<tr>
 											<th>Doctor</th>
-											<th>Brand Targetted</th>
+											<th>Speciality</th>
+											<th>Qualification</th>
+											<th>Associated MR</th>
+											<th>ASM</th>
 											<th>Amount</th>
 											<th>Value business at time of Disbursement</th>
 											<th>Date of Activity Done</th>
-											<th>Type of Sponsors</th>
-											<th>MR Name</th>
-											<th>Region</th>
+											<th>Type of Sponsorship</th>
+											<th>ASM Visit Dates</th>
+											<th>RM Visit Dates</th>
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td><a class="" href="individual_doctor_business_info">Kate</td>
-											<td>Moss</td>
-											<td>USA</td>
-											<td>New York City / Warsaw / Lodz / Amsterdam / London /
-												Chicago</td>
-											<td>Web Designer /UX designer / Ul designer / JavaScript
-												Developer</td>
-											<td>23</td>
-											<td>23</td>
-										</tr>
+										<c:forEach items="${stateDoctorBusinessList}" var="state">
+											<tr>
+												<td><a class="" href="individual_doctor_business_info"><c:out
+															value="${state.doctor_name}" /></td>
+												<td><c:out value="${state.doctor_speciality}" /></td>
+												<td><c:out value="${state.doctor_qualification}" /></td>
+												<td>New York City / Warsaw / Lodz / Amsterdam / London
+													/ Chicago</td>
+												<td>Web Designer /UX designer / Ul designer /
+													JavaScript Developer</td>
+												<td>23</td>
+												<td>23</td>
+											</tr>
+										</c:forEach>
 										<tr>
 											<td><a class=""
 												href="individual_doctor_business_info.jsp">Kate</td>
@@ -228,20 +238,22 @@ th:first-child, td:first-child {
 
 									<!--Table body-->
 									<tbody>
-									<c:forEach items="${location}" var="loc" varStatus="loop">   	
-										<tr>
-											<td><a class=""
-												href="individual_doctor_business_info.jsp">Kate</td>
+										<c:forEach items="${location}" var="loc" varStatus="loop">
+											<tr>
+												<td><a class=""
+													href="individual_doctor_business_info.jsp">Kate</td>
 												<c:set var="index" value="${loop.index}" />
 												<c:set var="index" value="${index + 1}" />
-												
-											<td id="did${index}">${loc.id}</td>
-											<td id="state${index}">${loc.state}</td>
-											<td id="region${index}">${loc.region}</td>
-											<td><c:out value="${index}"/></td>
-											<td><input type="button" id="edit_button${index}" value="Edit" class="edit" onclick="edit_row('${index}')"></td>
-											<td><input type="button" id="save_button${index}" value="Save" class="save" onclick="save_row('${index}')"></td>
-										</tr>
+
+												<td id="did${index}">${loc.id}</td>
+												<td id="state${index}">${loc.state}</td>
+												<td id="region${index}">${loc.region}</td>
+												<td><c:out value="${index}" /></td>
+												<td><input type="button" id="edit_button${index}"
+													value="Edit" class="edit" onclick="edit_row('${index}')"></td>
+												<td><input type="button" id="save_button${index}"
+													value="Save" class="save" onclick="save_row('${index}')"></td>
+											</tr>
 										</c:forEach>
 									</tbody>
 									<!--Table body-->
@@ -485,67 +497,60 @@ th:first-child, td:first-child {
 			document.getElementById(cityName).style.display = "block";
 			evt.currentTarget.className += " active";
 		}
-		
-		
-		
-		
-		function edit_row(no)
-		{
-			
-		 document.getElementById("edit_button"+no).style.display="none";
-		 document.getElementById("save_button"+no).style.display="block";
-			
-		 var name=document.getElementById("did"+no);
-		 var country=document.getElementById("state"+no);
-		 var age=document.getElementById("region"+no);
-			
-		 var name_data=name.innerHTML;
-		 var country_data=country.innerHTML;
-		 var age_data=age.innerHTML;
-			
-		 name.innerHTML="<input type='text' id='edited_did"+no+"' value='"+name_data+"'>";
-		 country.innerHTML="<input type='text' id='edited_state"+no+"' value='"+country_data+"'>";
-		 age.innerHTML="<input type='text' id='edited_region"+no+"' value='"+age_data+"'>";
-		}
-		
-		function save_row(no)
-		{
-		 var name_val=document.getElementById("edited_did"+no).value;
-		 var country_val=document.getElementById("edited_state"+no).value;
-		 var age_val=document.getElementById("edited_region"+no).value;
 
-		 document.getElementById("did"+no).innerHTML=name_val;
-		 document.getElementById("state"+no).innerHTML=country_val;
-		 document.getElementById("region"+no).innerHTML=age_val;
+		function edit_row(no) {
 
-		 document.getElementById("edit_button"+no).style.display="block";
-		 document.getElementById("save_button"+no).style.display="none";
-		 
-		  var person = {
-				  did: name_val,
-		            state: country_val,
-		            region: age_val
-		        }
+			document.getElementById("edit_button" + no).style.display = "none";
+			document.getElementById("save_button" + no).style.display = "block";
 
-		        $('#target').html('sending..');
+			var name = document.getElementById("did" + no);
+			var country = document.getElementById("state" + no);
+			var age = document.getElementById("region" + no);
 
-		        $.ajax({
-		            url: '/edited_data',
-		            type: 'post',
-		            dataType: 'json',
-		            contentType: 'application/json',
-		            success: function (data) {
-		            	
-		            	
-		            },
-		            data: JSON.stringify(person)
-		        }); 
-		        
+			var name_data = name.innerHTML;
+			var country_data = country.innerHTML;
+			var age_data = age.innerHTML;
+
+			name.innerHTML = "<input type='text' id='edited_did"+no+"' value='"+name_data+"'>";
+			country.innerHTML = "<input type='text' id='edited_state"+no+"' value='"+country_data+"'>";
+			age.innerHTML = "<input type='text' id='edited_region"+no+"' value='"+age_data+"'>";
 		}
 
-		function delete_row(no)
-		{
-		 document.getElementById("row"+no+"").outerHTML="";
+		function save_row(no) {
+			var name_val = document.getElementById("edited_did" + no).value;
+			var country_val = document.getElementById("edited_state" + no).value;
+			var age_val = document.getElementById("edited_region" + no).value;
+
+			document.getElementById("did" + no).innerHTML = name_val;
+			document.getElementById("state" + no).innerHTML = country_val;
+			document.getElementById("region" + no).innerHTML = age_val;
+
+			document.getElementById("edit_button" + no).style.display = "block";
+			document.getElementById("save_button" + no).style.display = "none";
+
+			var person = {
+				did : name_val,
+				state : country_val,
+				region : age_val
+			}
+
+			$('#target').html('sending..');
+
+			$.ajax({
+				url : '/edited_data',
+				type : 'post',
+				dataType : 'json',
+				contentType : 'application/json',
+				success : function(data) {
+
+				},
+				data : JSON.stringify(person)
+			});
+
+		}
+
+		function delete_row(no) {
+			document.getElementById("row" + no + "").outerHTML = "";
 		}
 	</script>
 </body>
