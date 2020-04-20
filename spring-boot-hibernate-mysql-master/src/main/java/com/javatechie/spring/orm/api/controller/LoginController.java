@@ -46,19 +46,25 @@ public class LoginController {
 	@ResponseBody
 	public List<Object> LoginData(@RequestBody LoginDto jsonLoginString, HttpSession session, HttpServletRequest request) {
 		List<Object> list = loginDao.checkLogin(jsonLoginString);
-		String state_id_session = "";
-		String headquarter_sessionid = "";
+		String state_sessionid="",division_sessionid = "", headquarter_sessionid="", role_sessionid = "",user_sessionid ="";
+
 		for (int i = 0; i < list.size(); i++) {
 			Object[] row = (Object[]) list.get(i);
 			String str = Arrays.toString(row);
 			String strArray[] = str.split(",");
-			state_id_session = strArray[2].trim();
+			division_sessionid = strArray[1].trim();
+			state_sessionid = strArray[2].trim();
 			headquarter_sessionid = strArray[3].trim();
-			System.out.println("Element " + strArray[2]);
+			role_sessionid = strArray[6].trim();
+			user_sessionid = strArray[5].trim();
+			System.out.println("Element " + strArray[6]);
 		}
+		request.getSession().setAttribute("division_sessionid", division_sessionid);
+		request.getSession().setAttribute("state_sessionid", state_sessionid);
 		request.getSession().setAttribute("headquarter_sessionid", headquarter_sessionid);
-		request.getSession().setAttribute("state_sessionid", state_id_session);
-		session.setAttribute("state_id_session", state_id_session);
+		request.getSession().setAttribute("role_sessionid", role_sessionid);
+		request.getSession().setAttribute("user_sessionid", user_sessionid);
+//		session.setAttribute("state_id_session", state_id_session);
 		return list;
 	}
 }

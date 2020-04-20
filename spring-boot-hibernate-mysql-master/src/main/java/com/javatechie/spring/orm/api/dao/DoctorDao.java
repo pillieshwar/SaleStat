@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.javatechie.spring.orm.api.dto.AddDoctorDto;
 import com.javatechie.spring.orm.api.dto.AddUserDoctorDto;
 import com.javatechie.spring.orm.api.dto.StateDoctorBusinessDto;
+import com.javatechie.spring.orm.api.dto.User_DoctorDto;
 
 @Repository
 @Transactional
@@ -55,6 +56,7 @@ public class DoctorDao {
 		}	
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<StateDoctorBusinessDto> getStateDoctorBusiness(String hq_id) {
 		int headquarter_id = Integer.parseInt(hq_id);
 		String qry = "select doctor_id,doctor_name,doctor_speciality,doctor_qualification from doctor join (select division_state_id from division_state where headquarter_id="+ headquarter_id +") as ref_id on doctor.division_state_id=ref_id.division_state_id;";
@@ -66,12 +68,25 @@ public class DoctorDao {
 		return sqlQuery.list();
 	}
 	
+	
+	
 	private Session getSession() {
 		Session session = factory.getCurrentSession();
 		if (session == null) {
 			session = factory.openSession();
 		}
 		return session;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<User_DoctorDto> getUserDoctorList(String user_sessionid) {
+		System.out.println("user_sessionid :"+user_sessionid);
+		int UserId = Integer.parseInt(user_sessionid);
+		String qry="select d.doctor_id, doctor_name from doctor as d join (select doctor_id from user_doctor where user_id=" + user_sessionid + " ) as ref_user_id on d.doctor_id=ref_user_id.doctor_id;";
+		SQLQuery sqlQuery = (SQLQuery) getSession().createSQLQuery(qry).setResultTransformer(Transformers.aliasToBean(User_DoctorDto.class)); 
+		sqlQuery.addScalar("doctor_id", IntegerType.INSTANCE);
+		sqlQuery.addScalar("doctor_name", StringType.INSTANCE);
+		return sqlQuery.list();
 	}
 
 	

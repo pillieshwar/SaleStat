@@ -79,8 +79,13 @@
 												<div class="form-group col-md-6">
 													<label class="col-lg-4 control-label">Doctor Name</label>
 													<div class="col-lg-8">
-														<input type="text" class="form-control" id="doctor_name"
-															placeholder=" ">
+														<select id="division_name" name="reportingto"
+															class="form-control" autofocus>
+															<c:forEach items="${user_doctorList}" var="user_doctor">
+																<option value="${user_doctor.doctor_id}"><c:out
+																		value="${user_doctor.doctor_name}" /></option>
+															</c:forEach>
+														</select>
 													</div>
 												</div>
 												<div class="form-group col-md-6">
@@ -98,8 +103,8 @@
 											</div>
 											<div class="row">
 												<div class="form-group col-md-6">
-													<label class="col-lg-4 control-label">Doctor
-														Speciality</label>
+													<label class="col-lg-4 control-label">Brand Name
+														</label>
 													<div class="col-lg-8">
 														<input type="text" class="form-control"
 															id="doctor_speciality" placeholder=" ">
@@ -120,8 +125,8 @@
 											</div>
 											<div class="row">
 												<div class="form-group col-md-6">
-													<label class="col-lg-4 control-label">Doctor
-														Qualification</label>
+													<label class="col-lg-4 control-label">Quantity Sold
+														</label>
 													<div class="col-lg-8">
 														<input type="text" class="form-control"
 															id="doctor_qualification" placeholder=" ">
@@ -132,14 +137,17 @@
 													<div class="col-lg-9">
 														<select id="headquarter_name" name="reportingto"
 															class="form-control" autofocus>
-															<option>Choose Headquarter</option>
+															<c:forEach items="${headquarterList}" var="headquarter">
+																<option value="${headquarter.headquarter_id}"><c:out
+																		value="${headquarter.headquarter_name}" /></option>
+															</c:forEach>
 														</select>
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="form-group col-md-6">
-													<label class="col-lg-4 control-label">Phone Number</label>
+													<label class="col-lg-4 control-label">Total Amount</label>
 													<div class="col-lg-8">
 														<input type="number" class="form-control"
 															id="phone_number" placeholder=" " max="9999999999">

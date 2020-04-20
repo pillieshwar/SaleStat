@@ -67,16 +67,6 @@ public class PersonController {
 		return dao.getFewPersons();
 	}
 	
-	
-	
-	@RequestMapping("/data_entry")
-    public ModelAndView dataEntry(Model model){
-		List<DoctorDetails> doctorDetails = doctorDataEntryDao.getAllDoctorData();
-		model.addAttribute("location",doctorDetails);
-		return new ModelAndView("data_entry");
-		
-	}
-	
 	@RequestMapping("/individual_doctor_business_info")
     public ModelAndView individualDoctorBusinessInfo(Model model){
 		List<LocationDto> location = locationDao.getAllLocations();

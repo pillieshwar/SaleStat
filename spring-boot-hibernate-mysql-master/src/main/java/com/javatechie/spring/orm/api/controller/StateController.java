@@ -62,10 +62,7 @@ public class StateController {
 		System.out.println("state---->"+state);
 		List<State> stateList = stateDao.getStateList();
 		model.addAttribute("stateList",stateList);
-		
-//		int state_id_session = Integer.parseInt((String) session.getAttribute("state_id_session"));
-//		List<State> stateDropdownList = dashboardDao.stateDropdown1(state_id_session);
-//		model.addAttribute("stateDropdownList", stateDropdownList);
+
 		
         String headquarter_sessionid =  (String) request.getSession().getAttribute("headquarter_sessionid");
         System.out.println("headquarter_sessionid : " + headquarter_sessionid);
