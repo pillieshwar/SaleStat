@@ -20,8 +20,12 @@ import com.javatechie.spring.orm.api.dao.MedicineDao;
 import com.javatechie.spring.orm.api.dao.RoleDao;
 import com.javatechie.spring.orm.api.dao.StateDao;
 import com.javatechie.spring.orm.api.dto.AddDoctorDto;
+import com.javatechie.spring.orm.api.dto.AddDoctorMedicineDto;
 import com.javatechie.spring.orm.api.dto.AddUserDoctorDto;
 import com.javatechie.spring.orm.api.dto.DivisionStateDto;
+import com.javatechie.spring.orm.api.dto.DynamicMedicineDropdownDto;
+import com.javatechie.spring.orm.api.dto.GetAllDoctorsDto;
+import com.javatechie.spring.orm.api.dto.GetAllMedicinesDto;
 import com.javatechie.spring.orm.api.model.Division;
 import com.javatechie.spring.orm.api.model.Doctor;
 import com.javatechie.spring.orm.api.model.Headquarter;
@@ -210,4 +214,29 @@ public class AdminController {
 		doctorDao.userDoctorData(userdoctorjson);
 	}
 	
+	@RequestMapping("/doctor_medicine") // redirects to doctor_medicine page
+	public String doctorMedicine(Model model) {
+		
+		List<GetAllDoctorsDto> doctorList = doctorDao.getAllDoctorsList();
+		model.addAttribute("doctorList", doctorList);
+		
+		List<GetAllMedicinesDto> medicineList = medicineDao.getAllMedicinesList();
+		model.addAttribute("medicineList", medicineList);
+		return ("doctor_medicine");
+	}
+	
+	@RequestMapping(value = "/add_doctorMedicine_data", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public void addDoctorMedicineData(@RequestBody AddDoctorMedicineDto doctormedicinejson) {
+		System.out.println("inside userdoctorjson data");
+		doctorDao.doctorMedicineData(doctormedicinejson);
+	}
+	
+	@RequestMapping(value = "/dynamic_medicine_dropdown", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public List<Medicine> dynamicMedicineDropdown(@RequestBody DynamicMedicineDropdownDto medicinedropdownjson) {
+		List<Medicine> dynamicMedicineDropdown = medicineDao
+				.dynamicMedicineDropdown(medicinedropdownjson);
+		return dynamicMedicineDropdown;
+	}
 }

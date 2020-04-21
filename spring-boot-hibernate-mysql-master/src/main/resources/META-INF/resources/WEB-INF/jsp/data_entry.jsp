@@ -79,8 +79,9 @@
 												<div class="form-group col-md-6">
 													<label class="col-lg-4 control-label">Doctor Name</label>
 													<div class="col-lg-8">
-														<select id="division_name" name="reportingto"
+														<select onChange="doctorChanged()" id="doctor_id" name="reportingto"
 															class="form-control" autofocus>
+															<option>Select Doctor</option>
 															<c:forEach items="${user_doctorList}" var="user_doctor">
 																<option value="${user_doctor.doctor_id}"><c:out
 																		value="${user_doctor.doctor_name}" /></option>
@@ -101,19 +102,22 @@
 													</div>
 												</div>
 											</div>
+											
 											<div class="row">
 												<div class="form-group col-md-6">
 													<label class="col-lg-4 control-label">Brand Name
 														</label>
 													<div class="col-lg-8">
-														<input type="text" class="form-control"
-															id="doctor_speciality" placeholder=" ">
+														<select id="medicine_name" name="reportingto"
+															class="form-control" autofocus>
+															<option>Choose Brand</option>
+														</select>
 													</div>
 												</div>
 												<div class="form-group col-md-6">
 													<label class="col-lg-3 control-label">State</label>
 													<div class="col-lg-9">
-														<select onChange="stateChanged()" id="state_name"
+														<select  id="state_name"
 															name="state_name" class="form-control" autofocus>
 															<c:forEach items="${stateList}" var="state">
 																<option value="${state.state_id}"><c:out
@@ -220,16 +224,16 @@
 	</script>
 
 	<script>
-		function stateChanged() {
-			var state_id = document.getElementById("state_name").value;
-			var select = document.getElementById("headquarter_name");
+		function doctorChanged() {
+			var doctor_id = document.getElementById("doctor_id").value;
+			var select = document.getElementById("medicine_name");
 
-			var headquarterdropdownjson = {
-				state_id : state_id
+			var medicinedropdownjson = {
+					doctor_id : doctor_id
 			}
-			console.log(headquarterdropdownjson);
+			console.log(medicinedropdownjson);
 			$.ajax({
-				url : '/dynamic_headquarter_dropdown',
+				url : '/dynamic_medicine_dropdown',
 				type : 'post',
 				dataType : 'text',
 				contentType : 'application/json',
@@ -253,11 +257,11 @@
 						select.appendChild(el);
 					}
 
-					console.log("dynamic_headquarter_dropdown : ", JSON
+					console.log("medicinedropdownjson : ", JSON
 							.parse(data));
 
 				},
-				data : JSON.stringify(headquarterdropdownjson)
+				data : JSON.stringify(medicinedropdownjson)
 
 			});
 		}
@@ -265,7 +269,7 @@
 
 
 	<script>
-		function addDoctor() {
+		function addDoctor1() {
 
 			var doctor_name = document.getElementById("doctor_name").value
 					.toUpperCase();

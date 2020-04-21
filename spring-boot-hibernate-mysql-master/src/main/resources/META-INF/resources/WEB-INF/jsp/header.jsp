@@ -342,8 +342,8 @@
 					</a>
 						<ul class="sub">
 							<c:forEach items="${stateDropdownList}" var="state">
-								<li><a class="" href="state_sales?state=${state.state_id}" id=""><c:out
-											value="${state.state_name}" /></a></li>
+								<li><a class="" href="state_sales?state=${state.state_id}"
+									id=""><c:out value="${state.state_name}" /></a></li>
 							</c:forEach>
 						</ul></li>
 					<li><a class="" href="all_doctors"> <i
@@ -391,6 +391,8 @@
 						<ul class="sub">
 							<li><a class="" href="user_doctor"><span>User -
 										Doctor </span></a></li>
+							<li><a class="" href="doctor_medicine"><span>Doctor
+										- Medicine </span></a></li>
 							<li><a class="" href="add_role"><span>Add Role</span></a></li>
 							<li><a class="" href="add_state"><span>Add State</span></a></li>
 							<li><a class="" href="add_headquarter"><span>Add

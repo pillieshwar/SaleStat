@@ -125,7 +125,7 @@ color: #F00
 							state_id: val[2],
 							headquarter_id: val[3],
 							role_id: val[4],
-							role_abbr: val[5] 
+							role_abbr: val[6] 
 					  }));
 						window.location.href = "dashboard";
 					}

@@ -13,7 +13,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.javatechie.spring.orm.api.dto.AddDoctorDto;
+import com.javatechie.spring.orm.api.dto.AddDoctorMedicineDto;
 import com.javatechie.spring.orm.api.dto.AddUserDoctorDto;
+import com.javatechie.spring.orm.api.dto.GetAllDoctorsDto;
 import com.javatechie.spring.orm.api.dto.StateDoctorBusinessDto;
 import com.javatechie.spring.orm.api.dto.User_DoctorDto;
 
@@ -87,6 +89,33 @@ public class DoctorDao {
 		sqlQuery.addScalar("doctor_id", IntegerType.INSTANCE);
 		sqlQuery.addScalar("doctor_name", StringType.INSTANCE);
 		return sqlQuery.list();
+	}
+
+	public List<GetAllDoctorsDto> getAllDoctorsList() {
+		String qry = "select doctor_id, doctor_name from doctor;";
+		SQLQuery sqlQuery = (SQLQuery) getSession().createSQLQuery(qry).setResultTransformer(Transformers.aliasToBean(GetAllDoctorsDto.class)); 
+		sqlQuery.addScalar("doctor_id", IntegerType.INSTANCE);
+		sqlQuery.addScalar("doctor_name", StringType.INSTANCE);
+		return sqlQuery.list();
+	}
+
+	public void doctorMedicineData(AddDoctorMedicineDto doctormedicinejson) {
+		
+		List selectedMedicine = doctormedicinejson.getSelected();
+		String arr[] = new String[doctormedicinejson.getSelected().size()];
+
+		for(int i=0;i<selectedMedicine.size();i++)
+		{
+			arr[i] = (String) selectedMedicine.get(i);
+		}
+		
+		for(int j=0;j<arr.length;j++)
+		{
+		String qry = "insert into doctor_medicine values(null," + doctormedicinejson.getDoctor_id() + ","+ Integer.parseInt(arr[j]) + ")";
+		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
+		sqlQuery.executeUpdate();
+		}	
+		
 	}
 
 	
