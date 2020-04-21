@@ -1,7 +1,7 @@
 CREATE TABLE `doctor` (
 	`doctor_id` INT NOT NULL AUTO_INCREMENT,
 	`doctor_name` varchar(30) NOT NULL,
-	`headquarter_id` INT NOT NULL,
+	`division_state_id` INT NOT NULL,
 	`doctor_speciality` varchar(30),
 	PRIMARY KEY (`doctor_id`)
 );
@@ -101,7 +101,14 @@ CREATE TABLE `doctor_visit` (
 	PRIMARY KEY (`doctor_visit_id`)
 );
 
-ALTER TABLE `doctor` ADD CONSTRAINT `doctor_fk0` FOREIGN KEY (`headquarter_id`) REFERENCES `headquarter`(`headquarter_id`);
+CREATE TABLE `user_doctor` (
+	`user_doctor_id` int NOT NULL AUTO_INCREMENT,
+	`user_id` int NOT NULL,
+	`doctor_id` int NOT NULL,
+	PRIMARY KEY (`user_doctor_id`)
+);
+
+ALTER TABLE `doctor` ADD CONSTRAINT `doctor_fk0` FOREIGN KEY (`division_state_id`) REFERENCES `division_state`(`division_state_id`);
 
 ALTER TABLE `headquarter` ADD CONSTRAINT `headquarter_fk0` FOREIGN KEY (`state_id`) REFERENCES `state`(`state_id`);
 
@@ -124,3 +131,12 @@ ALTER TABLE `doctor_sale` ADD CONSTRAINT `doctor_sale_fk1` FOREIGN KEY (`sponsor
 ALTER TABLE `doctor_visit` ADD CONSTRAINT `doctor_visit_fk0` FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`);
 
 ALTER TABLE `doctor_visit` ADD CONSTRAINT `doctor_visit_fk1` FOREIGN KEY (`doctor_id`) REFERENCES `doctor`(`doctor_id`);
+
+ALTER TABLE medicine ADD(medicine_price float);
+
+alter table doctor add column(doctor_qualification varchar(30), doctor_ph varchar(10), doctor_address varchar(255));
+
+
+ALTER TABLE `user_doctor` ADD CONSTRAINT `user_doctor_fk0` FOREIGN KEY (`user_id`) REFERENCES `user`(`user_id`);
+
+ALTER TABLE `user_doctor` ADD CONSTRAINT `user_doctor_fk1` FOREIGN KEY (`doctor_id`) REFERENCES `doctor`(`doctor_id`);
