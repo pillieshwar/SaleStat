@@ -3,6 +3,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="header.jsp"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<jsp:useBean id="now" class="java.util.Date" />
+<fmt:formatDate var="year" value="${now}" pattern="yyyy" />
+
 
 <head>
 <meta charset="utf-8">
@@ -68,7 +72,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<section class="panel">
-							
+
 							<!-- add-new-medicine -->
 							<div id="edit-profile" class="tab-pane">
 								<section class="panel">
@@ -79,8 +83,8 @@
 												<div class="form-group col-md-6">
 													<label class="col-lg-4 control-label">Doctor Name</label>
 													<div class="col-lg-8">
-														<select onChange="doctorChanged()" id="doctor_id" name="reportingto"
-															class="form-control" autofocus>
+														<select onChange="doctorChanged()" id="doctor_id"
+															name="" class="form-control" autofocus>
 															<option>Select Doctor</option>
 															<c:forEach items="${user_doctorList}" var="user_doctor">
 																<option value="${user_doctor.doctor_id}"><c:out
@@ -90,6 +94,15 @@
 													</div>
 												</div>
 												<div class="form-group col-md-6">
+													<label class="col-lg-4 control-label">Brand Name </label>
+													<div class="col-lg-8">
+														<select id="medicine_name" name=""
+															class="form-control" autofocus>
+															<option>Choose Brand</option>
+														</select>
+													</div>
+												</div>
+												<%-- <div class="form-group col-md-6">
 													<label class="col-lg-3 control-label">Division Name</label>
 													<div class="col-lg-9">
 														<select id="division_name" name="reportingto"
@@ -100,21 +113,12 @@
 															</c:forEach>
 														</select>
 													</div>
-												</div>
+												</div> --%>
 											</div>
-											
+
 											<div class="row">
-												<div class="form-group col-md-6">
-													<label class="col-lg-4 control-label">Brand Name
-														</label>
-													<div class="col-lg-8">
-														<select id="medicine_name" name="reportingto"
-															class="form-control" autofocus>
-															<option>Choose Brand</option>
-														</select>
-													</div>
-												</div>
-												<div class="form-group col-md-6">
+
+												<%-- <div class="form-group col-md-6">
 													<label class="col-lg-3 control-label">State</label>
 													<div class="col-lg-9">
 														<select  id="state_name"
@@ -125,18 +129,26 @@
 															</c:forEach>
 														</select>
 													</div>
-												</div>
+												</div> --%>
 											</div>
 											<div class="row">
 												<div class="form-group col-md-6">
 													<label class="col-lg-4 control-label">Quantity Sold
-														</label>
+														(Pcs.) </label>
 													<div class="col-lg-8">
-														<input type="text" class="form-control"
-															id="doctor_qualification" placeholder=" ">
+														<input type="number" class="form-control"
+															id="medicine_pieces" placeholder=" ">
 													</div>
 												</div>
 												<div class="form-group col-md-6">
+													<label class="col-lg-4 control-label">Quantity
+														Amount(Rs.)</label>
+													<div class="col-lg-8">
+														<input type="number" class="form-control"
+															id="medicine_amount" placeholder=" " max="9999999999">
+													</div>
+												</div>
+												<%-- <div class="form-group col-md-6">
 													<label class="col-lg-3 control-label">Headquarter</label>
 													<div class="col-lg-9">
 														<select id="headquarter_name" name="reportingto"
@@ -147,36 +159,50 @@
 															</c:forEach>
 														</select>
 													</div>
-												</div>
+												</div> --%>
 											</div>
+
 											<div class="row">
 												<div class="form-group col-md-6">
-													<label class="col-lg-4 control-label">Total Amount</label>
+													<label class="col-lg-4 control-label">Month</label>
 													<div class="col-lg-8">
-														<input type="number" class="form-control"
-															id="phone_number" placeholder=" " max="9999999999">
+														<select id="month"
+															name="" class="form-control" autofocus>
+															<option value="">Select Month</option>
+															<option value="jan">January</option>
+															<option value="feb">February</option>
+															<option value="mar">March</option>
+															<option value="apr">April</option>
+															<option value="may">May</option>
+															<option value="jun">June</option>
+															<option value="jul">July</option>
+															<option value="aug">August</option>
+															<option value="sep">September</option>
+															<option value="oct">October</option>
+															<option value="nov">November</option>
+															<option value="dec">December</option>
+														</select>
 													</div>
 												</div>
 												<div class="form-group col-md-6">
-													<label class="col-lg-3 control-label">Address</label>
-													<div class="col-lg-9">
-														<textarea name="address" id="address" class="form-control"
-															cols="20" rows="3"></textarea>
+													<label class="col-lg-4 control-label">Year</label>
+													<div class="col-lg-8">
+														<select id="year" name=""
+															class="form-control" autofocus>
+															<c:forEach begin="0" end="120" var="val">
+																<c:set var="decr" value="${year - val}" />
+																<option value="${decr}"
+																	${birthYear == decr ? "selected='selected'": ''}>${decr}</option>
+															</c:forEach>
+														</select>
 													</div>
 												</div>
-												<!-- <div class="form-group  col-md-6">
-													<label class="col-lg-4 control-label">Address</label>
-													<div class="col-lg-8">
-														<input type="text" class="form-control" id="address"
-															placeholder="http://www.demowebsite.com ">
-													</div>
-												</div> -->
 											</div>
 
 											<div class="form-group">
 												<div class="col-lg-offset-2 col-lg-10">
-													<button onclick="addDoctor()" type="submit"
-														class="btn btn-primary">Save</button>
+													<button onclick="enterData()" type="submit"
+														class="btn btn-primary">Enter Data</button>
 													<button type="button" class="btn btn-danger">Cancel</button>
 												</div>
 											</div>
@@ -229,7 +255,7 @@
 			var select = document.getElementById("medicine_name");
 
 			var medicinedropdownjson = {
-					doctor_id : doctor_id
+				doctor_id : doctor_id
 			}
 			console.log(medicinedropdownjson);
 			$.ajax({
@@ -253,12 +279,11 @@
 						var val = str.split(",");
 						el.textContent = val[1];
 						el.value = val[0];
-						console.log("options : " + val[0] + " - " + el.value);
+						console.log("options : " + val[2] + " - " + el.value);
 						select.appendChild(el);
 					}
 
-					console.log("medicinedropdownjson : ", JSON
-							.parse(data));
+					console.log("medicinedropdownjson : ", JSON.parse(data));
 
 				},
 				data : JSON.stringify(medicinedropdownjson)
@@ -269,55 +294,45 @@
 
 
 	<script>
-		function addDoctor1() {
+		function enterData() {
 
-			var doctor_name = document.getElementById("doctor_name").value
-					.toUpperCase();
-			var division_name = document.getElementById("division_name").value
-					.toUpperCase();
-			var state_name = document.getElementById("state_name").value
-					.toUpperCase();
-			var headquarter_name = document.getElementById("headquarter_name").value
-					.toUpperCase();
-			var doctor_qualification = document
-					.getElementById("doctor_qualification").value.toUpperCase();
-			var doctor_speciality = document
-					.getElementById("doctor_speciality").value.toUpperCase();
-			var phone_number = document.getElementById("phone_number").value;
-			var address = document.getElementById("address").value
-					.toUpperCase();
+			var doctor_id = document.getElementById("doctor_id").value;
+			var medicine_name = document.getElementById("medicine_name").value;
+			var medicine_pieces = document.getElementById("medicine_pieces").value;
+			var medicine_amount = document.getElementById("medicine_amount").value;
+			var month = document.getElementById("month").value;
+			var year = document.getElementById("year").value;
+			
+			alert(medicine_name);
 
-			var addDoctor = {
+			 var dataEntry = {
 
-				doctor_name : doctor_name,
-				doctor_speciality : doctor_speciality,
-				division_id : division_name,
-				state_id : state_name,
-				headquarter_id : headquarter_name,
-				doctor_qualification : doctor_qualification,
-				phone_number : phone_number,
-				address : address
-
+					 doctor_id : doctor_id,
+					 medicine_id : medicine_name,
+					 medicine_pieces : medicine_pieces,
+					 medicine_amount : medicine_amount,
+					 month : month,
+					 year : year
 			}
-			console.log(addDoctor); //remove all console.log once the whole module is deployed and ready for UAT.
+			console.log(dataEntry); //remove all console.log once the whole module is deployed and ready for UAT.
 
 			$
 					.ajax({
-						url : '/add_doctor_data',
+						url : '/add_data_entry',
 						type : 'post',
 						dataType : 'text',
 						contentType : 'application/json',
 						success : function(data) {
-							if (data == "success") {
+							/* if (data == "success") {
 								window.location.href = "login";
 							} else {
 								document.getElementById("credentials").innerHTML = "<span style='color: red;'> Username / password incorrect </span>";
-							}
-							console.log("ADD_DOCTOR : ", data);
+							} */
+							console.log("DATA_ENTRY : ", data);
 						},
-						data : JSON.stringify(addDoctor)
+						data : JSON.stringify(dataEntry)
 					});
-		}
+		} 
 	</script>
 </body>
 

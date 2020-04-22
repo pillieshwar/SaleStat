@@ -6,16 +6,23 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.javatechie.spring.orm.api.dao.DataEntryDao;
 import com.javatechie.spring.orm.api.dao.DivisionDao;
 import com.javatechie.spring.orm.api.dao.DoctorDao;
 import com.javatechie.spring.orm.api.dao.HeadquarterDao;
 import com.javatechie.spring.orm.api.dao.MedicineDao;
 import com.javatechie.spring.orm.api.dao.StateDao;
+import com.javatechie.spring.orm.api.dto.AddDataEntryDto;
+import com.javatechie.spring.orm.api.dto.AddDoctorMedicineDto;
 import com.javatechie.spring.orm.api.dto.User_DoctorDto;
 import com.javatechie.spring.orm.api.model.Division;
 import com.javatechie.spring.orm.api.model.Headquarter;
@@ -39,6 +46,9 @@ public class DataEntryController {
 	
 	@Autowired
 	private MedicineDao medicineDao;
+	
+	@Autowired
+	private DataEntryDao dataEntryDao;
 	
 	@RequestMapping("/data_entry")
     public ModelAndView dataEntry(Model model, HttpServletRequest request){
@@ -66,5 +76,13 @@ public class DataEntryController {
 		model.addAttribute("userDoctorMedicineList",userDoctorMedicineList);
 		return new ModelAndView("data_entry");
 		
+	}
+    
+    @RequestMapping(value = "/add_data_entry", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@ResponseBody
+	public String addDataEntry(@RequestBody AddDataEntryDto dataEntry) {
+		System.out.println("inside addDataEntry");
+		return dataEntryDao.addDataEntry(dataEntry);
+		 
 	}
 }
