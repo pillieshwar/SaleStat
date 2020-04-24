@@ -84,7 +84,7 @@ public class MedicineDao {
 	}
 
 	public List<Medicine> dynamicMedicineDropdown(DynamicMedicineDropdownDto medicinedropdownjson) {
-		List<Medicine> x = getSession().createSQLQuery("select m.medicine_id, m.medicine_name from medicine as m join (select medicine_id from doctor_medicine where doctor_id="  + medicinedropdownjson.getDoctor_id() + ") as ref_medicine_id on ref_medicine_id.medicine_id=m.medicine_id;")
+		List<Medicine> x = getSession().createSQLQuery("select m.medicine_id, m.medicine_name, m.medicine_price from medicine as m join (select medicine_id from doctor_medicine where doctor_id="  + medicinedropdownjson.getDoctor_id() + ") as ref_medicine_id on ref_medicine_id.medicine_id=m.medicine_id;")
 				.list();
 		return x;
 
