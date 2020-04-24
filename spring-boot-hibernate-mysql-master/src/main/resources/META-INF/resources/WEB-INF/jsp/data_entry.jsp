@@ -303,7 +303,7 @@
 			var month = document.getElementById("month").value;
 			var year = document.getElementById("year").value;
 			
-			alert(medicine_name);
+			//alert(medicine_name);
 
 			 var dataEntry = {
 
