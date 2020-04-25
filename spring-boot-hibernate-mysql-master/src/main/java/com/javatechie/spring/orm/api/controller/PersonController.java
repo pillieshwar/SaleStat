@@ -67,13 +67,7 @@ public class PersonController {
 		return dao.getFewPersons();
 	}
 	
-	@RequestMapping("/individual_doctor_business_info")
-    public ModelAndView individualDoctorBusinessInfo(Model model){
-		List<LocationDto> location = locationDao.getAllLocations();
-		model.addAttribute("location",location);
-		return new ModelAndView("individual_doctor_business_info");
-		
-	}
+	
 
 	/*@RequestMapping(path="/state_sales/{month}")
     public String stateSalesMonth(@PathVariable("month") String month, Model model) {

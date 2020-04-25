@@ -168,7 +168,7 @@ th:first-child, td:first-child {
 									<tbody>
 										<c:forEach items="${stateDoctorBusinessList}" var="state">
 											<tr>
-												<td><a class="" href="individual_doctor_business_info"><c:out
+												<td><a class="" href="individual_doctor_business_info?dr_id=${state.doctor_id}"><c:out
 															value="${state.doctor_name}" /></td>
 												<td><c:out value="${state.doctor_speciality}" /></td>
 												<td><c:out value="${state.doctor_qualification}" /></td>
@@ -180,30 +180,7 @@ th:first-child, td:first-child {
 												<td>23</td>
 											</tr>
 										</c:forEach>
-										<tr>
-											<td><a class=""
-												href="individual_doctor_business_info.jsp">Kate</td>
-											<td contenteditable='true'>Moss</td>
-											<td>Russia</td>
-											<td>New York City / Warsaw / Lodz / Amsterdam / London /
-												Chicago</td>
-											<td>Web Designer /UX designer / Ul designer / JavaScript
-												Developer</td>
-											<td>23</td>
-											<td>23</td>
-										</tr>
-										<tr>
-											<td><a class=""
-												href="individual_doctor_business_info.jsp">Kate</td>
-											<td>Eshwar</td>
-											<td>India</td>
-											<td>New York City / Warsaw / Lodz / Amsterdam / London /
-												Chicago</td>
-											<td>Web Designer /UX designer / Ul designer / JavaScript
-												Developer</td>
-											<td>23</td>
-											<td>23</td>
-										</tr>
+										
 									</tbody>
 								</table>
 							</div>

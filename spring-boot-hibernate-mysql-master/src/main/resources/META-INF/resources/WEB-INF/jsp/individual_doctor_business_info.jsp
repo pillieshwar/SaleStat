@@ -143,24 +143,10 @@ th:first-child, td:first-child {
 						<table class="table table-striped">
 
 							<!--Table head-->
+
 							<thead>
 								<tr>
-									<th></th>
-									<th></th>
-									<th></th>
-									<th></th>
-									<th></th>
-									<th></th>
-									<th></th>
-									<th></th>
-									<th></th>
-								</tr>
-							</thead>
-							<thead>
-								<tr>
-									<th>Doctor</th>
-									<th>ASM Visits</th>
-									<th>RM Visits</th>
+									<th>BRAND NAME</th>
 									<th>YEAR</th>
 									<th>JAN</th>
 									<th>FEB</th>
@@ -174,94 +160,25 @@ th:first-child, td:first-child {
 									<th>OCT</th>
 									<th>NOV</th>
 									<th>DEC</th>
-									<th>RX FOR TARGETED BRAND UNITS</th>
-									<th>TOTAL VALUE SALE FOR THE MONTH</th>
-									<th>HQ. PRIM SALES VAL (LACS)</th>
-									<th>HQ. SEC. SALES VAL (LACS)</th>
-									<th>Region</th>
 								</tr>
 							</thead>
 
 							<!--Table head-->
 
 							<!--Table body-->
+							
 							<tbody>
-								<tr>
-									<td><a class="" href="individual_doctor_business_info.jsp">Kate</td>
-									<td>7, 13, 19</td>
-									<td>10, 12</td>
-									<td>1.1</td>
-									<!-- <table>
-              	<tr>
-              		<td>1.1</td>
-              	</tr>
-              	<tr>
-              		<td>1.1</td>
-              	</tr>
-              	<tr>
-              		<td>1.1</td>
-              	</tr>
-              </table> -->
-
-									<td>2.4</td>
-									<td>23</td>
-									<td>23</td>
-								</tr>
-								<tr>
-									<td><a class="" href="individual_doctor_business_info.jsp">Kate</td>
-									<td>7, 13, 19</td>
-									<td>10, 12</td>
-									<td>1.1</td>
-									<td>2.4</td>
-									<td>23</td>
-									<td>23</td>
-								</tr>
-								<tr>
-									<td><a class="" href="individual_doctor_business_info.jsp">Kate</td>
-									<td>7, 13, 19</td>
-									<td>10, 12</td>
-									<td>1.1</td>
-									<td>2.4</td>
-									<td>23</td>
-									<td>23</td>
-								</tr>
-								<tr>
-									<td><a class="" href="individual_doctor_business_info.jsp">Kate</td>
-									<td>7, 13, 19</td>
-									<td>10, 12</td>
-									<td>1.1</td>
-									<td>2.4</td>
-									<td>23</td>
-									<td>23</td>
-								</tr>
-								<tr>
-									<td><a class="" href="individual_doctor_business_info.jsp">Kate</td>
-									<td>7, 13, 19</td>
-									<td>10, 12</td>
-									<td>1.1</td>
-									<td>2.4</td>
-									<td>23</td>
-									<td>23</td>
-								</tr>
-								<tr>
-									<td><a class="" href="individual_doctor_business_info.jsp">Kate</td>
-									<td>7, 13, 19</td>
-									<td>10, 12</td>
-									<td>1.1</td>
-									<td>2.4</td>
-									<td>23</td>
-									<td>23</td>
-								</tr>
-								<tr>
-									<td><a class="" href="individual_doctor_business_info.jsp">Kate</td>
-									<td>7, 13, 19</td>
-									<td>10, 12</td>
-									<td>1.1</td>
-									<td>2.4</td>
-									<td>23</td>
-									<td>23</td>
-								</tr>
-
+								<c:forEach items="${individualDoctorSaleList}" var="individualDoctorSale">
+									<tr>
+										<td>${individualDoctorSale.medicine_name}</td>
+										<td>${individualDoctorSale.year}</td>
+										<td>10, 12</td>
+										<td>1.1</td>
+										<td>2.4</td>
+										<td>23</td>
+										<td>23</td>
+									</tr>
+									</c:forEach>
 							</tbody>
 							<!--Table body-->
 
@@ -336,14 +253,14 @@ Highcharts.chart('container2', {
         name: 'Tokyo',
         data: [
 
-        	<c:forEach items="${location}" var="loc">
-        	${loc.region},
+        	<c:forEach items="${individualDoctorSaleList}" var="loc">
+        	${loc.year},
         	</c:forEach>
         	
         	]
     }, {
         name: 'London',
-        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+        data: [2003.9, 4.2, 5.7, 8.5, 2011.9, 15.2, 17.0, 1036.6, 14.2, 2000.3, 3006.6, 4.8]
     }]
 });
 </script>

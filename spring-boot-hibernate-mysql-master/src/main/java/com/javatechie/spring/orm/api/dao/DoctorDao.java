@@ -6,6 +6,7 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.Transformers;
+import org.hibernate.type.FloatType;
 import org.hibernate.type.IntegerType;
 import org.hibernate.type.StringType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import com.javatechie.spring.orm.api.dto.AddDoctorDto;
 import com.javatechie.spring.orm.api.dto.AddDoctorMedicineDto;
 import com.javatechie.spring.orm.api.dto.AddUserDoctorDto;
 import com.javatechie.spring.orm.api.dto.GetAllDoctorsDto;
+import com.javatechie.spring.orm.api.dto.GetIndividualDoctorSaleDto;
 import com.javatechie.spring.orm.api.dto.StateDoctorBusinessDto;
 import com.javatechie.spring.orm.api.dto.User_DoctorDto;
 
@@ -59,9 +61,23 @@ public class DoctorDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<StateDoctorBusinessDto> getStateDoctorBusiness(String hq_id) {
+	public List<StateDoctorBusinessDto> getStateDoctorBusiness(String hq_id, String state_sessionid) {
 		int headquarter_id = Integer.parseInt(hq_id);
-		String qry = "select doctor_id,doctor_name,doctor_speciality,doctor_qualification from doctor join (select division_state_id from division_state where headquarter_id="+ headquarter_id +") as ref_id on doctor.division_state_id=ref_id.division_state_id;";
+		int stateId = Integer.parseInt(state_sessionid);
+		String qry = "";
+		if(stateId<9000)
+		{
+		qry = "select d.doctor_id,d.doctor_name,d.doctor_speciality,d.doctor_qualification from doctor d\r\n" + 
+				"join division_state ds on d.division_state_id=ds.division_state_id\r\n" + 
+				"join user_doctor us on d.doctor_id=us.doctor_id\r\n" + 
+				"where ds.headquarter_id="+headquarter_id+" and us.user_id="+stateId;
+		}
+		else {
+			qry = "select distinct(d.doctor_id),d.doctor_name,d.doctor_speciality,d.doctor_qualification from doctor d\r\n" + 
+					"join division_state ds on d.division_state_id=ds.division_state_id\r\n" +
+					"where ds.headquarter_id="+headquarter_id;
+			}
+		
 		SQLQuery sqlQuery = (SQLQuery) getSession().createSQLQuery(qry).setResultTransformer(Transformers.aliasToBean(StateDoctorBusinessDto.class));
 		sqlQuery.addScalar("doctor_id", IntegerType.INSTANCE);
 		sqlQuery.addScalar("doctor_name", StringType.INSTANCE);
@@ -118,5 +134,26 @@ public class DoctorDao {
 		
 	}
 
-	
+	@SuppressWarnings("unchecked")
+	public List<GetIndividualDoctorSaleDto> getIndividualDoctorSaleList(String dr_id) {
+		int doctorId = Integer.parseInt(dr_id);
+		String qry = "select ds.doctor_sale_id, m.medicine_name, ds.year, ds.jan_sale, ds.feb_sale, ds.mar_sale, ds.apr_sale, ds.may_sale, ds.jun_sale, ds.jul_sale, ds.aug_sale, ds.sep_sale, ds.oct_sale, ds.nov_sale, ds.dec_sale from doctor_sale ds join doctor_medicine dm on dm.doctor_medicine_id=ds.doctor_medicine_id join medicine m on m.medicine_id=dm.medicine_id where dm.doctor_id="+doctorId;
+		SQLQuery sqlQuery = (SQLQuery) getSession().createSQLQuery(qry).setResultTransformer(Transformers.aliasToBean(GetIndividualDoctorSaleDto.class)); 
+		sqlQuery.addScalar("doctor_sale_id", IntegerType.INSTANCE);
+		sqlQuery.addScalar("medicine_name", StringType.INSTANCE);
+		sqlQuery.addScalar("year", StringType.INSTANCE);
+//		sqlQuery.addScalar("jan_sale", FloatType.INSTANCE);
+//		sqlQuery.addScalar("feb_sale", FloatType.INSTANCE);
+//		sqlQuery.addScalar("mar_sale", FloatType.INSTANCE);
+//		sqlQuery.addScalar("apr_sale", FloatType.INSTANCE);
+//		sqlQuery.addScalar("may_sale", FloatType.INSTANCE);
+//		sqlQuery.addScalar("jan_sale", FloatType.INSTANCE);
+//		sqlQuery.addScalar("jul_sale", FloatType.INSTANCE);
+//		sqlQuery.addScalar("aug_sale", FloatType.INSTANCE);
+//		sqlQuery.addScalar("sep_sale", FloatType.INSTANCE);
+//		sqlQuery.addScalar("oct_sale", FloatType.INSTANCE);
+//		sqlQuery.addScalar("nov_sale", FloatType.INSTANCE);
+//		sqlQuery.addScalar("dec_sale", FloatType.INSTANCE);
+		return sqlQuery.list();
+	}
 }
