@@ -115,13 +115,7 @@ th:first-child, td:first-child {
 												<!--                     <div id="chart_div" style="height: 1000px;"></div> -->
 												<figure class="highcharts-figure">
 													<div id="container2"></div>
-													<p class="highcharts-description">This chart shows how
-														symbols and shapes can be used in charts. Highcharts
-														includes several common symbol shapes, such as squares,
-														circles and triangles, but it is also possible to add your
-														own custom symbols. In this chart, custom weather symbols
-														are used on data points to highlight that certain
-														temperatures are warm while others are cold.</p>
+													<p class="highcharts-description"></p>
 												</figure>
 											</div>
 										</section>
@@ -172,11 +166,19 @@ th:first-child, td:first-child {
 									<tr>
 										<td>${individualDoctorSale.medicine_name}</td>
 										<td>${individualDoctorSale.year}</td>
-										<td>10, 12</td>
-										<td>1.1</td>
-										<td>2.4</td>
-										<td>23</td>
-										<td>23</td>
+										<td>${individualDoctorSale.jan_sale}</td>
+										<td>${individualDoctorSale.feb_sale}</td>
+										<td>${individualDoctorSale.mar_sale}</td>
+										<td>${individualDoctorSale.apr_sale}</td>
+										<td>${individualDoctorSale.may_sale}</td>
+										<td>${individualDoctorSale.jun_sale}</td>
+										<td>${individualDoctorSale.jul_sale}</td>
+										<td>${individualDoctorSale.aug_sale}</td>
+										<td>${individualDoctorSale.sep_sale}</td>
+										<td>${individualDoctorSale.oct_sale}</td>
+										<td>${individualDoctorSale.nov_sale}</td>
+										<td>${individualDoctorSale.dec_sale}</td>
+										
 									</tr>
 									</c:forEach>
 							</tbody>
@@ -222,23 +224,19 @@ Highcharts.chart('container2', {
         type: 'line'
     },
     title: {
-        text: 'Monthly Average Temperature'
+        text: 'Monthly Sale Value (Rs)'
     },
     subtitle: {
         /* text: 'Source: WorldClimate.com' */
     },
     xAxis: {
     	
-        categories: [
-        	<c:forEach items="${location}" var="loc">
-        	'${loc.state}',
-        	</c:forEach>
-        	]
+        categories: ['January','February','March','April','May','June','July','August','September','October','November','December']
     	
     },
     yAxis: {
         title: {
-            text: 'Temperature (°C)'
+            text: 'Sale Amount (Rs.)'
         }
     },
     plotOptions: {
@@ -249,19 +247,28 @@ Highcharts.chart('container2', {
             enableMouseTracking: false
         }
     },
-    series: [{
-        name: 'Tokyo',
+    series: [<c:forEach items="${individualDoctorSaleList}" var="individualDoctorSaleList">
+    {
+        name: '${individualDoctorSaleList.medicine_name}',
         data: [
 
-        	<c:forEach items="${individualDoctorSaleList}" var="loc">
-        	${loc.year},
-        	</c:forEach>
+        	
+        	${individualDoctorSaleList.jan_sale},
+        	${individualDoctorSaleList.feb_sale},
+        	${individualDoctorSaleList.mar_sale},
+        	${individualDoctorSaleList.apr_sale},
+        	${individualDoctorSaleList.may_sale},
+        	${individualDoctorSaleList.jun_sale},
+        	${individualDoctorSaleList.jul_sale},
+        	${individualDoctorSaleList.aug_sale},
+        	${individualDoctorSaleList.sep_sale},
+        	${individualDoctorSaleList.oct_sale},
+        	${individualDoctorSaleList.nov_sale},
+        	${individualDoctorSaleList.dec_sale}
+        	
         	
         	]
-    }, {
-        name: 'London',
-        data: [2003.9, 4.2, 5.7, 8.5, 2011.9, 15.2, 17.0, 1036.6, 14.2, 2000.3, 3006.6, 4.8]
-    }]
+    },</c:forEach> ]
 });
 </script>
 

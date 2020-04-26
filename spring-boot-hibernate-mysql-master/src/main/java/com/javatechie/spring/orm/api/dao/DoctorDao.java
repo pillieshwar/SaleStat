@@ -137,23 +137,23 @@ public class DoctorDao {
 	@SuppressWarnings("unchecked")
 	public List<GetIndividualDoctorSaleDto> getIndividualDoctorSaleList(String dr_id) {
 		int doctorId = Integer.parseInt(dr_id);
-		String qry = "select ds.doctor_sale_id, m.medicine_name, ds.year, ds.jan_sale, ds.feb_sale, ds.mar_sale, ds.apr_sale, ds.may_sale, ds.jun_sale, ds.jul_sale, ds.aug_sale, ds.sep_sale, ds.oct_sale, ds.nov_sale, ds.dec_sale from doctor_sale ds join doctor_medicine dm on dm.doctor_medicine_id=ds.doctor_medicine_id join medicine m on m.medicine_id=dm.medicine_id where dm.doctor_id="+doctorId;
+		String qry = "select ds.doctor_sale_id, m.medicine_name, ds.year, COALESCE(ds.jan_sale, 0) as jan_sale, COALESCE(ds.feb_sale, 0) as feb_sale, COALESCE(ds.mar_sale, 0) as mar_sale, COALESCE(ds.apr_sale, 0) as apr_sale, COALESCE(ds.may_sale, 0) as may_sale, COALESCE(ds.jun_sale, 0) as jun_sale, COALESCE(ds.jul_sale, 0) as jul_sale, COALESCE(ds.aug_sale, 0) as aug_sale, COALESCE(ds.sep_sale, 0) as sep_sale, COALESCE(ds.oct_sale, 0) as oct_sale, COALESCE(ds.nov_sale, 0) as nov_sale, COALESCE(ds.dec_sale, 0) as dec_sale from doctor_sale ds join doctor_medicine dm on dm.doctor_medicine_id=ds.doctor_medicine_id join medicine m on m.medicine_id=dm.medicine_id where dm.doctor_id="+doctorId;
 		SQLQuery sqlQuery = (SQLQuery) getSession().createSQLQuery(qry).setResultTransformer(Transformers.aliasToBean(GetIndividualDoctorSaleDto.class)); 
 		sqlQuery.addScalar("doctor_sale_id", IntegerType.INSTANCE);
 		sqlQuery.addScalar("medicine_name", StringType.INSTANCE);
 		sqlQuery.addScalar("year", StringType.INSTANCE);
-//		sqlQuery.addScalar("jan_sale", FloatType.INSTANCE);
-//		sqlQuery.addScalar("feb_sale", FloatType.INSTANCE);
-//		sqlQuery.addScalar("mar_sale", FloatType.INSTANCE);
-//		sqlQuery.addScalar("apr_sale", FloatType.INSTANCE);
-//		sqlQuery.addScalar("may_sale", FloatType.INSTANCE);
-//		sqlQuery.addScalar("jan_sale", FloatType.INSTANCE);
-//		sqlQuery.addScalar("jul_sale", FloatType.INSTANCE);
-//		sqlQuery.addScalar("aug_sale", FloatType.INSTANCE);
-//		sqlQuery.addScalar("sep_sale", FloatType.INSTANCE);
-//		sqlQuery.addScalar("oct_sale", FloatType.INSTANCE);
-//		sqlQuery.addScalar("nov_sale", FloatType.INSTANCE);
-//		sqlQuery.addScalar("dec_sale", FloatType.INSTANCE);
+		sqlQuery.addScalar("jan_sale", FloatType.INSTANCE);
+		sqlQuery.addScalar("feb_sale", FloatType.INSTANCE);
+		sqlQuery.addScalar("mar_sale", FloatType.INSTANCE);
+		sqlQuery.addScalar("apr_sale", FloatType.INSTANCE);
+		sqlQuery.addScalar("may_sale", FloatType.INSTANCE);
+		sqlQuery.addScalar("jan_sale", FloatType.INSTANCE);
+		sqlQuery.addScalar("jul_sale", FloatType.INSTANCE);
+		sqlQuery.addScalar("aug_sale", FloatType.INSTANCE);
+		sqlQuery.addScalar("sep_sale", FloatType.INSTANCE);
+		sqlQuery.addScalar("oct_sale", FloatType.INSTANCE);
+		sqlQuery.addScalar("nov_sale", FloatType.INSTANCE);
+		sqlQuery.addScalar("dec_sale", FloatType.INSTANCE);
 		return sqlQuery.list();
 	}
 }
