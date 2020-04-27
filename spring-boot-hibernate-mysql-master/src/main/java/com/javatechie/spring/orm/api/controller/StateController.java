@@ -71,4 +71,5 @@ public class StateController {
 		model.addAttribute("headquarterList",headquarterList);
 		return ("state_sales");
 	}
+
 }

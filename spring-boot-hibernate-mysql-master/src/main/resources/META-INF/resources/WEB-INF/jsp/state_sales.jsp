@@ -162,7 +162,7 @@
         	
         	<c:forEach items="${headquarterList}" var="hqList">
         	
-        	{y: 10,
+        	{y: ${hqList.headquarter_total_sale},
         	 name: '${hqList.headquarter_name}',
         	 key: 'state_doctor_business?hq_id=${hqList.headquarter_id}'
         	},

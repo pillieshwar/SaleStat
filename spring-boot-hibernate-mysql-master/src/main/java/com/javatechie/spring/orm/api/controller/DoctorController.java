@@ -31,7 +31,8 @@ public class DoctorController {
     public ModelAndView stateDoctorBusiness(@RequestParam("hq_id") String hq_id, Model model, HttpServletRequest request){
 		System.out.println("hq_id : " + hq_id);
 		String state_sessionid =  (String) request.getSession().getAttribute("state_sessionid");
-		List<StateDoctorBusinessDto> stateDoctorBusinessObjectList = doctorDao.getStateDoctorBusiness(hq_id,state_sessionid);
+		String user_sessionid =  (String) request.getSession().getAttribute("user_sessionid");
+		List<StateDoctorBusinessDto> stateDoctorBusinessObjectList = doctorDao.getStateDoctorBusiness(hq_id,state_sessionid, user_sessionid);
 		System.out.println("stateDoctorBusinessObjectList size : " + stateDoctorBusinessObjectList.size());
 //		System.out.println("stateDoctorBusinessObjectList : " + stateDoctorBusinessObjectList.get(0).getDoctor_name());
 		model.addAttribute("stateDoctorBusinessList",stateDoctorBusinessObjectList);

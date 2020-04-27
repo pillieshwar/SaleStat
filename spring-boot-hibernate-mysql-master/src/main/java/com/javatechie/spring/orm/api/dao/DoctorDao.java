@@ -61,16 +61,17 @@ public class DoctorDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<StateDoctorBusinessDto> getStateDoctorBusiness(String hq_id, String state_sessionid) {
+	public List<StateDoctorBusinessDto> getStateDoctorBusiness(String hq_id, String state_sessionid, String user_sessionid) {
 		int headquarter_id = Integer.parseInt(hq_id);
 		int stateId = Integer.parseInt(state_sessionid);
+		int userId = Integer.parseInt(user_sessionid);
 		String qry = "";
 		if(stateId<9000)
 		{
 		qry = "select d.doctor_id,d.doctor_name,d.doctor_speciality,d.doctor_qualification from doctor d\r\n" + 
 				"join division_state ds on d.division_state_id=ds.division_state_id\r\n" + 
-				"join user_doctor us on d.doctor_id=us.doctor_id\r\n" + 
-				"where ds.headquarter_id="+headquarter_id+" and us.user_id="+stateId;
+				"join user_doctor ud on d.doctor_id=ud.doctor_id\r\n" + 
+				"where ds.headquarter_id="+headquarter_id+" and ud.user_id="+userId;
 		}
 		else {
 			qry = "select distinct(d.doctor_id),d.doctor_name,d.doctor_speciality,d.doctor_qualification from doctor d\r\n" + 
