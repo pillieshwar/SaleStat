@@ -268,7 +268,28 @@ Highcharts.chart('container2', {
         	
         	
         	]
-    },</c:forEach> ]
+    },</c:forEach> 
+    {
+    	name: 'TOTAL',
+        data: [
+
+        	
+        	${individualDoctorTotalSaleDto.tot_jan_sale},
+        	${individualDoctorTotalSaleDto.tot_feb_sale},
+        	${individualDoctorTotalSaleDto.tot_mar_sale},
+        	${individualDoctorTotalSaleDto.tot_apr_sale},
+        	${individualDoctorTotalSaleDto.tot_may_sale},
+        	${individualDoctorTotalSaleDto.tot_jun_sale},
+        	${individualDoctorTotalSaleDto.tot_jul_sale},
+        	${individualDoctorTotalSaleDto.tot_aug_sale},
+        	${individualDoctorTotalSaleDto.tot_sep_sale},
+        	${individualDoctorTotalSaleDto.tot_oct_sale},
+        	${individualDoctorTotalSaleDto.tot_nov_sale},
+        	${individualDoctorTotalSaleDto.tot_dec_sale}
+        	
+        	
+        	]
+    }]
 });
 </script>
 

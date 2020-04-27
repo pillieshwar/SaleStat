@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.javatechie.spring.orm.api.dao.DoctorDao;
 import com.javatechie.spring.orm.api.dto.GetIndividualDoctorSaleDto;
+import com.javatechie.spring.orm.api.dto.GetIndividualDoctorTotalSaleDto;
 import com.javatechie.spring.orm.api.dto.LocationDto;
 import com.javatechie.spring.orm.api.dto.StateDoctorBusinessDto;
 
@@ -42,8 +43,48 @@ public class DoctorController {
     public ModelAndView individualDoctorBusinessInfo(@RequestParam("dr_id") String dr_id, Model model){
 		System.out.println("dr_id : " + dr_id);
 		List<GetIndividualDoctorSaleDto> individualDoctorSaleList = doctorDao.getIndividualDoctorSaleList(dr_id);
-		
+		 float tot_jan_sale=0;
+		 float tot_feb_sale=0;
+		 float tot_mar_sale=0;
+		 float tot_apr_sale=0;
+		 float tot_may_sale=0;
+		 float tot_jun_sale=0;
+		 float tot_jul_sale=0;
+		 float tot_aug_sale=0;
+		 float tot_sep_sale=0;
+		 float tot_oct_sale=0;
+		 float tot_nov_sale=0;
+		 float tot_dec_sale=0;
+		for(GetIndividualDoctorSaleDto individualDoctorTotalSaleDto : individualDoctorSaleList)
+		{
+			tot_jan_sale = tot_jan_sale + individualDoctorTotalSaleDto.getJan_sale();
+			tot_feb_sale = tot_feb_sale + individualDoctorTotalSaleDto.getFeb_sale();
+			tot_mar_sale = tot_mar_sale + individualDoctorTotalSaleDto.getMar_sale();
+			tot_apr_sale = tot_apr_sale + individualDoctorTotalSaleDto.getApr_sale();
+			tot_may_sale = tot_may_sale + individualDoctorTotalSaleDto.getMay_sale();
+			tot_jun_sale = tot_jun_sale + individualDoctorTotalSaleDto.getJun_sale();
+			tot_jul_sale = tot_jul_sale + individualDoctorTotalSaleDto.getJul_sale();
+			tot_aug_sale = tot_aug_sale + individualDoctorTotalSaleDto.getAug_sale();
+			tot_sep_sale = tot_sep_sale + individualDoctorTotalSaleDto.getSep_sale();
+			tot_oct_sale = tot_oct_sale + individualDoctorTotalSaleDto.getOct_sale();
+			tot_nov_sale = tot_nov_sale + individualDoctorTotalSaleDto.getNov_sale();
+			tot_dec_sale = tot_dec_sale + individualDoctorTotalSaleDto.getDec_sale();
+		}
+		GetIndividualDoctorTotalSaleDto getIndividualDoctorTotalSaleDto = new GetIndividualDoctorTotalSaleDto();
+		getIndividualDoctorTotalSaleDto.setTot_jan_sale(tot_jan_sale);
+		getIndividualDoctorTotalSaleDto.setTot_feb_sale(tot_feb_sale);
+		getIndividualDoctorTotalSaleDto.setTot_mar_sale(tot_mar_sale);
+		getIndividualDoctorTotalSaleDto.setTot_apr_sale(tot_apr_sale);
+		getIndividualDoctorTotalSaleDto.setTot_may_sale(tot_may_sale);
+		getIndividualDoctorTotalSaleDto.setTot_jun_sale(tot_jun_sale);
+		getIndividualDoctorTotalSaleDto.setTot_jul_sale(tot_jul_sale);
+		getIndividualDoctorTotalSaleDto.setTot_aug_sale(tot_aug_sale);
+		getIndividualDoctorTotalSaleDto.setTot_sep_sale(tot_sep_sale);
+		getIndividualDoctorTotalSaleDto.setTot_oct_sale(tot_oct_sale);
+		getIndividualDoctorTotalSaleDto.setTot_nov_sale(tot_nov_sale);
+		getIndividualDoctorTotalSaleDto.setTot_dec_sale(tot_dec_sale);
 		model.addAttribute("individualDoctorSaleList",individualDoctorSaleList);
+		model.addAttribute("individualDoctorTotalSaleDto",getIndividualDoctorTotalSaleDto);
 		return new ModelAndView("individual_doctor_business_info");
 		
 	}
