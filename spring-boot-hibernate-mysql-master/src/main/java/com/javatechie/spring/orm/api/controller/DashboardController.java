@@ -3,7 +3,6 @@ package com.javatechie.spring.orm.api.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -12,28 +11,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.javatechie.spring.orm.api.dao.DashboardDao;
 import com.javatechie.spring.orm.api.dao.LocationDao;
-import com.javatechie.spring.orm.api.dao.StateDao;
-import com.javatechie.spring.orm.api.dto.AddDoctorDto;
-import com.javatechie.spring.orm.api.dto.AddStateDataDto;
-import com.javatechie.spring.orm.api.dto.HeadquarterListDto;
 import com.javatechie.spring.orm.api.dto.LocationDto;
-import com.javatechie.spring.orm.api.model.Division;
-import com.javatechie.spring.orm.api.model.State;
+import com.javatechie.spring.orm.api.model.state;
 
 @Controller
 public class DashboardController {
 
 	@Autowired
 	private LocationDao locationDao;
-
-	@Autowired
-	private StateDao stateDao;
 
 	@Autowired
 	private DashboardDao dashboardDao;
@@ -44,8 +34,7 @@ public class DashboardController {
 		model.addAttribute("location", location);
         String state_sessionid =  (String) request.getSession().getAttribute("state_sessionid");
         int state = Integer.parseInt(state_sessionid);
-        System.out.println("state_id :-------> " + state);
-		List<State> stateDropdownList = dashboardDao.stateDropdown1(state);
+		List<state> stateDropdownList = dashboardDao.stateDropdown1(state);
 		model.addAttribute("stateDropdownList", stateDropdownList);
 		return new ModelAndView("dashboard");
 	}
@@ -53,9 +42,9 @@ public class DashboardController {
 
 	@RequestMapping(value = "/state_dropdown_data", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public List<State> stateDropdown(@RequestBody State statedropdownjson, Model model) {
+	public List<state> stateDropdown(@RequestBody state statedropdownjson, Model model) {
 		System.out.println("inside ");
-		List<State> stateDropdownList = dashboardDao.stateDropdown(statedropdownjson);
+		List<state> stateDropdownList = dashboardDao.stateDropdown(statedropdownjson);
 		model.addAttribute("stateDropdownList", stateDropdownList);
 		return stateDropdownList;
 	}

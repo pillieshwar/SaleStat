@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.javatechie.spring.orm.api.model.Person;
+import com.javatechie.spring.orm.api.model.person;
 
 @Repository
 @Transactional
@@ -17,18 +17,18 @@ public class PersonDao {
 	@Autowired
 	private SessionFactory factory;
 
-	public void savePerson(Person person) {
+	public void savePerson(person person) {
 		getSession().save(person);
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Person> getFewPersons() {
+	public List<person> getFewPersons() {
 		return getSession().createSQLQuery("select * from person where id<2").list();
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Person> getPersons() {
-		return getSession().createCriteria(Person.class).list();
+	public List<person> getPersons() {
+		return getSession().createCriteria(person.class).list();
 	}
 
 	private Session getSession() {

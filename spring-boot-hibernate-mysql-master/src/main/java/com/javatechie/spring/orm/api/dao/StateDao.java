@@ -10,9 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.javatechie.spring.orm.api.model.Division;
-import com.javatechie.spring.orm.api.model.Headquarter;
-import com.javatechie.spring.orm.api.model.State;
+import com.javatechie.spring.orm.api.model.headquarter;
+import com.javatechie.spring.orm.api.model.state;
 
 @Repository
 @Transactional
@@ -21,26 +20,26 @@ public class StateDao {
 	@Autowired
 	private SessionFactory factory;
 
-	public Serializable saveState(State state) {
+	public Serializable saveState(state state) {
 		Serializable ret = getSession().save(state);
 		return ret;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<State> getStateList() {
-		return getSession().createCriteria(State.class).list();
+	public List<state> getStateList() {
+		return getSession().createCriteria(state.class).list();
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<State> getUserStateList(String state_sessionid) {
-		
+	public List<state> getUserStateList(String state_sessionid) {
+
 		int stateId = Integer.parseInt(state_sessionid);
-		String qry="select * from state where state_id="+ stateId;
-		SQLQuery sqlQuery = getSession().createSQLQuery(qry); 
-		sqlQuery.addEntity(State.class);
+		String qry = "select * from state where state_id=" + stateId;
+		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
+		sqlQuery.addEntity(state.class);
 		return sqlQuery.list();
 	}
-	
+
 	private Session getSession() {
 		Session session = factory.getCurrentSession();
 		if (session == null) {
@@ -49,11 +48,12 @@ public class StateDao {
 		return session;
 	}
 
-	public List<Headquarter> getUserHeadquarterList(String headquarter_sessionid) {
+	@SuppressWarnings("unchecked")
+	public List<headquarter> getUserHeadquarterList(String headquarter_sessionid) {
 		int headquarterId = Integer.parseInt(headquarter_sessionid);
-		String qry="select * from headquarter where headquarter_id="+ headquarterId;
-		SQLQuery sqlQuery = getSession().createSQLQuery(qry); 
-		sqlQuery.addEntity(Headquarter.class);
+		String qry = "select * from headquarter where headquarter_id=" + headquarterId;
+		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
+		sqlQuery.addEntity(headquarter.class);
 		return sqlQuery.list();
 	}
 }

@@ -9,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.javatechie.spring.orm.api.dto.AddStateDataDto;
-import com.javatechie.spring.orm.api.model.Headquarter;
-import com.javatechie.spring.orm.api.model.State;
+import com.javatechie.spring.orm.api.model.state;
 
 @Repository
 @Transactional
@@ -34,17 +32,18 @@ public class DashboardDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<State> stateDropdown(State statedropdownjson) {
+	public List<state> stateDropdown(state statedropdownjson) {
 		System.out.println("statedropdown : " + statedropdownjson.getState_id());
 		String qry = "select * from state where state_id=" + statedropdownjson.getState_id();
 		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
-		sqlQuery.addEntity(State.class);
+		sqlQuery.addEntity(state.class);
 		return sqlQuery.list();
 	}
 
-	public List<State> stateDropdown1(int state_id) {
+	@SuppressWarnings("unchecked")
+	public List<state> stateDropdown1(int state_id) {
 		String qry = "";
-		
+
 		if (state_id == 9999) {
 			qry = "select * from state";
 		} else {
@@ -52,7 +51,7 @@ public class DashboardDao {
 		}
 
 		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
-		sqlQuery.addEntity(State.class);
+		sqlQuery.addEntity(state.class);
 		return sqlQuery.list();
 	}
 

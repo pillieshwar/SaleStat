@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.javatechie.spring.orm.api.model.Division;
+import com.javatechie.spring.orm.api.model.division;
 
 @Repository
 @Transactional
@@ -27,12 +27,12 @@ public class DivisionDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Division> getDivisionList(String division_sessionid) {
+	public List<division> getDivisionList(String division_sessionid) {
 		
 		int divisionId = Integer.parseInt(division_sessionid);
 		String qry="select * from division where division_id="+ divisionId;
 		SQLQuery sqlQuery = getSession().createSQLQuery(qry); 
-		sqlQuery.addEntity(Division.class);
+		sqlQuery.addEntity(division.class);
 		return sqlQuery.list();
 	}
 }

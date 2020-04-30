@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.javatechie.spring.orm.api.dao.LoginDao;
 import com.javatechie.spring.orm.api.dto.LoginDto;
-import com.javatechie.spring.orm.api.dto.LoginLocalStorageDto;
-import com.javatechie.spring.orm.api.model.Login;
 
 @Controller
 public class LoginController {
@@ -59,6 +57,8 @@ public class LoginController {
 			user_sessionid = strArray[5].trim();
 			System.out.println("Element " + strArray[6]);
 		}
+		int int_state_sessionid = Integer.parseInt(state_sessionid);
+		request.getSession().setAttribute("int_state_sessionid", int_state_sessionid);
 		request.getSession().setAttribute("division_sessionid", division_sessionid);
 		request.getSession().setAttribute("state_sessionid", state_sessionid);
 		request.getSession().setAttribute("headquarter_sessionid", headquarter_sessionid);

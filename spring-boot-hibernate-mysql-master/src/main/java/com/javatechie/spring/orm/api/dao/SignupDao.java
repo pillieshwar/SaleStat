@@ -6,8 +6,9 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.javatechie.spring.orm.api.model.Login;
-import com.javatechie.spring.orm.api.model.User;
+import com.javatechie.spring.orm.api.model.user;
 
 @Repository
 @Transactional
@@ -20,8 +21,10 @@ public class SignupDao {
 		getSession().save(login);
 	}
 
-	public String signupUser(User signup) {
-		String qry = "insert into user values(null,"+signup.getRole_id()+",'"+signup.getUsername()+"','"+signup.getPassword()+"',"+signup.getDivision_id()+","+signup.getState_id()+","+signup.getHeadquarter_id()+","+signup.getDoctor_id()+","+signup.getReporting_to()+")";
+	public String signupUser(user signup) {
+		String qry = "insert into user values(null," + signup.getRole_id() + ",'" + signup.getUsername() + "','"
+				+ signup.getPassword() + "'," + signup.getDivision_id() + "," + signup.getState_id() + ","
+				+ signup.getHeadquarter_id() + "," + signup.getDoctor_id() + "," + signup.getReporting_to() + ")";
 		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
 		int s = sqlQuery.executeUpdate();
 		System.out.println(s);

@@ -2,18 +2,16 @@ package com.javatechie.spring.orm.api.dao;
 
 import java.util.List;
 
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.javatechie.spring.orm.api.dto.UserDoctorDto;
-import com.javatechie.spring.orm.api.model.Division;
-import com.javatechie.spring.orm.api.model.Doctor;
-import com.javatechie.spring.orm.api.model.Role;
-import com.javatechie.spring.orm.api.model.User;
+import com.javatechie.spring.orm.api.model.division;
+import com.javatechie.spring.orm.api.model.doctor;
+import com.javatechie.spring.orm.api.model.role;
+import com.javatechie.spring.orm.api.model.user;
 
 @Repository
 @Transactional
@@ -22,31 +20,21 @@ public class RoleDao {
 	@Autowired
 	private SessionFactory factory;
 
-//	public Serializable saveState(State state) {
-//		Serializable ret = getSession().save(state);
-//		return ret;
-//	}
 	@SuppressWarnings("unchecked")
-	public List<Division> getDivisionList() {
-		return getSession().createCriteria(Division.class).list();
+	public List<division> getDivisionList() {
+		return getSession().createCriteria(division.class).list();
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<Role> getRoleList() {
-		return getSession().createCriteria(Role.class).list();
+	public List<role> getRoleList() {
+		return getSession().createCriteria(role.class).list();
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<User> getUserList() {
-		return getSession().createCriteria(User.class).list();
+	public List<user> getUserList() {
+		return getSession().createCriteria(user.class).list();
 	}
-	
-	/*@SuppressWarnings("unchecked")
-	public List<UserDoctorDto> getUserList() {
-		String qry = "select user_id,username from user";
-		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
-		return sqlQuery.list();
-	}*/
+
 	private Session getSession() {
 		Session session = factory.getCurrentSession();
 		if (session == null) {
@@ -56,8 +44,8 @@ public class RoleDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Doctor> getDoctorList() {
-		return getSession().createCriteria(Doctor.class).list();
+	public List<doctor> getDoctorList() {
+		return getSession().createCriteria(doctor.class).list();
 	}
-	
+
 }

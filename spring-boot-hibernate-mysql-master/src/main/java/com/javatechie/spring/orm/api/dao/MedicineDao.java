@@ -13,15 +13,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.javatechie.spring.orm.api.dto.DynamicMedicineDropdownDto;
-import com.javatechie.spring.orm.api.dto.GetAllDoctorsDto;
 import com.javatechie.spring.orm.api.dto.GetAllMedicinesDto;
-import com.javatechie.spring.orm.api.dto.GetUserDoctorMedicineDto;
-import com.javatechie.spring.orm.api.dto.HeadquarterListDto;
-import com.javatechie.spring.orm.api.dto.User_DoctorDto;
-import com.javatechie.spring.orm.api.model.Headquarter;
-import com.javatechie.spring.orm.api.model.Medicine;
-import com.javatechie.spring.orm.api.model.Role;
-import com.javatechie.spring.orm.api.model.Sponsorship;
+import com.javatechie.spring.orm.api.model.medicine;
+import com.javatechie.spring.orm.api.model.role;
+import com.javatechie.spring.orm.api.model.sponsorship;
 
 @Repository
 @Transactional
@@ -30,7 +25,7 @@ public class MedicineDao {
 	@Autowired
 	private SessionFactory factory;
 
-	public void saveMedicine(Medicine medicinejson) {
+	public void saveMedicine(medicine medicinejson) {
 		String qry = "insert into medicine values(null,'" + medicinejson.getMedicine_name() + "',"
 				+ medicinejson.getMedicine_price() + ")";
 		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
@@ -47,7 +42,7 @@ public class MedicineDao {
 		return session;
 	}
 
-	public void saveSponsorship(Sponsorship sponsorshipjson) {
+	public void saveSponsorship(sponsorship sponsorshipjson) {
 		String qry = "insert into sponsorship values(null,'" + sponsorshipjson.getSponsorship_nature() + "'" + ")";
 		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
 		int s = sqlQuery.executeUpdate();
@@ -55,7 +50,7 @@ public class MedicineDao {
 		System.out.println(s);
 	}
 
-	public void saveRole(Role rolejson) {
+	public void saveRole(role rolejson) {
 
 		String qry = "insert into role values(null,'" + rolejson.getRole_name() + "','" + rolejson.getRole_abbr()
 				+ "')";
@@ -66,14 +61,15 @@ public class MedicineDao {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Medicine> getUserDoctorMedicineList(int doctorId) {
+	public List<medicine> getUserDoctorMedicineList(int doctorId) {
 		String qry = "select * from medicine join (select medicine_id from doctor_medicine where doctor_id=" + doctorId
 				+ ") as ref_medicine_id on ref_medicine_id.medicine_id=medicine.medicine_id;";
 		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
-		sqlQuery.addEntity(Medicine.class);
+		sqlQuery.addEntity(medicine.class);
 		return sqlQuery.list();
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<GetAllMedicinesDto> getAllMedicinesList() {
 		String qry = "select medicine_id, medicine_name from medicine;";
 		SQLQuery sqlQuery = (SQLQuery) getSession().createSQLQuery(qry)
@@ -83,8 +79,12 @@ public class MedicineDao {
 		return sqlQuery.list();
 	}
 
-	public List<Medicine> dynamicMedicineDropdown(DynamicMedicineDropdownDto medicinedropdownjson) {
-		List<Medicine> x = getSession().createSQLQuery("select m.medicine_id, m.medicine_name, m.medicine_price from medicine as m join (select medicine_id from doctor_medicine where doctor_id="  + medicinedropdownjson.getDoctor_id() + ") as ref_medicine_id on ref_medicine_id.medicine_id=m.medicine_id;")
+	@SuppressWarnings("unchecked")
+	public List<medicine> dynamicMedicineDropdown(DynamicMedicineDropdownDto medicinedropdownjson) {
+		List<medicine> x = getSession().createSQLQuery(
+				"select m.medicine_id, m.medicine_name, m.medicine_price from medicine as m join (select medicine_id from doctor_medicine where doctor_id="
+						+ medicinedropdownjson.getDoctor_id()
+						+ ") as ref_medicine_id on ref_medicine_id.medicine_id=m.medicine_id;")
 				.list();
 		return x;
 

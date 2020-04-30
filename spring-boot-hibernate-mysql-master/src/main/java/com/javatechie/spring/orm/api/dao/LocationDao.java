@@ -9,9 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.javatechie.spring.orm.api.dto.HeadquarterListDto;
 import com.javatechie.spring.orm.api.dto.LocationDto;
-import com.javatechie.spring.orm.api.model.Location;
-import com.javatechie.spring.orm.api.model.Person;
+import com.javatechie.spring.orm.api.model.headquarter;
+import com.javatechie.spring.orm.api.model.location;
 
 @Repository
 @Transactional
@@ -28,16 +29,17 @@ public class LocationDao {
 		return getSession().createSQLQuery("select * from Location").list();
 	}*/
 	
+	@SuppressWarnings("unchecked")
 	public List<LocationDto> getAllLocations() {
 	String qry = "select * from Location";
 	SQLQuery sqlQuery = getSession().createSQLQuery(qry);
 
-	sqlQuery.addEntity(Location.class);
+	sqlQuery.addEntity(location.class);
 
 	return sqlQuery.list();
 	}
 	
-	public List<LocationDto> getStateSalesMonth(String month) {
+	public List<HeadquarterListDto> getStateSalesMonth(String month) {
 		System.out.println("query---------->"+month);
 		String qry="";
 		if(month.equals("01"))
@@ -77,26 +79,26 @@ public class LocationDao {
 							}
 							else
 		{
-			qry = "select * from Location";
+			qry = "select * from headquarter where state_id="+month;
 			System.out.println("outside jan");
 		}
 		
 		SQLQuery sqlQuery = getSession().createSQLQuery(qry);
 
-		sqlQuery.addEntity(Location.class);
+		sqlQuery.addEntity(headquarter.class);
 
 		return sqlQuery.list();
 		}
 
 	@SuppressWarnings("unchecked")
 	public List<LocationDto> getLocations() {
-		return getSession().createCriteria(Location.class).list();
+		return getSession().createCriteria(location.class).list();
 	}
-	public void saveLocation(Location location) {
+	public void saveLocation(location location) {
 		getSession().save(location);
 	}
 	
-	public void insertLocation(Location location)
+	public void insertLocation(location location)
 	{
 		String qry = "insert into Location values(null,'"+location.getState()+"','"+location.getRegion()+"')";
 		SQLQuery sqlQuery = getSession().createSQLQuery(qry);

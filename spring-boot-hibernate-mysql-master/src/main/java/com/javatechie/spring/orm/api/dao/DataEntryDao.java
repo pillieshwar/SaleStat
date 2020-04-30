@@ -3,14 +3,11 @@ package com.javatechie.spring.orm.api.dao;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.transform.Transformers;
-import org.hibernate.type.IntegerType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.javatechie.spring.orm.api.dto.AddDataEntryDto;
-import com.javatechie.spring.orm.api.dto.GetAllDoctorsDto;
 
 @Repository
 @Transactional
