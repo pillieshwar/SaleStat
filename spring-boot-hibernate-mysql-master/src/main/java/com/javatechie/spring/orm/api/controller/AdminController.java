@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.javatechie.spring.orm.api.dao.AdminDao;
 import com.javatechie.spring.orm.api.dao.DashboardDao;
 import com.javatechie.spring.orm.api.dao.DoctorDao;
 import com.javatechie.spring.orm.api.dao.HeadquarterDao;
@@ -26,6 +27,7 @@ import com.javatechie.spring.orm.api.dto.DivisionStateDto;
 import com.javatechie.spring.orm.api.dto.DynamicMedicineDropdownDto;
 import com.javatechie.spring.orm.api.dto.GetAllDoctorsDto;
 import com.javatechie.spring.orm.api.dto.GetAllMedicinesDto;
+import com.javatechie.spring.orm.api.dto.GetDoctorMedicineDto;
 import com.javatechie.spring.orm.api.model.division;
 import com.javatechie.spring.orm.api.model.doctor;
 import com.javatechie.spring.orm.api.model.headquarter;
@@ -58,12 +60,19 @@ public class AdminController {
 
 	@Autowired
 	private DashboardDao dashboardDao;
+	
+	@Autowired
+	private AdminDao adminDao;
 
 	@RequestMapping("/add_medicine") // redirects to add new medicine page
 	public String addMedicine(Model model, HttpServletRequest request) {
 		int int_state_sessionid = (Integer) request.getSession().getAttribute("int_state_sessionid");
 		List<state> stateDropdownList = dashboardDao.stateDropdown1(int_state_sessionid);
 		model.addAttribute("stateDropdownList", stateDropdownList);
+		
+		List<medicine> medicineList = adminDao.getMedicineList();
+		model.addAttribute("medicineList", medicineList);
+		
 		return ("add_medicine");
 	}
 
@@ -81,9 +90,12 @@ public class AdminController {
 
 	@RequestMapping("/add_sponsorship") // redirects to add new sponsorship page
 	public String addSponsorship(Model model, HttpServletRequest request) {
+		
+		List<sponsorship> sponsorshipList = adminDao.getSponsorshipList();
 		int int_state_sessionid = (Integer) request.getSession().getAttribute("int_state_sessionid");
 		List<state> stateDropdownList = dashboardDao.stateDropdown1(int_state_sessionid);
 		model.addAttribute("stateDropdownList", stateDropdownList);
+		model.addAttribute("sponsorshipList", sponsorshipList);
 		return ("add_sponsorship");
 	}
 
@@ -92,6 +104,9 @@ public class AdminController {
 		int int_state_sessionid = (Integer) request.getSession().getAttribute("int_state_sessionid");
 		List<state> stateDropdownList = dashboardDao.stateDropdown1(int_state_sessionid);
 		model.addAttribute("stateDropdownList", stateDropdownList);
+		
+		List<state> stateList = adminDao.getStateList();
+		model.addAttribute("stateList", stateList);
 		return ("add_state");
 	}
 
@@ -114,6 +129,9 @@ public class AdminController {
 		int int_state_sessionid = (Integer) request.getSession().getAttribute("int_state_sessionid");
 		List<state> stateDropdownList = dashboardDao.stateDropdown1(int_state_sessionid);
 		model.addAttribute("stateDropdownList", stateDropdownList);
+		
+		List<role> roleList = adminDao.getRoleList();
+		model.addAttribute("roleList", roleList);
 		return ("add_role");
 	}
 
@@ -218,6 +236,10 @@ public class AdminController {
 
 		List<GetAllMedicinesDto> medicineList = medicineDao.getAllMedicinesList();
 		model.addAttribute("medicineList", medicineList);
+		
+		List<GetDoctorMedicineDto> doctorMedicineList = adminDao.getDoctorMedicineList();
+		model.addAttribute("doctorMedicineList", doctorMedicineList);
+		
 		return ("doctor_medicine");
 	}
 

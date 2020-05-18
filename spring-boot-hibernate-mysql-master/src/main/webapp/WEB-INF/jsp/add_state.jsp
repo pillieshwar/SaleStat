@@ -41,6 +41,18 @@
       Author: BootstrapMade
       Author URL: https://bootstrapmade.com
     ======================================================= -->
+<style>
+#myInput {
+	background-image: url('/img/search-icon.jpg');
+	background-position: 10px 10px;
+	background-repeat: no-repeat;
+	width: 100%;
+	font-size: 16px;
+	padding: 6px 20px 6px 40px;
+	border: 1px solid black;
+	margin-bottom: 12px;
+}
+</style>
 </head>
 
 <body>
@@ -53,7 +65,7 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h3 class="page-header">
-							<i class="fa fa-user-md"></i> Profile
+							<i class="fa fa-user-md"></i> STATES
 						</h3>
 						<ol class="breadcrumb">
 							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
@@ -83,48 +95,43 @@
 												</div>
 											</div>
 
-											<div class="row">
-												<div class="bio-row">
-													<p>
-														<span>First Name </span>: Jenifer
-													</p>
-												</div>
-												<div class="bio-row">
-													<p>
-														<span>Last Name </span>: Smith
-													</p>
-												</div>
-												<div class="bio-row">
-													<p>
-														<span>Birthday</span>: 27 August 1987
-													</p>
-												</div>
-												<div class="bio-row">
-													<p>
-														<span>Country </span>: United
-													</p>
-												</div>
-												<div class="bio-row">
-													<p>
-														<span>Occupation </span>: UI Designer
-													</p>
-												</div>
-												<div class="bio-row">
-													<p>
-														<span>Email </span>:jenifer@mailname.com
-													</p>
-												</div>
-												<div class="bio-row">
-													<p>
-														<span>Mobile </span>: (+6283) 456 789
-													</p>
-												</div>
-												<div class="bio-row">
-													<p>
-														<span>Phone </span>: (+021) 956 789123
-													</p>
+											<div id="tab-description" class="row tabcontent">
+												<div class="col-lg-12">
+													<section class="panel">
+														<header style="background-color: #394a59; color: white"
+															class="panel-heading"> ALL STATES </header>
+														<input type="text" id="myInput" onkeyup="searchFunction()"
+															placeholder="Search by State name"
+															title="Type in a name">
+														<div class="table-responsive text-nowrap">
+															<table id="myTable" class="table table-striped">
+																<thead>
+																	<tr>
+																		<th>Sr No.</th>
+																		<th>State Name</th>
+																		<th>Entry Date</th>
+																		<th>Entered By</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<c:forEach items="${stateList}" varStatus="loopCount"
+																		var="stateList">
+																		<tr>
+																			<td>${loopCount.count}</td>
+																			<td>${stateList.state_name}</td>
+																			<td class="text-info"></td>
+																			<td class="text-info">ADMIN</td>
+
+																		</tr>
+																	</c:forEach>
+
+																</tbody>
+															</table>
+														</div>
+													</section>
 												</div>
 											</div>
+
 
 											<div class="form-group">
 												<div class="col-lg-offset-2 col-lg-10">
@@ -175,6 +182,30 @@
 		$(".knob").knob();
 	</script>
 
+<script>
+		function searchFunction() {
+			var input, filter, table, tr, td, i, txtValue, txtValue2;
+			input = document.getElementById("myInput");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("myTable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[1];
+				td2 = tr[i].getElementsByTagName("td")[2];
+				if (td || td2) {
+					txtValue = td.textContent || td.innerText;
+					txtValue2 = td2.textContent || td2.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1
+							|| txtValue2.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
+	</script>
+	
 	<script>
 		function addState() {
 			var statename = document.getElementById("state_name").value
