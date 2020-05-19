@@ -28,6 +28,7 @@ import com.javatechie.spring.orm.api.dto.DynamicMedicineDropdownDto;
 import com.javatechie.spring.orm.api.dto.GetAllDoctorsDto;
 import com.javatechie.spring.orm.api.dto.GetAllMedicinesDto;
 import com.javatechie.spring.orm.api.dto.GetDoctorMedicineDto;
+import com.javatechie.spring.orm.api.dto.GetHeadquarterDto;
 import com.javatechie.spring.orm.api.model.division;
 import com.javatechie.spring.orm.api.model.doctor;
 import com.javatechie.spring.orm.api.model.headquarter;
@@ -121,6 +122,10 @@ public class AdminController {
 
 		List<division> divisionList = roleDao.getDivisionList();
 		model.addAttribute("divisionList", divisionList);
+		
+		List<GetHeadquarterDto> headquarterList = adminDao.getHeadquarterList();
+		model.addAttribute("headquarterList", headquarterList);
+		
 		return ("add_headquarter");
 	}
 

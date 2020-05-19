@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.javatechie.spring.orm.api.dto.GetDoctorMedicineDto;
+import com.javatechie.spring.orm.api.dto.GetHeadquarterDto;
 import com.javatechie.spring.orm.api.model.medicine;
 import com.javatechie.spring.orm.api.model.role;
 import com.javatechie.spring.orm.api.model.sponsorship;
@@ -61,6 +62,16 @@ public class AdminDao {
 				.setResultTransformer(Transformers.aliasToBean(GetDoctorMedicineDto.class));
 		sqlQuery.addScalar("doctor_name", StringType.INSTANCE);
 		sqlQuery.addScalar("medicines", StringType.INSTANCE);
+		return sqlQuery.list();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<GetHeadquarterDto> getHeadquarterList() {
+		String qry = "select distinct(state_name), GROUP_CONCAT(headquarter_name) as headquarters  from division_state as ds join state as s on ds.state_id=s.state_id join headquarter as h on ds.headquarter_id=h.headquarter_id group by s.state_id;";
+		SQLQuery sqlQuery = (SQLQuery) getSession().createSQLQuery(qry)
+				.setResultTransformer(Transformers.aliasToBean(GetHeadquarterDto.class));
+		sqlQuery.addScalar("state_name", StringType.INSTANCE);
+		sqlQuery.addScalar("headquarters", StringType.INSTANCE);
 		return sqlQuery.list();
 	}
 }

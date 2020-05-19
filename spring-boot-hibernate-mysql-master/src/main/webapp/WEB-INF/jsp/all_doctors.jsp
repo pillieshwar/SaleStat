@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <head>
 <meta charset="utf-8">
@@ -13,116 +14,136 @@
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
 	rel="stylesheet" />
-<title>Medicines</title>
+<title>All Doctors</title>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@include file="header.jsp" %>
+<%@include file="header.jsp"%>
 <style>
+th:first-child, td:first-child {
+	position: sticky;
+	left: 0px;
+	background-color: white;
+}
+
 #myInput {
 	background-image: url('/img/search-icon.jpg');
-	background-position: 10px 16px;
+	background-position: 10px 10px;
 	background-repeat: no-repeat;
 	width: 100%;
 	font-size: 16px;
-	padding: 12px 20px 12px 40px;
-	border: 1px solid #ddd;
+	padding: 6px 20px 6px 40px;
+	border: 1px solid black;
 	margin-bottom: 12px;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: black;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	padding: 12px 16px;
+	z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
 }
 </style>
 </head>
 <body>
 
-		<!--main content start-->
-		<section id="main-content">
-			<section class="wrapper">
-				<div class="row">
-					<div class="col-lg-12">
-						<h3 class="page-header">
-							<i class="fa fa-table"></i> Doctors
-						</h3>
-						<ol class="breadcrumb">
-							<li><i class="fa fa-home"></i><a href="dashboard">Dashboard</a></li>
-							<li><i class="fa fa-table"></i>Doctors</li>
-<!-- 							<li><i class="fa fa-th-list"></i>Basic Table</li> -->
-						</ol>
-					</div>
+	<!--main content start-->
+	<section id="main-content">
+		<section class="wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<h3 class="page-header">
+						<i class="fa fa-table"></i> Doctors
+					</h3>
+					<ol class="breadcrumb">
+						<li><i class="fa fa-home"></i><a href="dashboard">Home</a></li>
+						<li><i class="fa fa-table"></i>Doctors</li>
+						<!-- 							<li><i class="fa fa-th-list"></i>Basic Table</li> -->
+					</ol>
 				</div>
-				<!-- page start-->
-				
+			</div>
+			<!-- page start-->
 
-				<input type="text" id="myInput" onkeyup="myFunction()"
-					placeholder="Search for names.." title="Type in a name">
+			<div id="tab-description" style="padding-top: 6px"
+				class="row tabcontent">
+				<div class="col-lg-12">
+					<section class="panel">
+						<header style="background-color: #394a59; color: white;"
+							class="panel-heading"> ALL DOCTORS INFO </header>
+						<input type="text" id="myInput" onkeyup="searchFunction()"
+							placeholder="Search "
+							title="Type in a name">
+						<div class="table-responsive text-nowrap">
+							<table id="myTable" class="table table-striped">
+								<thead>
+									<tr>
+										<th>Sr No.</th>
+										<th>Doctor</th>
+										<th>State</th>
+										<th>Headquarter</th>
+										<th>Brand Targeted</th>
+										<th>Associated MR</th>
+										<th>Division</th>
+										<th>Doctor Speciality</th>
+										<th>ASM Name</th>
+										<th>Amount</th>
+										<th>Value business at time of Disbursement</th>
+										<th>Date of Activity Done</th>
+										<th>Type of Sponsorship</th>
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${sidebarAllDoctorsLists}"
+										varStatus="loopCount" var="sidebarAllDoctorsLists">
+										<tr>
+											<td>${loopCount.count}</td>
+											<td><a class="" href="individual_doctor_business_info?dr_id=${sidebarAllDoctorsLists.doctor_id}">${sidebarAllDoctorsLists.doctor_name}</a></td>
+											<td>${sidebarAllDoctorsLists.state}</td>
+											<td>${sidebarAllDoctorsLists.headquarter}</td>
+											<c:set var="msg" value="${sidebarAllDoctorsLists.medicines}" />
+											<c:set var="arrayofmsg" value="${fn:split(msg,',')}" />
+											<td style="max-width: 150px;">
+												<div class="dropdown ">
+													<span class="text-success">VIEW</span>
+													<div class="dropdown-content">
+														<c:forEach items="${arrayofmsg}" var="medicineList">
+															<p class="badge bg-success">${medicineList}</p><br>
+														</c:forEach>
+													</div>
+												</div>
+											</td>
+											<td>${sidebarAllDoctorsLists.mr}</td>
+											<td>${sidebarAllDoctorsLists.division}</td>
+											<td>${sidebarAllDoctorsLists.doctor_speciality}</td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
+											<td></td>
 
-				<div id="tab-description" class="row tabcontent">
-					<div class="col-lg-12">
-						<section class="panel">
-							<header style="background-color: #7BFD94;" class="panel-heading">
-								SALES EXPECTATION REACHED </header>
+										</tr>
+									</c:forEach>
 
-							<div class="table-responsive text-nowrap">
-								<table id="myTable" class="table table-striped">
-									<thead>
-										<tr>
-											<th>Doctor</th>
-											<th>Region</th>
-											<th>Brand Targeted</th>
-											<th>Amount</th>
-											<th>Value business at time of Disbursement</th>
-											<th>Date of Activity Done</th>
-											<th>Type of Sponsorship</th>
-											<th>ASM Name</th>
-											<th>MR Name</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><a class="" href="individual_doctor_business_info">Kate</td>
-											<td>Moss</td>
-											<td>USA</td>
-											<td>New York City / Warsaw / Lodz / Amsterdam / London /
-												Chicago</td>
-											<td>Web Designer /UX designer / Ul designer / JavaScript
-												Developer</td>
-											<td>23</td>
-											<td>23</td>
-											<td>Rahul</td>
-											<td>Salim</td>
-										</tr>
-										<tr>
-											<td><a class=""
-												href="individual_doctor_business_info.jsp">Kate</td>
-											<td contenteditable='true'>Moss</td>
-											<td>Russia</td>
-											<td>New York City / Warsaw / Lodz / Amsterdam / London /
-												Chicago</td>
-											<td>Web Designer /UX designer / Ul designer / JavaScript
-												Developer</td>
-											<td>23</td>
-											<td>23</td>
-										</tr>
-										<tr>
-											<td><a class=""
-												href="individual_doctor_business_info.jsp">Kate</td>
-											<td>Eshwar</td>
-											<td>India</td>
-											<td>New York City / Warsaw / Lodz / Amsterdam / London /
-												Chicago</td>
-											<td>Web Designer /UX designer / Ul designer / JavaScript
-												Developer</td>
-											<td>23</td>
-											<td>23</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</section>
-					</div>
+								</tbody>
+							</table>
+						</div>
+					</section>
 				</div>
+			</div>
 
-				
-
-			</section>
 		</section>
+	</section>
 	</section>
 
 	<!--main content end-->
@@ -162,7 +183,7 @@
 	</script>
 
 	<script>
-		function myFunction() {
+		function searchFunction() {
 			var input, filter, table, tr, td, i, txtValue, txtValue2;
 			input = document.getElementById("myInput");
 			filter = input.value.toUpperCase();
@@ -171,11 +192,23 @@
 			for (i = 0; i < tr.length; i++) {
 				td = tr[i].getElementsByTagName("td")[1];
 				td2 = tr[i].getElementsByTagName("td")[2];
-				if (td || td2) {
+				td3 = tr[i].getElementsByTagName("td")[3];
+				td4 = tr[i].getElementsByTagName("td")[4];
+				td5 = tr[i].getElementsByTagName("td")[5];
+				td6 = tr[i].getElementsByTagName("td")[6];
+				if (td || td2 || td3 || td4 || td5 || td6) {
 					txtValue = td.textContent || td.innerText;
 					txtValue2 = td2.textContent || td2.innerText;
+					txtValue3 = td3.textContent || td3.innerText;
+					txtValue4 = td4.textContent || td4.innerText;
+					txtValue5 = td5.textContent || td5.innerText;
+					txtValue6 = td6.textContent || td6.innerText;
 					if (txtValue.toUpperCase().indexOf(filter) > -1
-							|| txtValue2.toUpperCase().indexOf(filter) > -1) {
+							|| txtValue2.toUpperCase().indexOf(filter) > -1
+							|| txtValue3.toUpperCase().indexOf(filter) > -1
+							|| txtValue4.toUpperCase().indexOf(filter) > -1
+							|| txtValue5.toUpperCase().indexOf(filter) > -1
+							|| txtValue6.toUpperCase().indexOf(filter) > -1) {
 						tr[i].style.display = "";
 					} else {
 						tr[i].style.display = "none";
@@ -183,6 +216,7 @@
 				}
 			}
 		}
+
 		function stateSort() {
 			var input = document.getElementById('monthpick').value;
 			alert(input);

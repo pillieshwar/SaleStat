@@ -3,6 +3,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="header.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 
 <head>
 <meta charset="utf-8">
@@ -41,6 +43,18 @@
       Author: BootstrapMade
       Author URL: https://bootstrapmade.com
     ======================================================= -->
+        <style>
+#myInput {
+	background-image: url('/img/search-icon.jpg');
+	background-position: 10px 10px;
+	background-repeat: no-repeat;
+	width: 100%;
+	font-size: 16px;
+	padding: 6px 20px 6px 40px;
+	border: 1px solid black;
+	margin-bottom: 12px;
+}
+</style>
 </head>
 
 <body>
@@ -108,49 +122,6 @@
 												</div>
 											</div>
 
-											<div class="row">
-												<div class="bio-row">
-													<p>
-														<span>First Name </span>: Jenifer
-													</p>
-												</div>
-												<div class="bio-row">
-													<p>
-														<span>Last Name </span>: Smith
-													</p>
-												</div>
-												<div class="bio-row">
-													<p>
-														<span>Birthday</span>: 27 August 1987
-													</p>
-												</div>
-												<div class="bio-row">
-													<p>
-														<span>Country </span>: United
-													</p>
-												</div>
-												<div class="bio-row">
-													<p>
-														<span>Occupation </span>: UI Designer
-													</p>
-												</div>
-												<div class="bio-row">
-													<p>
-														<span>Email </span>:jenifer@mailname.com
-													</p>
-												</div>
-												<div class="bio-row">
-													<p>
-														<span>Mobile </span>: (+6283) 456 789
-													</p>
-												</div>
-												<div class="bio-row">
-													<p>
-														<span>Phone </span>: (+021) 956 789123
-													</p>
-												</div>
-											</div>
-
 											<div class="form-group">
 												<div class="col-lg-offset-2 col-lg-10">
 													<button onclick="addHeadquarter()" type="submit"
@@ -159,6 +130,51 @@
 												</div>
 											</div>
 										</form>
+										
+										<div id="tab-description" style="padding-top:6px" class="row tabcontent">
+												<div class="col-lg-12">
+													<section class="panel">
+														<header style="background-color: #394a59; color: white; "
+															class="panel-heading"> DOCTOR & MEDICINE MAPPING </header>
+														<input type="text" id="myInput" onkeyup="searchFunction()"
+															placeholder="Search by Doctor or Medicine name"
+															title="Type in a name">
+														<div class="table-responsive text-nowrap">
+															<table id="myTable" class="table table-striped">
+																<thead>
+																	<tr>
+																		<th>Sr No.</th>
+																		<th>Doctor Name</th>
+																		<th>Prescribed Medicines</th>
+																		<th>Entry Date</th>
+																		<th>Entered By</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<c:forEach items="${headquarterList}" varStatus="loopCount"
+																		var="headquarterList">
+																		<tr>
+																			<td>${loopCount.count}</td>
+																			<td>${headquarterList.state_name}</td>
+																			<c:set var="msg" value="${headquarterList.headquarters}"/>
+																			<c:set var="arrayofmsg" value="${fn:split(msg,',')}"/>
+																			<td width="50%">
+																			<c:forEach items="${arrayofmsg}" var="headquarterList">
+																			<span class="badge bg-info">${headquarterList}</span>
+																			</c:forEach>
+																			</td>
+																			<td class="text-info"></td>
+																			<td>ADMIN</td>
+
+																		</tr>
+																	</c:forEach>
+
+																</tbody>
+															</table>
+														</div>
+													</section>
+												</div>
+											</div>
 									</div>
 								</section>
 							</div>
@@ -200,6 +216,30 @@
 		$(".knob").knob();
 	</script>
 
+<script>
+		function searchFunction() {
+			var input, filter, table, tr, td, i, txtValue, txtValue2;
+			input = document.getElementById("myInput");
+			filter = input.value.toUpperCase();
+			table = document.getElementById("myTable");
+			tr = table.getElementsByTagName("tr");
+			for (i = 0; i < tr.length; i++) {
+				td = tr[i].getElementsByTagName("td")[1];
+				td2 = tr[i].getElementsByTagName("td")[2];
+				if (td || td2) {
+					txtValue = td.textContent || td.innerText;
+					txtValue2 = td2.textContent || td2.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1
+							|| txtValue2.toUpperCase().indexOf(filter) > -1) {
+						tr[i].style.display = "";
+					} else {
+						tr[i].style.display = "none";
+					}
+				}
+			}
+		}
+	</script>
+	
 	<script>
 		function addHeadquarter() {
 			var state_id = document.getElementById("state_name").value;

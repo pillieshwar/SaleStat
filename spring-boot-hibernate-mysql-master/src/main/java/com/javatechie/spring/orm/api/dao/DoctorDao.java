@@ -17,7 +17,9 @@ import com.javatechie.spring.orm.api.dto.AddDoctorDto;
 import com.javatechie.spring.orm.api.dto.AddDoctorMedicineDto;
 import com.javatechie.spring.orm.api.dto.AddUserDoctorDto;
 import com.javatechie.spring.orm.api.dto.GetAllDoctorsDto;
+import com.javatechie.spring.orm.api.dto.GetHeadquarterDto;
 import com.javatechie.spring.orm.api.dto.GetIndividualDoctorSaleDto;
+import com.javatechie.spring.orm.api.dto.GetSidebarAllDoctorsDto;
 import com.javatechie.spring.orm.api.dto.StateDoctorBusinessDto;
 import com.javatechie.spring.orm.api.dto.User_DoctorDto;
 
@@ -159,6 +161,31 @@ public class DoctorDao {
 		sqlQuery.addScalar("oct_sale", FloatType.INSTANCE);
 		sqlQuery.addScalar("nov_sale", FloatType.INSTANCE);
 		sqlQuery.addScalar("dec_sale", FloatType.INSTANCE);
+		return sqlQuery.list();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<GetSidebarAllDoctorsDto> getSidebarAllDoctorsList() {
+		String qry = "select  d.doctor_id, doctor_name, state_name as state, headquarter_name as headquarter,username as mr,GROUP_CONCAT(distinct(medicine_name)) as medicines, division_name as division, doctor_speciality from doctor as d\r\n" + 
+				"join division_state as ds on ds.division_state_id=d.division_state_id\r\n" + 
+				"join state as s on s.state_id=ds.state_id\r\n" + 
+				"join headquarter as h on h.headquarter_id=ds.headquarter_id\r\n" + 
+				"join division as divs on divs.division_id=ds.division_id\r\n" + 
+				"join doctor_medicine as dm on dm.doctor_id=d.doctor_id\r\n" + 
+				"join medicine as m on m.medicine_id=dm.medicine_id\r\n" + 
+				"join user_doctor as ud on ud.doctor_id=d.doctor_id\r\n" + 
+				"join user as u on u.user_id=ud.user_id\r\n" + 
+				"group by d.doctor_id;";
+		SQLQuery sqlQuery = (SQLQuery) getSession().createSQLQuery(qry)
+				.setResultTransformer(Transformers.aliasToBean(GetSidebarAllDoctorsDto.class));
+		sqlQuery.addScalar("doctor_id", IntegerType.INSTANCE);
+		sqlQuery.addScalar("doctor_name", StringType.INSTANCE);
+		sqlQuery.addScalar("state", StringType.INSTANCE);
+		sqlQuery.addScalar("headquarter", StringType.INSTANCE);
+		sqlQuery.addScalar("mr", StringType.INSTANCE);
+		sqlQuery.addScalar("medicines", StringType.INSTANCE);
+		sqlQuery.addScalar("division", StringType.INSTANCE);
+		sqlQuery.addScalar("doctor_speciality", StringType.INSTANCE);
 		return sqlQuery.list();
 	}
 }
