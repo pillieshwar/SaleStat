@@ -38,8 +38,11 @@ public class StateController {
 	 */
 
 	@GetMapping("/state_sales")
-	public String stateSalesMonth(@RequestParam("state") String state, Model model, HttpServletRequest request) {
+	public String stateSalesMonth(@RequestParam("state") String state,@RequestParam("start") String start,@RequestParam("end") String end, Model model, HttpServletRequest request) {
 		System.out.println("state---->" + state);
+		System.out.println("start---->" + start);
+		System.out.println("end---->" + end);
+		
 		List<state> stateList = stateDao.getStateList();
 		model.addAttribute("stateList", stateList);
 
@@ -50,9 +53,9 @@ public class StateController {
 		String headquarter_sessionid = (String) request.getSession().getAttribute("headquarter_sessionid");
 		System.out.println("headquarter_sessionid : " + headquarter_sessionid);
 		int headquarterId = Integer.parseInt(headquarter_sessionid);
-		List<HeadquarterListDto> headquarterList = headquarterDao.headquarterList(state, headquarterId);
+		List<HeadquarterListDto> headquarterList = headquarterDao.headquarterList(state, headquarterId, start, end);
 		model.addAttribute("headquarterList", headquarterList);
 		return ("state_sales");
 	}
-
+	
 }

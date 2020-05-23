@@ -27,6 +27,7 @@
 <!-- Custom styles -->
 <link href="css/style.css" rel="stylesheet">
 <link href="css/style-responsive.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
 <!--[if lt IE 9]>
@@ -84,14 +85,17 @@
 										<div class="col-lg-12">
 											<section class="panel">
 												<header class="panel-heading">
-													Bar <select name="monthpick" id="monthpick"
+													Select Month Range : &nbsp; <!-- <select name="monthpick" id="monthpick"
 														style="height: 39px;">
 														<option value="01">Jan</option>
 														<option value="02">Feb</option>
 														<option value="03">March</option>
 													</select>
 													<button id="touch" onclick="month_click();">View
-														Data</button>
+														Data</button> -->
+														<i class="fa fa-calendar"></i>&nbsp;
+    <input type="text" name="daterange" value=" 01/01/2020 - 01/15/2020" />
+														
 
 												</header>
 												<div class="panel-body text-center">
@@ -209,6 +213,31 @@
 	<script src="js/sparklines.js"></script>
 	<script src="js/charts.js"></script>
 	<script src="js/jquery.slimscroll.min.js"></script>
+	
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+	
+	<script>
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth() + 1;
+
+	var yyyy = today.getFullYear();
+$(function() {
+  $('input[name="daterange"]').daterangepicker({
+    opens: 'left',
+    startDate: yyyy,
+    locale: {
+        format: 'MM/YYYY'
+      }
+  }, function(start, end, label) {
+	  console.log(start.format('YYYY-MM'));
+    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+  });
+});
+</script>
+
 	<script> -->
           //knob
           $(function() {

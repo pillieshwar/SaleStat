@@ -64,11 +64,11 @@ th:first-child, td:first-child {
 			<div class="row">
 				<div class="col-lg-12">
 					<h3 class="page-header">
-						<i class="fa fa-table"></i> Doctors
+						<i class="fa fa-user-md"></i> Doctors
 					</h3>
 					<ol class="breadcrumb">
 						<li><i class="fa fa-home"></i><a href="dashboard">Home</a></li>
-						<li><i class="fa fa-table"></i>Doctors</li>
+						<li><i class="fa fa-user-md"></i>Doctors</li>
 						<!-- 							<li><i class="fa fa-th-list"></i>Basic Table</li> -->
 					</ol>
 				</div>
@@ -219,7 +219,6 @@ th:first-child, td:first-child {
 
 		function stateSort() {
 			var input = document.getElementById('monthpick').value;
-			alert(input);
 			var filter, table, tr, td, i, txtValue, txtValue2;
 			filter = input.toUpperCase();
 			table = document.getElementById("myTable");

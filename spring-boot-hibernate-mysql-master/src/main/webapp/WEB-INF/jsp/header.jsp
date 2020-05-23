@@ -337,19 +337,18 @@
 							class="icon_house_alt"></i> <span>DASHBOARD</span>
 					</a></li>
 					<li class="sub-menu"><a onClick="stateDropdown()"
-						href="javascript:;" class=""> <i class="icon_document_alt"></i>
+						href="javascript:;" class=""> <i class="fa fa-globe"></i>
 							<span>STATES</span> <span class="menu-arrow arrow_carrot-right"></span>
 					</a>
 						<ul class="sub">
 							<c:forEach items="${stateDropdownList}" var="state">
-								<li><a class="" href="state_sales?state=${state.state_id}"
+								<li><a class="" href="state_sales?state=${state.state_id}&start=0&end=0"
 									id=""><c:out value="${state.state_name}" /></a></li>
 							</c:forEach>
 						</ul></li>
-					<li><a class="" href="all_doctors"> <i
-							class="icon_piechart"></i> <span>DOCTORS</span>
+					<li><a class="" href="all_doctors"> <i class="fa fa-user-md"></i> <span>DOCTORS</span>
 					</a></li>
-					<li><a class="" href="medicine"> <i class="icon_genius"></i>
+					<li><a class="" href="medicine"> <i class="fa fa-medkit"></i>
 							<span>MEDICINES</span>
 					</a></li>
 					<!-- <li class="sub-menu"><a href="javascript:;" class=""> <i
@@ -385,7 +384,7 @@
 						</ul></li> -->
 
 					<li class="sub-menu"><a href="javascript:;" id="admin_enable"
-						class="disabled"> <i class="icon_documents_alt"></i> <span>ADMIN</span>
+						class="disabled"> <i class="fa fa-lock"></i> <span>ADMIN</span>
 							<span class="menu-arrow arrow_carrot-right"></span>
 					</a>
 						<ul class="sub">

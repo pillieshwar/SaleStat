@@ -14,7 +14,7 @@
 	content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
 <link rel="shortcut icon" href="img/favicon.png">
 
-<title>SaleStat - Add Doctor</title>
+<title>SaleStat - Add Sponsorship</title>
 
 <!-- Bootstrap CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -65,12 +65,12 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h3 class="page-header">
-							<i class="fa fa-user-md"></i> Profile
+							<i class="fa fa-credit-card"></i> ADD SPONSORSHIP
 						</h3>
 						<ol class="breadcrumb">
 							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
 							<li><i class="icon_documents_alt"></i>Admin</li>
-							<li><i class="fa fa-user-md"></i>Add Sponsorship</li>
+							<li><i class="fa fa-credit-card"></i>Add Sponsorship</li>
 						</ol>
 					</div>
 				</div>
@@ -102,7 +102,7 @@
 															class="panel-heading"> ALL SPONSORSHIP
 															DETAILS </header>
 														<input type="text" id="myInput" onkeyup="searchFunction()"
-															placeholder="Search for Medicine name" title="Type in a name">
+															placeholder="Search for Sponsorships" title="Type in a name">
 														<div class="table-responsive text-nowrap">
 															<table id="myTable" class="table table-striped">
 																<thead>

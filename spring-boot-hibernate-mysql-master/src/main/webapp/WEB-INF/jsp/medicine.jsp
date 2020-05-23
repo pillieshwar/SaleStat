@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <head>
 <meta charset="utf-8">
@@ -13,116 +14,109 @@
 <link
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
 	rel="stylesheet" />
-<title>Medicines</title>
+<title>All Medicines</title>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@include file="header.jsp" %>
+<%@include file="header.jsp"%>
 <style>
+th:first-child, td:first-child {
+	position: sticky;
+	left: 0px;
+	background-color: white;
+}
+
 #myInput {
 	background-image: url('/img/search-icon.jpg');
-	background-position: 10px 16px;
+	background-position: 10px 10px;
 	background-repeat: no-repeat;
 	width: 100%;
 	font-size: 16px;
-	padding: 12px 20px 12px 40px;
-	border: 1px solid #ddd;
+	padding: 6px 20px 6px 40px;
+	border: 1px solid black;
 	margin-bottom: 12px;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: black;
+	min-width: 160px;
+	box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+	padding: 12px 16px;
+	z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
 }
 </style>
 </head>
 <body>
 
-		<!--main content start-->
-		<section id="main-content">
-			<section class="wrapper">
-				<div class="row">
-					<div class="col-lg-12">
-						<h3 class="page-header">
-							<i class="fa fa-table"></i> Table
-						</h3>
-						<ol class="breadcrumb">
-							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
-							<li><i class="fa fa-table"></i>Table</li>
-							<li><i class="fa fa-th-list"></i>Basic Table</li>
-						</ol>
-					</div>
+	<!--main content start-->
+	<section id="main-content">
+		<section class="wrapper">
+			<div class="row">
+				<div class="col-lg-12">
+					<h3 class="page-header">
+						<i class="fa fa-medkit"></i> Medicines
+					</h3>
+					<ol class="breadcrumb">
+						<li><i class="fa fa-home"></i><a href="dashboard">Home</a></li>
+						<li><i class="fa fa-medkit"></i>Medicines</li>
+						<!-- 							<li><i class="fa fa-th-list"></i>Basic Table</li> -->
+					</ol>
 				</div>
-				<!-- page start-->
-				
+			</div>
+			<!-- page start-->
 
-				<input type="text" id="myInput" onkeyup="myFunction()"
-					placeholder="Search for names.." title="Type in a name">
+			<div id="tab-description" class="row tabcontent">
+												<div class="col-lg-12">
+													<section class="panel">
+														<header style="background-color: #394a59; color: white"
+															class="panel-heading"> ALL BRAND(MEDICINE)
+															DETAILS </header>
+														<input type="text" id="myInput" onkeyup="searchFunction()"
+															placeholder="Search for Medicine name" title="Type in a name">
+														<div class="table-responsive text-nowrap">
+															<table id="myTable" class="table table-striped">
+																<thead>
+																	<tr>
+																		<th>Sr No.</th>
+																		<th>Medicine Name</th>
+																		<th>Price</th>
+																		<th>Entry Date</th>
+																		<th>Entered By</th>
+																	</tr>
+																</thead>
+																<tbody>
+																	<c:forEach items="${medicineList}"
+																		varStatus="loopCount" var="medicineList">
+																		<tr>
+																			<td>${loopCount.count}</td>
+																			<td>${medicineList.medicine_name}</td>
+																			<td class="text-success">&#x20b9;
+																				${medicineList.medicine_price}</td>
+																			<td class="text-info"></td>
+																			<td class="text-info">ADMIN</td>
 
-				<div id="tab-description" class="row tabcontent">
-					<div class="col-lg-12">
-						<section class="panel">
-							<header style="background-color: #7BFD94;" class="panel-heading">
-								SALES EXPECTATION REACHED </header>
+																		</tr>
+																	</c:forEach>
 
-							<div class="table-responsive text-nowrap">
-								<table id="myTable" class="table table-striped">
-									<thead>
-										<tr>
-											<th>Doctor</th>
-											<th>Region</th>
-											<th>Brand Targeted</th>
-											<th>Amount</th>
-											<th>Value business at time of Disbursement</th>
-											<th>Date of Activity Done</th>
-											<th>Type of Sponsorship</th>
-											<th>ASM Name</th>
-											<th>MR Name</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><a class="" href="individual_doctor_business_info">Kate</td>
-											<td>Moss</td>
-											<td>USA</td>
-											<td>New York City / Warsaw / Lodz / Amsterdam / London /
-												Chicago</td>
-											<td>Web Designer /UX designer / Ul designer / JavaScript
-												Developer</td>
-											<td>23</td>
-											<td>23</td>
-											<td>Rahul</td>
-											<td>Salim</td>
-										</tr>
-										<tr>
-											<td><a class=""
-												href="individual_doctor_business_info.jsp">Kate</td>
-											<td contenteditable='true'>Moss</td>
-											<td>Russia</td>
-											<td>New York City / Warsaw / Lodz / Amsterdam / London /
-												Chicago</td>
-											<td>Web Designer /UX designer / Ul designer / JavaScript
-												Developer</td>
-											<td>23</td>
-											<td>23</td>
-										</tr>
-										<tr>
-											<td><a class=""
-												href="individual_doctor_business_info.jsp">Kate</td>
-											<td>Eshwar</td>
-											<td>India</td>
-											<td>New York City / Warsaw / Lodz / Amsterdam / London /
-												Chicago</td>
-											<td>Web Designer /UX designer / Ul designer / JavaScript
-												Developer</td>
-											<td>23</td>
-											<td>23</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</section>
-					</div>
-				</div>
+																</tbody>
+															</table>
+														</div>
+													</section>
+												</div>
+											</div>
 
-				
-
-			</section>
 		</section>
+	</section>
 	</section>
 
 	<!--main content end-->
@@ -162,7 +156,7 @@
 	</script>
 
 	<script>
-		function myFunction() {
+		function searchFunction() {
 			var input, filter, table, tr, td, i, txtValue, txtValue2;
 			input = document.getElementById("myInput");
 			filter = input.value.toUpperCase();
@@ -171,11 +165,15 @@
 			for (i = 0; i < tr.length; i++) {
 				td = tr[i].getElementsByTagName("td")[1];
 				td2 = tr[i].getElementsByTagName("td")[2];
-				if (td || td2) {
+				td3 = tr[i].getElementsByTagName("td")[3];
+				if (td || td2 || td3) {
 					txtValue = td.textContent || td.innerText;
 					txtValue2 = td2.textContent || td2.innerText;
+					txtValue3 = td3.textContent || td3.innerText;
+					
 					if (txtValue.toUpperCase().indexOf(filter) > -1
-							|| txtValue2.toUpperCase().indexOf(filter) > -1) {
+							|| txtValue2.toUpperCase().indexOf(filter) > -1
+							|| txtValue3.toUpperCase().indexOf(filter) > -1) {
 						tr[i].style.display = "";
 					} else {
 						tr[i].style.display = "none";
@@ -183,6 +181,7 @@
 				}
 			}
 		}
+
 		function stateSort() {
 			var input = document.getElementById('monthpick').value;
 			alert(input);

@@ -67,12 +67,12 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h3 class="page-header">
-							<i class="fa fa-user-md"></i> DOCTOR - MEDICINE
+							<i class="fa fa-user-md"></i> DOCTOR - MEDICINE MAPPING
 						</h3>
 						<ol class="breadcrumb">
 							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
 							<li><i class="icon_documents_alt"></i>Admin</li>
-							<li><i class="fa fa-user-md"></i>Add Headquarter</li>
+							<li><i class="fa fa-user-md"></i>Doctor Medicine</li>
 						</ol>
 					</div>
 				</div>

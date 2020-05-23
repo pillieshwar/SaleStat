@@ -53,12 +53,12 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h3 class="page-header">
-							<i class="fa fa-user-md"></i> USER DOCTOR
+							<i class="fa fa-users"></i> USER DOCTOR MAPPING
 						</h3>
 						<ol class="breadcrumb">
 							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
 							<li><i class="icon_documents_alt"></i>Admin</li>
-							<li><i class="fa fa-user-md"></i>Add Headquarter</li>
+							<li><i class="fa fa-user-md"></i>User Doctor</li>
 						</ol>
 					</div>
 				</div>
@@ -229,11 +229,6 @@
 					selected.push(chks[i].value);
 				}
 			}
-
-			//Display the selected CheckBox values.
-			/* if (selected.length > 0) {
-				alert("Selected values: " + selected);
-			} */
 
 			var user_id = document.getElementById("user_id").value;
 	

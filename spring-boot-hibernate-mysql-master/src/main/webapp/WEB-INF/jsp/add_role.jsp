@@ -14,7 +14,7 @@
 	content="Creative, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
 <link rel="shortcut icon" href="img/favicon.png">
 
-<title>SaleStat - Add Doctor</title>
+<title>SaleStat - Add Role</title>
 
 <!-- Bootstrap CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -65,12 +65,12 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<h3 class="page-header">
-							<i class="fa fa-user-md"></i> ROLE
+							<i class="fa fa-tag"></i> ROLE
 						</h3>
 						<ol class="breadcrumb">
 							<li><i class="fa fa-home"></i><a href="index.html">Home</a></li>
 							<li><i class="icon_documents_alt"></i>Admin</li>
-							<li><i class="fa fa-user-md"></i>Add Role</li>
+							<li><i class="fa fa-tag"></i>Add Role</li>
 						</ol>
 					</div>
 				</div>
@@ -108,7 +108,7 @@
 														<header style="background-color: #394a59; color: white"
 															class="panel-heading"> ALL ROLE NAME </header>
 														<input type="text" id="myInput" onkeyup="searchFunction()"
-															placeholder="Search for Medicine name"
+															placeholder="Search by Role"
 															title="Type in a name">
 														<div class="table-responsive text-nowrap">
 															<table id="myTable" class="table table-striped">
@@ -226,7 +226,6 @@
 				role_abbr : role_abbr
 
 			}
-			alert(rolejson);
 
 			$.ajax({
 				url : '/add_role_data',

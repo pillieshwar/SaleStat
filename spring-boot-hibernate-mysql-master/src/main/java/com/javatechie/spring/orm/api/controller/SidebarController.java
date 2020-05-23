@@ -10,10 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.javatechie.spring.orm.api.dao.AdminDao;
 import com.javatechie.spring.orm.api.dao.DashboardDao;
 import com.javatechie.spring.orm.api.dao.DoctorDao;
 import com.javatechie.spring.orm.api.dao.StateDao;
 import com.javatechie.spring.orm.api.dto.GetSidebarAllDoctorsDto;
+import com.javatechie.spring.orm.api.model.medicine;
 import com.javatechie.spring.orm.api.model.state;
 
 @Controller
@@ -28,8 +30,18 @@ public class SidebarController {
 	@Autowired
 	private DashboardDao dashboardDao;
 	
+	@Autowired
+	private AdminDao adminDao;
+	
 	@RequestMapping("/medicine")
-	public String medicine() {
+	public String medicine(Model model, HttpServletRequest request) {
+		int int_state_sessionid = (Integer) request.getSession().getAttribute("int_state_sessionid");
+		List<state> stateDropdownList = dashboardDao.stateDropdown1(int_state_sessionid);
+		model.addAttribute("stateDropdownList", stateDropdownList);
+		
+		List<medicine> medicineList = adminDao.getMedicineList();
+		model.addAttribute("medicineList", medicineList);
+		
 		return "medicine";
 	}
 
