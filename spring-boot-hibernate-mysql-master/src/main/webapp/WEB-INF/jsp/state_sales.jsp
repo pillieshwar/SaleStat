@@ -232,9 +232,20 @@ $(function() {
         format: 'MM/YYYY'
       }
   }, function(start, end, label) {
-	  console.log(start.format('YYYY-MM'));
-    console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-  });
+	  
+	  url1 = window.location.search;
+	  const params = new URLSearchParams(url1);
+	  console.log("state : " +params.get("state"));
+	  
+	  /* console.log(start.format('YYYY-MM'));
+	  console.log(end.format('YYYY-MM')); */
+	  var state = params.get("state");
+	  var start = start.format('YYYY-MM');
+	  var end = end.format('YYYY-MM');
+	  var url= "state_sales?state="+state+"&start="+start+"&end="+end;
+ 	 	window.location.href=url;
+/*     console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+ */  });
 });
 </script>
 
