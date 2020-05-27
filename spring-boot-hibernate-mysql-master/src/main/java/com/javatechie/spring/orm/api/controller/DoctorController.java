@@ -1,5 +1,7 @@
 package com.javatechie.spring.orm.api.controller;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.javatechie.spring.orm.api.dao.DoctorDao;
+import com.javatechie.spring.orm.api.dto.GetHeadquarterTotalSaleDto;
 import com.javatechie.spring.orm.api.dto.GetIndividualDoctorSaleDto;
 import com.javatechie.spring.orm.api.dto.GetIndividualDoctorTotalSaleDto;
 import com.javatechie.spring.orm.api.dto.StateDoctorBusinessDto;
@@ -24,22 +27,38 @@ public class DoctorController {
 	private DoctorDao doctorDao;
 	
 	@GetMapping("/state_doctor_business")
-    public ModelAndView stateDoctorBusiness(@RequestParam("hq_id") String hq_id, Model model, HttpServletRequest request){
+    public ModelAndView stateDoctorBusiness(@RequestParam("hq_id") String hq_id,@RequestParam("start") String start, @RequestParam("end") String end, Model model, HttpServletRequest request){
 		System.out.println("hq_id : " + hq_id);
+		int yrs = Calendar.getInstance().get(Calendar.YEAR);
+		String year = Integer.toString(yrs);
+
 		String state_sessionid =  (String) request.getSession().getAttribute("state_sessionid");
 		String user_sessionid =  (String) request.getSession().getAttribute("user_sessionid");
-		List<StateDoctorBusinessDto> stateDoctorBusinessObjectList = doctorDao.getStateDoctorBusiness(hq_id,state_sessionid, user_sessionid);
+		List<StateDoctorBusinessDto> stateDoctorBusinessObjectList = doctorDao.getStateDoctorBusiness(hq_id,state_sessionid, user_sessionid,start,end);
 		System.out.println("stateDoctorBusinessObjectList size : " + stateDoctorBusinessObjectList.size());
 //		System.out.println("stateDoctorBusinessObjectList : " + stateDoctorBusinessObjectList.get(0).getDoctor_name());
-		model.addAttribute("stateDoctorBusinessList",stateDoctorBusinessObjectList);
+		List<StateDoctorBusinessDto> tempStateDoctorBusinessList = new ArrayList<>();
+		for (StateDoctorBusinessDto stateDoctorList : stateDoctorBusinessObjectList) {
+			if (start.equals("0")) {
+				stateDoctorList.setStart_date(year + "-01");
+				stateDoctorList.setEnd_date(year + "-12");
+			}
+			else {
+				stateDoctorList.setStart_date(start);
+				stateDoctorList.setEnd_date(end);
+			}
+			
+			tempStateDoctorBusinessList.add(stateDoctorList);
+		}
+		model.addAttribute("stateDoctorBusinessList",tempStateDoctorBusinessList);
 		return new ModelAndView("state_doctor_business");
 		
 	}
 	
 	@GetMapping("/individual_doctor_business_info")
-    public ModelAndView individualDoctorBusinessInfo(@RequestParam("dr_id") String dr_id, Model model){
+    public ModelAndView individualDoctorBusinessInfo(@RequestParam("dr_id") String dr_id, @RequestParam("year") String year, Model model){
 		System.out.println("dr_id : " + dr_id);
-		List<GetIndividualDoctorSaleDto> individualDoctorSaleList = doctorDao.getIndividualDoctorSaleList(dr_id);
+		List<GetIndividualDoctorSaleDto> individualDoctorSaleList = doctorDao.getIndividualDoctorSaleList(dr_id, year);
 		 float tot_jan_sale=0;
 		 float tot_feb_sale=0;
 		 float tot_mar_sale=0;

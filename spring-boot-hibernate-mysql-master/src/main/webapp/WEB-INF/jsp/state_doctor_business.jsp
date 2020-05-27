@@ -32,6 +32,7 @@
 <!-- Custom styles -->
 <link href="css/style.css" rel="stylesheet">
 <link href="css/style-responsive.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
 <!--[if lt IE 9]>
@@ -146,38 +147,33 @@ th:first-child, td:first-child {
 					<div class="col-lg-12">
 						<section class="panel">
 							<header style="background-color: #7BFD94;" class="panel-heading">
-								SALES EXPECTATION REACHED </header>
+								SALES EXPECTATION REACHED <i class="fa fa-calendar"></i>&nbsp;
+    <input type="text" name="daterange" value=" 01/01/2020 - 01/15/2020" /> </header>
 
 							<div class="table-responsive text-nowrap">
 								<table id="myTable" class="table table-striped">
 									<thead>
 										<tr>
+											<th>Sr No.</th>
 											<th>Doctor</th>
-											<th>Speciality</th>
-											<th>Qualification</th>
-											<th>Associated MR</th>
-											<th>ASM</th>
-											<th>Amount</th>
-											<th>Value business at time of Disbursement</th>
-											<th>Date of Activity Done</th>
-											<th>Type of Sponsorship</th>
-											<th>ASM Visit Dates</th>
-											<th>RM Visit Dates</th>
+											<th>Start Date</th>
+											<th>End Date</th>
+											<th>Expected Sale</th>
+											<th>Generated Sale</th>
+											
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${stateDoctorBusinessList}" var="state">
+										<c:forEach items="${stateDoctorBusinessList}" varStatus="loopCount" var="state">
 											<tr>
-												<td><a class="" href="individual_doctor_business_info?dr_id=${state.doctor_id}"><c:out
+												<td>${loopCount.count}</td>
+												<td><a class="" href="individual_doctor_business_info?dr_id=${state.doctor_id}&year=0"><c:out
 															value="${state.doctor_name}" /></td>
-												<td><c:out value="${state.doctor_speciality}" /></td>
-												<td><c:out value="${state.doctor_qualification}" /></td>
-												<td>New York City / Warsaw / Lodz / Amsterdam / London
-													/ Chicago</td>
-												<td>Web Designer /UX designer / Ul designer /
-													JavaScript Developer</td>
-												<td>23</td>
-												<td>23</td>
+												<td><c:out value="${state.start_date}"/></td>
+												<td><c:out value="${state.end_date}"/></td>
+												<td>-</td>
+												<td><c:out value="${state.generated_sale}"/></td>
+												
 											</tr>
 										</c:forEach>
 										
@@ -270,6 +266,42 @@ th:first-child, td:first-child {
 	<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
 	<!--custome script for all page-->
 	<script src="js/scripts.js"></script>
+	
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+	
+	<script>
+	var today = new Date();
+	var dd = today.getDate();
+	var mm = today.getMonth() + 1;
+
+	var yyyy = today.getFullYear();
+$(function() {
+  $('input[name="daterange"]').daterangepicker({
+    opens: 'left',
+    startDate: yyyy,
+    locale: {
+        format: 'MM/YYYY'
+      }
+  }, function(start, end, label) {
+	  
+	  url1 = window.location.search;
+	  const params = new URLSearchParams(url1);
+	  console.log("hq_id : " +params.get("hq_id"));
+	  
+	  /* console.log(start.format('YYYY-MM'));
+	  console.log(end.format('YYYY-MM')); */
+	  var hq_id = params.get("hq_id");
+	  var start = start.format('YYYY-MM');
+	  var end = end.format('YYYY-MM');
+	  var url= "state_doctor_business?hq_id="+hq_id+"&start="+start+"&end="+end;
+ 	 	window.location.href=url;
+/*     console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+ */  });
+});
+</script>
+	
 	<script>
 		/*  function alternate(id){ 
 		 if(document.getElementsByTagName){  

@@ -108,7 +108,7 @@ th:first-child, td:first-child {
 										varStatus="loopCount" var="sidebarAllDoctorsLists">
 										<tr>
 											<td>${loopCount.count}</td>
-											<td><a class="" href="individual_doctor_business_info?dr_id=${sidebarAllDoctorsLists.doctor_id}">${sidebarAllDoctorsLists.doctor_name}</a></td>
+											<td><a class="" href="individual_doctor_business_info?dr_id=${sidebarAllDoctorsLists.doctor_id}&year=0">${sidebarAllDoctorsLists.doctor_name}</a></td>
 											<td>${sidebarAllDoctorsLists.state}</td>
 											<td>${sidebarAllDoctorsLists.headquarter}</td>
 											<c:set var="msg" value="${sidebarAllDoctorsLists.medicines}" />

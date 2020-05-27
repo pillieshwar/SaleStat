@@ -3,6 +3,9 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="header.jsp"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<jsp:useBean id="now" class="java.util.Date" />
+<fmt:formatDate var="year" value="${now}" pattern="yyyy" />
 
 <head>
 <meta charset="utf-8">
@@ -97,9 +100,8 @@ th:first-child, td:first-child {
 				<div class="col-lg-12">
 					<section class="panel">
 						<header class="panel-heading">
-							<h3>
-								General Chart
-								</Char>
+							<h3>General Chart</h3>
+
 						</header>
 						<div class="panel-body" style="height: 100%">
 							<div class="tab-pane" id="chartjs">
@@ -108,7 +110,19 @@ th:first-child, td:first-child {
 									<!-- Bar -->
 									<div class="col-lg-12">
 										<section class="panel">
-											<header class="panel-heading"> Bar </header>
+											<header class="panel-heading">
+												SELECT YEAR : <select onchange="selectedYear()" id="year"
+													name="" class="" autofocus>
+													<option>SELECT YEAR</option>
+													<c:forEach begin="0" end="20" var="val">
+													
+														<c:set var="decr" value="${year - val}" />
+														<option value="${decr}"
+															${birthYear == decr ? "selected='selected'": ''}>${decr}</option>
+													</c:forEach>
+												</select>
+											</header>
+
 											<div class="panel-body text-center">
 												<script type="text/javascript"
 													src="https://www.gstatic.com/charts/loader.js"></script>
@@ -123,74 +137,78 @@ th:first-child, td:first-child {
 								</div>
 							</div>
 						</div>
+					</section>
 				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<section class="panel">
+						<header class="panel-heading"> Advanced Table </header>
+
+						<div class="table-responsive text-nowrap">
+							<!--Table-->
+							<table class="table table-striped">
+
+								<!--Table head-->
+
+								<thead>
+									<tr>
+										<th>BRAND NAME</th>
+										<th>YEAR</th>
+										<th>JAN</th>
+										<th>FEB</th>
+										<th>MAR</th>
+										<th>APR</th>
+										<th>MAY</th>
+										<th>JUN</th>
+										<th>JUL</th>
+										<th>AUG</th>
+										<th>SEP</th>
+										<th>OCT</th>
+										<th>NOV</th>
+										<th>DEC</th>
+									</tr>
+								</thead>
+
+								<!--Table head-->
+
+								<!--Table body-->
+
+								<tbody>
+									<c:forEach items="${individualDoctorSaleList}"
+										var="individualDoctorSale">
+										<tr>
+											<td>${individualDoctorSale.medicine_name}</td>
+											<td>${individualDoctorSale.year}</td>
+											<td>${individualDoctorSale.jan_sale}</td>
+											<td>${individualDoctorSale.feb_sale}</td>
+											<td>${individualDoctorSale.mar_sale}</td>
+											<td>${individualDoctorSale.apr_sale}</td>
+											<td>${individualDoctorSale.may_sale}</td>
+											<td>${individualDoctorSale.jun_sale}</td>
+											<td>${individualDoctorSale.jul_sale}</td>
+											<td>${individualDoctorSale.aug_sale}</td>
+											<td>${individualDoctorSale.sep_sale}</td>
+											<td>${individualDoctorSale.oct_sale}</td>
+											<td>${individualDoctorSale.nov_sale}</td>
+											<td>${individualDoctorSale.dec_sale}</td>
+
+										</tr>
+									</c:forEach>
+								</tbody>
+								<!--Table body-->
+
+
+							</table>
+							<!--Table-->
+						</div>
+					</section>
+				</div>
+			</div>
 		</section>
 
 
-		<div class="row">
-			<div class="col-lg-12">
-				<section class="panel">
-					<header class="panel-heading"> Advanced Table </header>
 
-					<div class="table-responsive text-nowrap">
-						<!--Table-->
-						<table class="table table-striped">
-
-							<!--Table head-->
-
-							<thead>
-								<tr>
-									<th>BRAND NAME</th>
-									<th>YEAR</th>
-									<th>JAN</th>
-									<th>FEB</th>
-									<th>MAR</th>
-									<th>APR</th>
-									<th>MAY</th>
-									<th>JUN</th>
-									<th>JUL</th>
-									<th>AUG</th>
-									<th>SEP</th>
-									<th>OCT</th>
-									<th>NOV</th>
-									<th>DEC</th>
-								</tr>
-							</thead>
-
-							<!--Table head-->
-
-							<!--Table body-->
-							
-							<tbody>
-								<c:forEach items="${individualDoctorSaleList}" var="individualDoctorSale">
-									<tr>
-										<td>${individualDoctorSale.medicine_name}</td>
-										<td>${individualDoctorSale.year}</td>
-										<td>${individualDoctorSale.jan_sale}</td>
-										<td>${individualDoctorSale.feb_sale}</td>
-										<td>${individualDoctorSale.mar_sale}</td>
-										<td>${individualDoctorSale.apr_sale}</td>
-										<td>${individualDoctorSale.may_sale}</td>
-										<td>${individualDoctorSale.jun_sale}</td>
-										<td>${individualDoctorSale.jul_sale}</td>
-										<td>${individualDoctorSale.aug_sale}</td>
-										<td>${individualDoctorSale.sep_sale}</td>
-										<td>${individualDoctorSale.oct_sale}</td>
-										<td>${individualDoctorSale.nov_sale}</td>
-										<td>${individualDoctorSale.dec_sale}</td>
-										
-									</tr>
-									</c:forEach>
-							</tbody>
-							<!--Table body-->
-
-
-						</table>
-						<!--Table-->
-					</div>
-				</section>
-			</div>
-		</div>
 	</section>
 
 	<!-- page end-->
@@ -293,6 +311,21 @@ Highcharts.chart('container2', {
 });
 </script>
 
+
+	<script>
+function selectedYear()
+{
+	var year = document.getElementById("year").value;
+	console.log(year);
+	url1 = window.location.search;
+	  const params = new URLSearchParams(url1);
+	  console.log("dr_id : " +params.get("dr_id"));
+	  var dr_id = params.get("dr_id");
+	  var url = "individual_doctor_business_info?dr_id="+dr_id+"&year="+year;
+	  console.log(url);
+	window.location.href=url;
+	}
+</script>
 </body>
 
 </html>

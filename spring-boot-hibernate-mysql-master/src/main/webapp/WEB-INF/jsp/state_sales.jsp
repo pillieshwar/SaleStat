@@ -3,6 +3,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@include file="header.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -45,6 +47,23 @@
 <script src="https://code.highcharts.com/highcharts.js"></script>
 
 <style>
+th:first-child, td:first-child {
+	position: sticky;
+	left: 0px;
+	background-color: white;
+}
+
+#myInput {
+	background-image: url('/img/search-icon.jpg');
+	background-position: 10px 10px;
+	background-repeat: no-repeat;
+	width: 100%;
+	font-size: 16px;
+	padding: 6px 20px 6px 40px;
+	border: 1px solid black;
+	margin-bottom: 12px;
+}
+
 </style>
 </head>
 
@@ -72,8 +91,7 @@
 						<section class="panel">
 							<header class="panel-heading">
 								<h3>
-									State Headquarter Sales
-									</Char>
+									State Headquarter Sales</h3>
 							</header>
 							<div class="panel-body" style="height: 100%">
 								<div class="tab-pane" id="chartjs">
@@ -105,16 +123,74 @@
 												</div>
 											</section>
 										</div>
+										<div id="tab-description" style="padding-top: 6px"
+				class="row tabcontent">
+				<div class="col-lg-12">
+					<section class="panel">
+						<header style="background-color: #394a59; color: white;"
+							class="panel-heading"> STATE HEADQUARTER SALES INFO </header>
+						<input type="text" id="myInput" onkeyup="searchFunction()"
+							placeholder="Search "
+							title="Type in a name">
+						<div class="table-responsive text-nowrap">
+							<table id="myTable" class="table table-striped">
+								<thead>
+									<tr>
+										<th>Sr No.</th>
+										<th>Headquarter</th>
+										<th>Start Date</th>
+										<th>End Date</th>
+										<th>Expected Sales</th>
+										<th>Generated Sales</th>
+										<th>No. of Doctors(in HQ)</th>
+										
+										
+									</tr>
+								</thead>
+								<tbody>
+									<c:forEach items="${headquarterList}"
+										varStatus="loopCount" var="hqList">
+										<tr>
+											<td>${loopCount.count}</td>
+											<td><a class="" href="state_doctor_business?hq_id=${hqList.headquarter_id}&start=0&end=0">${hqList.headquarter_name}</a></td>
+											<td>${hqList.start_date}</td>
+											<td>${hqList.end_date}</td>
+											<%-- <c:set var="msg" value="${sidebarAllDoctorsLists.medicines}" />
+											<c:set var="arrayofmsg" value="${fn:split(msg,',')}" />
+											<td style="max-width: 150px;">
+												<div class="dropdown ">
+													<span class="text-success">VIEW</span>
+													<div class="dropdown-content">
+														<c:forEach items="${arrayofmsg}" var="medicineList">
+															<p class="badge bg-success">${medicineList}</p><br>
+														</c:forEach>
+													</div>
+												</div>
+											</td> --%>
+											<td>expected</td>
+											<td>${hqList.headquarter_total_sale}</td>
+											<td>${hqList.doctor_count}</td>
+											
+										
+
+										</tr>
+									</c:forEach>
+
+								</tbody>
+							</table>
+						</div>
+					</section>
+				</div>
+			</div>
 									</div>
 								</div>
 							</div>
-					</div>
 			</section>
 			</div>
-			<!-- chart morris start -->
+			
 			</div>
 		</section>
-
+</section>
 
 
 		<!--main content end-->
@@ -168,7 +244,7 @@
         	
         	{y: ${hqList.headquarter_total_sale},
         	 name: '${hqList.headquarter_name}',
-        	 key: 'state_doctor_business?hq_id=${hqList.headquarter_id}'
+        	 key: 'state_doctor_business?hq_id=${hqList.headquarter_id}&start=0&end=0'
         	},
         	
         	</c:forEach>
